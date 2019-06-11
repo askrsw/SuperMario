@@ -29,6 +29,11 @@ class BrickSprite : SKSpriteNode {
 
 extension BrickSprite: MarioBumpFragileNode {
     func marioBump() {
-        print("mario bump brick")
+        
+        if GameManager.instance.mario.marioPower != .A {
+            
+        } else {
+            
+        }
     }
 }
