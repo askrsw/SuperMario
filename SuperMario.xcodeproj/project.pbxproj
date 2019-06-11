@@ -1,0 +1,560 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB0D8A5722AF08C2005DF87F /* Physics1_1.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */; };
+		AB337A092291CE7900C9791B /* GameTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB337A082291CE7900C9791B /* GameTypes.swift */; };
+		AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */; };
+		AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */; };
+		AB3E2F88227E0745003BC9B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E2F87227E0745003BC9B7 /* AppDelegate.swift */; };
+		AB3E2F8E227E0745003BC9B7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E2F8D227E0745003BC9B7 /* GameScene.swift */; };
+		AB3E2F90227E0745003BC9B7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E2F8F227E0745003BC9B7 /* GameViewController.swift */; };
+		AB3E2F95227E0747003BC9B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3E2F94227E0747003BC9B7 /* Assets.xcassets */; };
+		AB3EA5AF22913E4000FB33C4 /* Background.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3EA5AE22913E4000FB33C4 /* Background.xcassets */; };
+		AB457C6C22923CEF00D2AC10 /* DirectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */; };
+		AB5096FB2294EA990021A298 /* GameScene+TileProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5096FA2294EA990021A298 /* GameScene+TileProcess.swift */; };
+		AB546A8B22AF297300A5C01D /* BrickSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A8A22AF297300A5C01D /* BrickSprite.swift */; };
+		AB546A8D22AF298200A5C01D /* GoldSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A8C22AF298200A5C01D /* GoldSprite.swift */; };
+		AB546A9122AF463800A5C01D /* GameAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A9022AF463800A5C01D /* GameAnimations.swift */; };
+		AB546A9322AF495700A5C01D /* GameScene+Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A9222AF495700A5C01D /* GameScene+Physics.swift */; };
+		AB54E93A228BFCB5000AE79E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB54E938228BFCB5000AE79E /* LaunchScreen.storyboard */; };
+		AB54E949228BFDF7000AE79E /* SKColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E93D228BFDF7000AE79E /* SKColor+Extensions.swift */; };
+		AB54E94A228BFDF7000AE79E /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E93E228BFDF7000AE79E /* CGVector+Extensions.swift */; };
+		AB54E94B228BFDF7000AE79E /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E93F228BFDF7000AE79E /* Int+Extensions.swift */; };
+		AB54E94C228BFDF7000AE79E /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E940228BFDF7000AE79E /* SKTTimingFunctions.swift */; };
+		AB54E94D228BFDF7000AE79E /* SKAction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E941228BFDF7000AE79E /* SKAction+Extensions.swift */; };
+		AB54E94E228BFDF7000AE79E /* SKAction+SpecialEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E942228BFDF7000AE79E /* SKAction+SpecialEffects.swift */; };
+		AB54E94F228BFDF7000AE79E /* SKNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E943228BFDF7000AE79E /* SKNode+Extensions.swift */; };
+		AB54E950228BFDF7000AE79E /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E944228BFDF7000AE79E /* CGPoint+Extensions.swift */; };
+		AB54E951228BFDF7000AE79E /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E945228BFDF7000AE79E /* SKTEffects.swift */; };
+		AB54E952228BFDF7000AE79E /* SKTAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E946228BFDF7000AE79E /* SKTAudio.swift */; };
+		AB54E953228BFDF7000AE79E /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E947228BFDF7000AE79E /* Vector3.swift */; };
+		AB54E954228BFDF7000AE79E /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB54E948228BFDF7000AE79E /* CGFloat+Extensions.swift */; };
+		AB54E958228C0431000AE79E /* Scene1_1.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB54E957228C0431000AE79E /* Scene1_1.sks */; };
+		AB54E95D228C070C000AE79E /* LevelReference.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB54E95C228C070C000AE79E /* LevelReference.xcassets */; };
+		AB55758C228E9AEC00A570D5 /* TileSets.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB55758A228E9AEC00A570D5 /* TileSets.sks */; };
+		AB55758F228EA34200A570D5 /* TileSets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB55758E228EA34200A570D5 /* TileSets.xcassets */; };
+		ABB07A61229677C300D3D7FE /* GameScene+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */; };
+		ABB07A6322967B3100D3D7FE /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB07A6222967B3100D3D7FE /* ActionButton.swift */; };
+		ABB07A652296B03600D3D7FE /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB07A642296B03600D3D7FE /* GameManager.swift */; };
+		ABB9774E228FEE3F0011ACE5 /* Mario.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB9774D228FEE3F0011ACE5 /* Mario.swift */; };
+		ABB97757229099250011ACE5 /* GameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB97756229099250011ACE5 /* GameProtocol.swift */; };
+		ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE0845C228D02B000BD6ADB /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Physics1_1.geojson; sourceTree = "<group>"; };
+		AB337A082291CE7900C9791B /* GameTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypes.swift; sourceTree = "<group>"; };
+		AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstant.swift; sourceTree = "<group>"; };
+		AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mario.xcassets; sourceTree = "<group>"; };
+		AB3E2F84227E0745003BC9B7 /* SuperMario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperMario.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB3E2F87227E0745003BC9B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AB3E2F8D227E0745003BC9B7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		AB3E2F8F227E0745003BC9B7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		AB3E2F94227E0747003BC9B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AB3E2F99227E0747003BC9B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB3EA5AE22913E4000FB33C4 /* Background.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Background.xcassets; sourceTree = "<group>"; };
+		AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionButton.swift; sourceTree = "<group>"; };
+		AB5096FA2294EA990021A298 /* GameScene+TileProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+TileProcess.swift"; sourceTree = "<group>"; };
+		AB546A8A22AF297300A5C01D /* BrickSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickSprite.swift; sourceTree = "<group>"; };
+		AB546A8C22AF298200A5C01D /* GoldSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldSprite.swift; sourceTree = "<group>"; };
+		AB546A9022AF463800A5C01D /* GameAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnimations.swift; sourceTree = "<group>"; };
+		AB546A9222AF495700A5C01D /* GameScene+Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Physics.swift"; sourceTree = "<group>"; };
+		AB54E938228BFCB5000AE79E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB54E93D228BFDF7000AE79E /* SKColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKColor+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E93E228BFDF7000AE79E /* CGVector+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E93F228BFDF7000AE79E /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E940228BFDF7000AE79E /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
+		AB54E941228BFDF7000AE79E /* SKAction+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E942228BFDF7000AE79E /* SKAction+SpecialEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+SpecialEffects.swift"; sourceTree = "<group>"; };
+		AB54E943228BFDF7000AE79E /* SKNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKNode+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E944228BFDF7000AE79E /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E945228BFDF7000AE79E /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
+		AB54E946228BFDF7000AE79E /* SKTAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTAudio.swift; sourceTree = "<group>"; };
+		AB54E947228BFDF7000AE79E /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		AB54E948228BFDF7000AE79E /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		AB54E957228C0431000AE79E /* Scene1_1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_1.sks; sourceTree = "<group>"; };
+		AB54E95C228C070C000AE79E /* LevelReference.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LevelReference.xcassets; sourceTree = "<group>"; };
+		AB55758A228E9AEC00A570D5 /* TileSets.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TileSets.sks; sourceTree = "<group>"; };
+		AB55758E228EA34200A570D5 /* TileSets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TileSets.xcassets; sourceTree = "<group>"; };
+		ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Camera.swift"; sourceTree = "<group>"; };
+		ABB07A6222967B3100D3D7FE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		ABB07A642296B03600D3D7FE /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		ABB9774D228FEE3F0011ACE5 /* Mario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mario.swift; sourceTree = "<group>"; };
+		ABB97756229099250011ACE5 /* GameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocol.swift; sourceTree = "<group>"; };
+		ABE0845C228D02B000BD6ADB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB3E2F81227E0745003BC9B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB3E2F7B227E0745003BC9B7 = {
+			isa = PBXGroup;
+			children = (
+				AB3E2F86227E0745003BC9B7 /* SuperMario */,
+				AB3E2F85227E0745003BC9B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB3E2F85227E0745003BC9B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E2F84227E0745003BC9B7 /* SuperMario.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB3E2F86227E0745003BC9B7 /* SuperMario */ = {
+			isa = PBXGroup;
+			children = (
+				AB54E955228C0305000AE79E /* Core */,
+				AB54E93C228BFDF7000AE79E /* SKTUtils */,
+				AB54E935228BF9D7000AE79E /* Resources */,
+				AB54E934228BF3E3000AE79E /* Supports */,
+			);
+			path = SuperMario;
+			sourceTree = "<group>";
+		};
+		AB43699222AA1F6400ECD4FE /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		AB54E934228BF3E3000AE79E /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E2F8F227E0745003BC9B7 /* GameViewController.swift */,
+				AB3E2F87227E0745003BC9B7 /* AppDelegate.swift */,
+				AB3E2F99227E0747003BC9B7 /* Info.plist */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		AB54E935228BF9D7000AE79E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E2F94227E0747003BC9B7 /* Assets.xcassets */,
+				AB3EA5AE22913E4000FB33C4 /* Background.xcassets */,
+				AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */,
+				AB55758E228EA34200A570D5 /* TileSets.xcassets */,
+				AB54E95C228C070C000AE79E /* LevelReference.xcassets */,
+				AB557589228E9AAA00A570D5 /* TileSet */,
+				AB54E956228C037E000AE79E /* Scenes */,
+				AB43699222AA1F6400ECD4FE /* Physics */,
+				AB54E937228BFCB5000AE79E /* Storyboards */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AB54E937228BFCB5000AE79E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				AB54E938228BFCB5000AE79E /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		AB54E93C228BFDF7000AE79E /* SKTUtils */ = {
+			isa = PBXGroup;
+			children = (
+				AB54E948228BFDF7000AE79E /* CGFloat+Extensions.swift */,
+				AB54E944228BFDF7000AE79E /* CGPoint+Extensions.swift */,
+				AB54E93E228BFDF7000AE79E /* CGVector+Extensions.swift */,
+				AB54E93F228BFDF7000AE79E /* Int+Extensions.swift */,
+				AB54E941228BFDF7000AE79E /* SKAction+Extensions.swift */,
+				AB54E942228BFDF7000AE79E /* SKAction+SpecialEffects.swift */,
+				AB54E93D228BFDF7000AE79E /* SKColor+Extensions.swift */,
+				AB54E943228BFDF7000AE79E /* SKNode+Extensions.swift */,
+				AB54E946228BFDF7000AE79E /* SKTAudio.swift */,
+				AB54E945228BFDF7000AE79E /* SKTEffects.swift */,
+				AB54E940228BFDF7000AE79E /* SKTTimingFunctions.swift */,
+				AB54E947228BFDF7000AE79E /* Vector3.swift */,
+				ABE0845C228D02B000BD6ADB /* Extensions.swift */,
+			);
+			path = SKTUtils;
+			sourceTree = "<group>";
+		};
+		AB54E955228C0305000AE79E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				ABB9775122900E6C0011ACE5 /* Shaders */,
+				ABB9775022900C810011ACE5 /* Sprite */,
+				ABB9774F22900C5E0011ACE5 /* Utils */,
+				ABB9774C228FEE1C0011ACE5 /* Mario */,
+				AB54E959228C044C000AE79E /* Scenes */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AB54E956228C037E000AE79E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				AB54E957228C0431000AE79E /* Scene1_1.sks */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		AB54E959228C044C000AE79E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E2F8D227E0745003BC9B7 /* GameScene.swift */,
+				ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */,
+				AB5096FA2294EA990021A298 /* GameScene+TileProcess.swift */,
+				AB546A9222AF495700A5C01D /* GameScene+Physics.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		AB557589228E9AAA00A570D5 /* TileSet */ = {
+			isa = PBXGroup;
+			children = (
+				AB55758A228E9AEC00A570D5 /* TileSets.sks */,
+			);
+			path = TileSet;
+			sourceTree = "<group>";
+		};
+		ABB9774C228FEE1C0011ACE5 /* Mario */ = {
+			isa = PBXGroup;
+			children = (
+				ABB9774D228FEE3F0011ACE5 /* Mario.swift */,
+			);
+			path = Mario;
+			sourceTree = "<group>";
+		};
+		ABB9774F22900C5E0011ACE5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ABB07A6222967B3100D3D7FE /* ActionButton.swift */,
+				AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */,
+				ABB07A642296B03600D3D7FE /* GameManager.swift */,
+				ABB97756229099250011ACE5 /* GameProtocol.swift */,
+				AB337A082291CE7900C9791B /* GameTypes.swift */,
+				AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */,
+				AB546A9022AF463800A5C01D /* GameAnimations.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		ABB9775022900C810011ACE5 /* Sprite */ = {
+			isa = PBXGroup;
+			children = (
+				AB546A8A22AF297300A5C01D /* BrickSprite.swift */,
+				AB546A8C22AF298200A5C01D /* GoldSprite.swift */,
+			);
+			path = Sprite;
+			sourceTree = "<group>";
+		};
+		ABB9775122900E6C0011ACE5 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB3E2F83227E0745003BC9B7 /* SuperMario */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB3E2F9C227E0747003BC9B7 /* Build configuration list for PBXNativeTarget "SuperMario" */;
+			buildPhases = (
+				AB3E2F80227E0745003BC9B7 /* Sources */,
+				AB3E2F81227E0745003BC9B7 /* Frameworks */,
+				AB3E2F82227E0745003BC9B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SuperMario;
+			productName = SuperMario;
+			productReference = AB3E2F84227E0745003BC9B7 /* SuperMario.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB3E2F7C227E0745003BC9B7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = haharsw;
+				TargetAttributes = {
+					AB3E2F83227E0745003BC9B7 = {
+						CreatedOnToolsVersion = 10.2;
+					};
+				};
+			};
+			buildConfigurationList = AB3E2F7F227E0745003BC9B7 /* Build configuration list for PBXProject "SuperMario" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AB3E2F7B227E0745003BC9B7;
+			productRefGroup = AB3E2F85227E0745003BC9B7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB3E2F83227E0745003BC9B7 /* SuperMario */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB3E2F82227E0745003BC9B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */,
+				AB3E2F95227E0747003BC9B7 /* Assets.xcassets in Resources */,
+				AB54E958228C0431000AE79E /* Scene1_1.sks in Resources */,
+				AB55758F228EA34200A570D5 /* TileSets.xcassets in Resources */,
+				AB55758C228E9AEC00A570D5 /* TileSets.sks in Resources */,
+				AB3EA5AF22913E4000FB33C4 /* Background.xcassets in Resources */,
+				AB0D8A5722AF08C2005DF87F /* Physics1_1.geojson in Resources */,
+				AB54E93A228BFCB5000AE79E /* LaunchScreen.storyboard in Resources */,
+				AB54E95D228C070C000AE79E /* LevelReference.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB3E2F80227E0745003BC9B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB54E94A228BFDF7000AE79E /* CGVector+Extensions.swift in Sources */,
+				ABB07A652296B03600D3D7FE /* GameManager.swift in Sources */,
+				AB54E954228BFDF7000AE79E /* CGFloat+Extensions.swift in Sources */,
+				AB54E951228BFDF7000AE79E /* SKTEffects.swift in Sources */,
+				AB546A8B22AF297300A5C01D /* BrickSprite.swift in Sources */,
+				AB546A8D22AF298200A5C01D /* GoldSprite.swift in Sources */,
+				AB337A092291CE7900C9791B /* GameTypes.swift in Sources */,
+				AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */,
+				ABB07A6322967B3100D3D7FE /* ActionButton.swift in Sources */,
+				AB457C6C22923CEF00D2AC10 /* DirectionButton.swift in Sources */,
+				AB5096FB2294EA990021A298 /* GameScene+TileProcess.swift in Sources */,
+				AB3E2F8E227E0745003BC9B7 /* GameScene.swift in Sources */,
+				ABB9774E228FEE3F0011ACE5 /* Mario.swift in Sources */,
+				AB546A9322AF495700A5C01D /* GameScene+Physics.swift in Sources */,
+				AB54E94E228BFDF7000AE79E /* SKAction+SpecialEffects.swift in Sources */,
+				ABB07A61229677C300D3D7FE /* GameScene+Camera.swift in Sources */,
+				AB54E952228BFDF7000AE79E /* SKTAudio.swift in Sources */,
+				AB54E94C228BFDF7000AE79E /* SKTTimingFunctions.swift in Sources */,
+				ABB97757229099250011ACE5 /* GameProtocol.swift in Sources */,
+				AB54E953228BFDF7000AE79E /* Vector3.swift in Sources */,
+				AB54E94D228BFDF7000AE79E /* SKAction+Extensions.swift in Sources */,
+				AB546A9122AF463800A5C01D /* GameAnimations.swift in Sources */,
+				AB3E2F90227E0745003BC9B7 /* GameViewController.swift in Sources */,
+				AB54E94B228BFDF7000AE79E /* Int+Extensions.swift in Sources */,
+				AB54E950228BFDF7000AE79E /* CGPoint+Extensions.swift in Sources */,
+				AB54E94F228BFDF7000AE79E /* SKNode+Extensions.swift in Sources */,
+				ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */,
+				AB3E2F88227E0745003BC9B7 /* AppDelegate.swift in Sources */,
+				AB54E949228BFDF7000AE79E /* SKColor+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AB3E2F9A227E0747003BC9B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AB3E2F9B227E0747003BC9B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB3E2F9D227E0747003BC9B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V97V429S7F;
+				INFOPLIST_FILE = "$(SRCROOT)/SuperMario/Supports/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.haharsw.SuperMario;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB3E2F9E227E0747003BC9B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V97V429S7F;
+				INFOPLIST_FILE = "$(SRCROOT)/SuperMario/Supports/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.haharsw.SuperMario;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB3E2F7F227E0745003BC9B7 /* Build configuration list for PBXProject "SuperMario" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB3E2F9A227E0747003BC9B7 /* Debug */,
+				AB3E2F9B227E0747003BC9B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB3E2F9C227E0747003BC9B7 /* Build configuration list for PBXNativeTarget "SuperMario" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB3E2F9D227E0747003BC9B7 /* Debug */,
+				AB3E2F9E227E0747003BC9B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB3E2F7C227E0745003BC9B7 /* Project object */;
+}
