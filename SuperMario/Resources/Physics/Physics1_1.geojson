@@ -93,4 +93,23 @@
     {"type": "groundLine",       "pos": {"x": 187, "y": 8}, "len": 1},
     {"type": "groundLine",       "pos": {"x": 188, "y": 9}, "len": 2},
     {"type": "verticalRightLine", "pos": {"x": 189, "y": 2}, "len": 8},
+    
+    {"type": "horzPlatformLine", "pos": {"x": 20, "y": 5}, "len": 5},
+    {"type": "horzPlatformLine", "pos": {"x": 77, "y": 5}, "len": 3},
+    {"type": "horzPlatformLine", "pos": {"x": 80, "y": 9}, "len": 8},
+    {"type": "horzPlatformLine", "pos": {"x": 91, "y": 9}, "len": 4},
+    {"type": "horzPlatformLine", "pos": {"x": 100, "y": 5}, "len": 2},
+    {"type": "horzPlatformLine", "pos": {"x": 121, "y": 9}, "len": 3},
+    {"type": "horzPlatformLine", "pos": {"x": 128, "y": 9}, "len": 4},
+    {"type": "horzPlatformLine", "pos": {"x": 129, "y": 5}, "len": 2},
+    {"type": "horzPlatformLine", "pos": {"x": 168, "y": 5}, "len": 4},
+    
+    {"type": "horzPlatformLine", "pos": {"x": 16, "y": 5}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 22, "y": 9}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 94, "y": 5}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 106, "y": 5}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 109, "y": 5}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 109, "y": 9}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 112, "y": 5}, "len": 1},
+    {"type": "horzPlatformLine", "pos": {"x": 118, "y": 5}, "len": 1},
 ]

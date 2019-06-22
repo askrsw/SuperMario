@@ -28,7 +28,7 @@ class GameViewController: UIViewController {
         skView.isMultipleTouchEnabled = true        // very important
         view = skView
         
-        let _ = GameManager.instance
+        GameManager.instance.gameView = skView
         
         if let scene = SKScene(fileNamed: "Scene1_1") as? GameScene {
             skView.presentScene(scene)

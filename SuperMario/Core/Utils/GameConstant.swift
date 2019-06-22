@@ -18,6 +18,10 @@ class GameConstant {
     public static let groundYFixup: CGFloat   = -1.0
     public static let horzPaddingOffset: CGFloat = 0.0
     
+    public static let marioFlashTimeUnit: TimeInterval     = 0.1
+    public static let powerdownSoundDuration: TimeInterval = 0.8088888888888889
+    public static let powerupSoundDuration: TimeInterval   = 1.0178684807256235
+    
     public static let actionButtonFontName = "Helvetica"
     public static let actionButtonFontSize: CGFloat = 20.0
     public static let actionButtonCircleRadius: CGFloat = 12.5

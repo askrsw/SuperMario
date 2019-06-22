@@ -17,12 +17,15 @@ struct ButtonDirectionCategory {
 }
 
 struct PhysicsCategory {
-    static let None:      UInt32 = 0
-    static let All:       UInt32 = 0xFFFFFFFF
-    static let Mario:     UInt32 = 0b1
-    static let Solid:     UInt32 = 0b10
-    static let Brick:     UInt32 = 0b100
-    static let GoldMetal: UInt32 = 0b1000
+    static let None:      UInt32  = 0
+    static let All:       UInt32  = 0b11111111111111111111111111111111
+    static let Mario:     UInt32  = 0b1
+    static let MBullet:   UInt32  = 0b10
+    static let Solid:     UInt32  = 0b100
+    static let Brick:     UInt32  = 0b1000
+    static let GoldMetal: UInt32  = 0b10000
+    static let MarioPower:   UInt32 = 0b100000
+    static let erasablePlat: UInt32 = 0b1000000
 }
 
 enum PhysicsSolidEdgeType: String {
@@ -32,6 +35,7 @@ enum PhysicsSolidEdgeType: String {
     case pipeLeftSideLine  = "pipeLeftSideLine"
     case pipeRightSideLine = "pipeRightSideLine"
     case pipeTopGroundLine = "pipeTopGroundLine"
+    case horzPlatformLine  = "horzPlatformLine"
 }
 
 enum FragileGridType: String {

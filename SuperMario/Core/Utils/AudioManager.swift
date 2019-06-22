@@ -1,0 +1,107 @@
+//
+//  AudioManager.swift
+//  SuperMario
+//
+//  Created by haharsw on 2019/6/14.
+//  Copyright © 2019 haharsw. All rights reserved.
+//
+
+import SpriteKit
+import AVFoundation
+
+enum GameSound: String {
+    case None            = ""
+    case AddLife         = "Add_Life"
+    case BossDead        = "Boss_Dead"
+    case BreakBrick      = "Break_Brick"
+    case BreakBridge     = "Break_Bridge"
+    case Coin            = "Coin"
+    case ConnonFire      = "Connon_Fire"
+    case DoubleJump      = "Double_Jump"
+    case DoubleSwim      = "Double_Swim"
+    case DownFlag        = "Down_Flag"
+    case EnPipe          = "En_Pipe"
+    case FireBullet      = "Fire_Bullet"
+    case FireHitEvil     = "Fire_Hit_Evil"
+    case FirePassWall    = "Fire_Pass_Wall"
+    case Firework        = "Firework"
+    case Flame           = "Flame"
+    case GameOver        = "Game_Over"
+    case HitHard         = "Hit_Hard"
+    case Jump            = "Jump"
+    case LevelFinish     = "Level_Finish"
+    case MarioDeathLong  = "Mario_Death_Long"
+    case MarioDeathShort = "Mario_Death_Short"
+    case Powerdown       = "Powerdown"
+    case Powerup         = "Powerup"
+    case SpawnPowerup    = "Spawn_Powerup"
+    case TreadEvil       = "Tread_Evil"
+}
+
+enum BackgroundMusic: String {
+    case None           = ""
+    case AutoWalkToPipe = "Auto_Walk_to_Pipe"
+    case EnCastle       = "En_Castle"
+    case InPrison       = "In_Prison"
+    case InPrisonRapid  = "In_Prison_Rapid"
+    case InSky          = "In_Sky"
+    case InSkyRapid     = "In_Sky_Rapid"
+    case InWater        = "In_Water"
+    case InWaterRapid   = "In_Water_Rapid"
+    case IndoorRandom   = "Indoor_Random"
+    case Indoor         = "Indoor"
+    case MarioProtected = "Mario_Protected"
+    case Outdoor        = "Outdoor"
+    case OutdoorRapid   = "Outdoor_Rapid"
+    case StatsTime      = "Stats_Time"
+    case TimeRunningOut = "Time_Running_Out"
+}
+
+class AudioManager {
+    private static let instance = AudioManager()
+    private init() {}
+    
+    var backgroundMusicPlayer: AVAudioPlayer?
+    let soundCache: NSCache<NSString, SKAction> = NSCache()
+
+    // MARK: Interface
+    
+    static func play(music: BackgroundMusic) {
+        instance.play(musicName: music)
+    }
+
+    static func play(sound: GameSound) {
+        instance.play(soundName: sound)
+    }
+}
+
+extension AudioManager {
+    
+    private func play(musicName: BackgroundMusic) {
+        let resourceUrl = Bundle.main.url(forResource: musicName.rawValue, withExtension: "wav")
+        guard let url = resourceUrl else {
+            print("Could not find file: \(musicName.rawValue)")
+            return
+        }
+        
+        do {
+            try backgroundMusicPlayer = AVAudioPlayer(contentsOf: url)
+            backgroundMusicPlayer!.numberOfLoops = -1
+            backgroundMusicPlayer!.prepareToPlay()
+            backgroundMusicPlayer!.play()
+        } catch {
+            print("Could not create audio player for background music!")
+        }
+    }
+    
+    private func play(soundName: GameSound) {
+        let name = NSString(string: soundName.rawValue)
+        if let sound = soundCache.object(forKey: name) {
+            GameManager.instance.currentScene?.run(sound)
+        } else {
+            let sound = SKAction.playSoundFileNamed(soundName.rawValue, waitForCompletion: false)
+            GameManager.instance.currentScene?.run(sound)
+            soundCache.setObject(sound, forKey: name)
+        }
+    }
+}

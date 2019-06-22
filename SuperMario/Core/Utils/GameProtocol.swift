@@ -11,3 +11,11 @@ import SpriteKit
 protocol MarioBumpFragileNode {
     func marioBump()
 }
+
+protocol SpriteReverseMovement {
+    func reverseMovement(_ direction: CGVector)
+}
+
+protocol MovingSpriteNode {
+    func update(deltaTime dt: CGFloat)
+}

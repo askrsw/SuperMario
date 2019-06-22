@@ -29,12 +29,13 @@ extension GameScene {
 #endif
 
     func loadSolidPhysicsEdge() {
-        guard let physicsDescFileName = userData?["PhysicsDescFile"] as? String else { return }
-        guard let edgeArray = GameScene.readPhysicsJsonData(file: physicsDescFileName) else { return }
+        guard let edgeArray = GameScene.readPhysicsJsonData(file: physicsDescFileName) else {
+            fatalError("Can not load physics desc file.")
+        }
         
         let gridRatio = GameConstant.TileGridLength
         let tileYOffset = GameConstant.TileYOffset
-        let yFixup = GameConstant.groundYFixup
+        let yFixup: CGFloat = 0.0 //GameConstant.groundYFixup
         
         var vertPhysicsBodies = [SKPhysicsBody]()
         var horzPhysicsBodies = [SKPhysicsBody]()
@@ -83,12 +84,13 @@ extension GameScene {
                 let path = GameScene.makeLeftPipeSideLinePath(posX, posY, len)
                 let pp_body = SKPhysicsBody(edgeChainFrom: path)
                 vertPhysicsBodies.append(pp_body)
-                break
             case .pipeRightSideLine:
                 let path = GameScene.makeRightPipeSideLinePath(posX, posY, len)
                 let pp_body = SKPhysicsBody(edgeChainFrom: path)
                 vertPhysicsBodies.append(pp_body)
-                break
+            case .horzPlatformLine:
+                let param = ErasablePlatLineParam(gridX: posX, gridY: posY, len: len)
+                makeErasablePlatNode(param: param)
             }
         }
         
@@ -97,7 +99,7 @@ extension GameScene {
             let body = SKPhysicsBody(bodies: horzPhysicsBodies)
             body.categoryBitMask = PhysicsCategory.Solid
             body.isDynamic = false
-            body.friction = 1.0
+            body.friction = 0.0
             body.restitution = 0.0
             horzPhysHostNode.physicsBody = body
             self.rootNode!.addChild(horzPhysHostNode)
@@ -117,48 +119,41 @@ extension GameScene {
     
     func loadBrickGridTile() {
         if let brickTileMapNode = rootNode!.childNode(withName: "brick_grid") as? SKTileMapNode {
-            let tileType = FragileGridType(rawValue: brickTileMapNode.userData!["type"] as! String)!
+            let tileType = FragileGridType(rawValue: self.tileType)!
             
             for column in 0 ..< brickTileMapNode.numberOfColumns {
                 for row in 0 ..< brickTileMapNode.numberOfRows {
-                    guard let _ = brickTileMapNode.tileDefinition(atColumn: column, row: row) else { continue }
+                    guard let tile = brickTileMapNode.tileDefinition(atColumn: column, row: row) else { continue }
                     let center = brickTileMapNode.centerOfTile(atColumn: column, row: row)
                     
-                    let brick = BrickSprite(tileType)
-                    brick.position = center
+                    let brick = BrickSprite(tileType, tile.name ?? "")
+                    brick.position = CGPoint(x: center.x, y: center.y + GameConstant.TileYOffset)
                     
                     brickSpriteHolder.addChild(brick)
                 }
             }
             
             brickTileMapNode.removeFromParent()
-            brickSpriteHolder.zPosition = brickTileMapNode.zPosition
-            brickSpriteHolder.position  = brickTileMapNode.position
-            rootNode!.addChild(brickSpriteHolder)
         }
     }
     
     func loadGoldGridTile() {
         if let goldTileMapNode = rootNode!.childNode(withName: "gold_grid") as? SKTileMapNode {
-            let tileType = FragileGridType(rawValue: goldTileMapNode.userData!["type"] as! String)!
-            GameAnimations.updateGoldAnimation(tileType.rawValue)
+            let tileType = FragileGridType(rawValue: self.tileType)!
             
             for column in 0 ..< goldTileMapNode.numberOfColumns {
                 for row in 0 ..< goldTileMapNode.numberOfRows {
-                    guard let _ = goldTileMapNode.tileDefinition(atColumn: column, row: row) else { continue }
+                    guard let tile = goldTileMapNode.tileDefinition(atColumn: column, row: row) else { continue }
                     let center = goldTileMapNode.centerOfTile(atColumn: column, row: row)
                     
-                    let goldMetal = GoldSprite(tileType)
-                    goldMetal.position = center
+                    let goldMetal = GoldSprite(tileType, tile.name ?? "")
+                    goldMetal.position = CGPoint(x: center.x, y: center.y + GameConstant.TileYOffset)
                     
                     goldSpriteHolder.addChild(goldMetal)
                 }
             }
             
             goldTileMapNode.removeFromParent()
-            goldSpriteHolder.zPosition = goldTileMapNode.zPosition
-            goldSpriteHolder.position  = goldTileMapNode.position
-            rootNode!.addChild(goldSpriteHolder)
         }
     }
 

@@ -13,4 +13,7 @@ class GameManager {
     private init() {}
     
     let mario = Mario()
+    
+    weak var gameView: SKView?
+    weak var currentScene: GameScene?
 }
