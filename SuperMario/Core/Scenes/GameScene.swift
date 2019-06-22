@@ -30,6 +30,8 @@ class GameScene: SKScene {
     fileprivate var lastUpdateTime: TimeInterval = 0.0
     var fragileContactNodes: Array<SKNode & MarioBumpFragileNode> = []
     
+    var halfCameraViewWidth: CGFloat = 256.0
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

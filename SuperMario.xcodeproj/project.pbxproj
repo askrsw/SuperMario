@@ -47,7 +47,6 @@
 		AB55758F228EA34200A570D5 /* TileSets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB55758E228EA34200A570D5 /* TileSets.xcassets */; };
 		AB57C7A222B1DF7100B11A60 /* MushroomSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C7A122B1DF7100B11A60 /* MushroomSprite.swift */; };
 		AB57C7A422B1F1A000B11A60 /* HelperMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C7A322B1F1A000B11A60 /* HelperMethod.swift */; };
-		AB5F465422B86BE90090F26C /* Mario+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F465322B86BE90090F26C /* Mario+Animation.swift */; };
 		AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F465522B88DD40090F26C /* Mario+Control.swift */; };
 		AB65729922B39F32004D878B /* Mario+Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65729822B39F32004D878B /* Mario+Movement.swift */; };
 		AB90441E22BDB55200322412 /* In_Sky.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F622BDB55000322412 /* In_Sky.wav */; };
@@ -93,6 +92,7 @@
 		ABB07A61229677C300D3D7FE /* GameScene+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */; };
 		ABB07A6322967B3100D3D7FE /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB07A6222967B3100D3D7FE /* ActionButton.swift */; };
 		ABB07A652296B03600D3D7FE /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB07A642296B03600D3D7FE /* GameManager.swift */; };
+		ABB4EA0522BDEF9000C001B5 /* StarSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB4EA0422BDEF9000C001B5 /* StarSprite.swift */; };
 		ABB9774E228FEE3F0011ACE5 /* Mario.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB9774D228FEE3F0011ACE5 /* Mario.swift */; };
 		ABB97757229099250011ACE5 /* GameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB97756229099250011ACE5 /* GameProtocol.swift */; };
 		ABDAFB7A22B71551004DCE22 /* BrickPieceSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDAFB7922B71551004DCE22 /* BrickPieceSprite.swift */; };
@@ -143,7 +143,6 @@
 		AB55758E228EA34200A570D5 /* TileSets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TileSets.xcassets; sourceTree = "<group>"; };
 		AB57C7A122B1DF7100B11A60 /* MushroomSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MushroomSprite.swift; sourceTree = "<group>"; };
 		AB57C7A322B1F1A000B11A60 /* HelperMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethod.swift; sourceTree = "<group>"; };
-		AB5F465322B86BE90090F26C /* Mario+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Animation.swift"; sourceTree = "<group>"; };
 		AB5F465522B88DD40090F26C /* Mario+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Control.swift"; sourceTree = "<group>"; };
 		AB65729822B39F32004D878B /* Mario+Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Movement.swift"; sourceTree = "<group>"; };
 		AB9043F622BDB55000322412 /* In_Sky.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = In_Sky.wav; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Camera.swift"; sourceTree = "<group>"; };
 		ABB07A6222967B3100D3D7FE /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		ABB07A642296B03600D3D7FE /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		ABB4EA0422BDEF9000C001B5 /* StarSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarSprite.swift; sourceTree = "<group>"; };
 		ABB9774D228FEE3F0011ACE5 /* Mario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mario.swift; sourceTree = "<group>"; };
 		ABB97756229099250011ACE5 /* GameProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProtocol.swift; sourceTree = "<group>"; };
 		ABDAFB7922B71551004DCE22 /* BrickPieceSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickPieceSprite.swift; sourceTree = "<group>"; };
@@ -390,7 +390,6 @@
 			children = (
 				ABB9774D228FEE3F0011ACE5 /* Mario.swift */,
 				AB5F465522B88DD40090F26C /* Mario+Control.swift */,
-				AB5F465322B86BE90090F26C /* Mario+Animation.swift */,
 				AB65729822B39F32004D878B /* Mario+Movement.swift */,
 				AB40CD3722B29289003E0067 /* Mario+Shapeshifting.swift */,
 			);
@@ -421,6 +420,7 @@
 				AB546A8C22AF298200A5C01D /* GoldSprite.swift */,
 				AB57C7A122B1DF7100B11A60 /* MushroomSprite.swift */,
 				AB40CD3522B265E2003E0067 /* FlowerSprite.swift */,
+				ABB4EA0422BDEF9000C001B5 /* StarSprite.swift */,
 				ABDAFB7B22B740CD004DCE22 /* BulletSprite.swift */,
 			);
 			path = Sprite;
@@ -563,7 +563,6 @@
 				AB54E94E228BFDF7000AE79E /* SKAction+SpecialEffects.swift in Sources */,
 				AB65729922B39F32004D878B /* Mario+Movement.swift in Sources */,
 				ABB07A61229677C300D3D7FE /* GameScene+Camera.swift in Sources */,
-				AB5F465422B86BE90090F26C /* Mario+Animation.swift in Sources */,
 				AB54E952228BFDF7000AE79E /* SKTAudio.swift in Sources */,
 				AB40CDDD22B32F67003E0067 /* GameScene+Config.swift in Sources */,
 				AB54E94C228BFDF7000AE79E /* SKTTimingFunctions.swift in Sources */,
@@ -578,6 +577,7 @@
 				AB40CDDB22B32BD0003E0067 /* GameScene+Audio.swift in Sources */,
 				AB3E2F90227E0745003BC9B7 /* GameViewController.swift in Sources */,
 				AB54E94B228BFDF7000AE79E /* Int+Extensions.swift in Sources */,
+				ABB4EA0522BDEF9000C001B5 /* StarSprite.swift in Sources */,
 				AB54E950228BFDF7000AE79E /* CGPoint+Extensions.swift in Sources */,
 				AB54E94F228BFDF7000AE79E /* SKNode+Extensions.swift in Sources */,
 				ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */,

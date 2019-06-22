@@ -84,7 +84,7 @@ class GameAnimations {
         let tex3 = SKTexture(imageNamed: "fire_bullet_3")
         let tex4 = SKTexture(imageNamed: "fire_bullet_4")
         
-        bulletAnimation = SKAction.animate(with: [tex1, tex2, tex3, tex4], timePerFrame: 0.1)
+        bulletAnimation = SKAction.repeatForever(SKAction.animate(with: [tex1, tex2, tex3, tex4], timePerFrame: 0.05))
     }
     
     static func updateBulletFlashAnimation() {

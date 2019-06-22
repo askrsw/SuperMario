@@ -8,14 +8,22 @@
 
 import SpriteKit
 
+fileprivate enum BrickTileType: String {
+    case brick = "brick"
+    case coinBrick = "coin"
+    case starBrick = "star"
+}
+
 class BrickSprite : SKSpriteNode {
-    
+    fileprivate let brickTileType: BrickTileType
     let type: FragileGridType
-    let tileName: String
+    var empty: Bool = false
+    var lastCoin: Bool = false
+    var coinTimerSetted = false
     
     init(_ type: FragileGridType, _ tileName: String) {
         self.type = type
-        self.tileName = tileName
+        self.brickTileType = BrickTileType(rawValue: tileName) ?? .brick
         
         let texFileName = "brick" + type.rawValue
         let tex = SKTexture(imageNamed: texFileName)
@@ -38,7 +46,25 @@ class BrickSprite : SKSpriteNode {
 
 extension BrickSprite: MarioBumpFragileNode {
     func marioBump() {
-        if GameManager.instance.mario.marioPower != .A {
+        guard self.empty != true else {
+            AudioManager.play(sound: .HitHard)
+            return
+        }
+        
+        switch self.brickTileType {
+        case .brick:
+            self.normalBrickProcess()
+        case .coinBrick:
+            self.coinBrickProccess()
+        case .starBrick:
+            self.starBrickProcess()
+        }
+    }
+    
+    // MARK: Helper method
+    
+    private func normalBrickProcess() {
+        if GameManager.instance.mario.marioPower != .A && GameManager.instance.mario.marioMoveState != .crouching {
             removeFromParent()
             AudioManager.play(sound: .BreakBrick)
             let position = CGPoint(x: self.position.x, y: self.position.y - GameConstant.TileGridLength * 0.5)
@@ -51,5 +77,47 @@ extension BrickSprite: MarioBumpFragileNode {
             self.run(GameAnimations.brickShakeAnimation)
             AudioManager.play(sound: .HitHard)
         }
+    }
+    
+    private func coinBrickProccess() {
+        self.run(GameAnimations.brickShakeAnimation)
+        
+        let coinFileName = "flycoin" + self.type.rawValue + "_1"
+        let coin = SKSpriteNode(imageNamed: coinFileName)
+        coin.zPosition = 1.0
+        coin.position = CGPoint(x: 0.0, y: GameConstant.TileGridLength * 0.75)
+        coin.run(GameAnimations.flyCoinAnimation)
+        self.addChild(coin)
+        AudioManager.play(sound: .Coin)
+        
+        if self.lastCoin {
+            let texFileName = "goldm" + self.type.rawValue + "_4"
+            self.texture = SKTexture(imageNamed: texFileName)
+            self.empty = true
+        }
+        
+        if self.coinTimerSetted == false {
+            delay(4.5) {
+                self.lastCoin = true
+            }
+            
+            self.coinTimerSetted = true
+        }
+    }
+    
+    private func starBrickProcess() {
+        if let holder = GameManager.instance.currentScene?.movingSpriteHolder {
+            let star = StarSprite(self.type)
+            let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
+            star.zPosition = self.zPosition
+            star.cropNode.position = position + self.parent!.position
+            holder.addChild(star.cropNode)
+        }
+        
+        let texFileName = "goldm" + self.type.rawValue + "_4"
+        self.texture = SKTexture(imageNamed: texFileName)
+        self.empty = true
+        
+        AudioManager.play(sound: .SpawnPowerup)
     }
 }

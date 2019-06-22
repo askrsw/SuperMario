@@ -16,6 +16,7 @@ extension Mario {
             
             let backupVelocity = physicsBody!.velocity
             
+            powerfull = false
             physicsBody = nil
             removeAllActions()
             
@@ -35,7 +36,7 @@ extension Mario {
             
             AudioManager.play(sound: .Powerup)
         } else {
-            AudioManager.play(sound: .Coin)
+            AudioManager.play(sound: .AddLife)
         }
     }
     
@@ -45,6 +46,7 @@ extension Mario {
             
             let backupVelocity = physicsBody!.velocity
             
+            powerfull = false
             physicsBody = nil
             removeAllActions()
             
@@ -63,7 +65,7 @@ extension Mario {
             
             AudioManager.play(sound: .Powerup)
         } else {
-            AudioManager.play(sound: .Coin)
+            AudioManager.play(sound: .AddLife)
         }
     }
 }

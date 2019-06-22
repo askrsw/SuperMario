@@ -16,6 +16,8 @@ extension GameScene {
         camera.xScale = 1.0 / scaleFactor
         camera.yScale = 1.0 / scaleFactor
         
+        halfCameraViewWidth = size.width * 0.5
+        
         let zeroDistance = SKRange(constantValue: 0)
         let marioConstraint = SKConstraint.distance(zeroDistance, to: mario)
         let xRange = SKRange(lowerLimit: size.width * 0.5 / scaleFactor, upperLimit: (sceneWidth - size.width * 0.5 / scaleFactor))
@@ -45,7 +47,7 @@ extension GameScene {
         dirButton.didMoveToScene()
     }
     
-    func setActionButton() {
+    fileprivate func setActionButton() {
         let marginRight = 24.0 * scaleFactor
         let marginBottom = 24.0 * scaleFactor
         let horzSpace = 18.0 * scaleFactor

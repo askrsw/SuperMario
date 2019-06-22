@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import GameplayKit
 
 enum MarioPower:String {
     case A = "a"
@@ -58,6 +59,8 @@ class Mario: SKSpriteNode {
     var underWater: Bool = false
     var shapeshifting: Bool = false
     
+    var movementStateMachine: GKStateMachine!
+    
     var marioPower: MarioPower = .A {
         didSet {
             guard oldValue != marioPower else { return }
@@ -79,9 +82,10 @@ class Mario: SKSpriteNode {
                 crouchingTexture = Mario.crouchingTextureC
                 moveAnimation = moveFaster ? Mario.runAnimationC : Mario.walkAnimationC
             }
-                
-            let tmp = marioMoveState
-            marioMoveState = tmp
+
+            if let movementState = movementStateMachine.currentState as? MovementState {
+                movementState.updateTextureOrAnimation()
+            }
         }
     }
     
@@ -95,10 +99,6 @@ class Mario: SKSpriteNode {
             case .C:
                 moveAnimation = moveFaster ? Mario.runAnimationC : Mario.walkAnimationC
             }
-            
-            if marioMoveState == .running || marioMoveState == .walking {
-                run(moveAnimation, withKey: "moveAnimation")
-            }
         }
     }
     
@@ -110,7 +110,7 @@ class Mario: SKSpriteNode {
     
     var maxSpeedX: CGFloat {
         get {
-            if moveFaster {
+            if moveFaster && marioMoveState != .crouching {
                 return 180.0
             } else {
                 return 120.0
@@ -120,7 +120,7 @@ class Mario: SKSpriteNode {
     
     var speedUpForce: CGVector {
         get {
-            if moveFaster {
+            if moveFaster && marioMoveState != .crouching {
                 return CGVector(dx: 360.0, dy: 0.0)
             } else {
                 return CGVector(dx: 240.0, dy: 0.0)
@@ -131,41 +131,19 @@ class Mario: SKSpriteNode {
     var downWard: Bool = false {
         didSet {
             if downWard == true {
-                guard marioPower != .A else { return }
-                marioMoveState = .crouching
+                movementStateMachine.enter(CrouchingMoveState.self)
             } else {
-                guard marioMoveState == .crouching else { return }
-                if jumping {
-                    marioMoveState = .jumping
-                } else if speedX {
-                    if moveFaster {
-                        marioMoveState = .running
-                    } else {
-                        marioMoveState = .walking
-                    }
-                } else {
-                    marioMoveState = .still
+                if let crouchingState = movementStateMachine.currentState as? CrouchingMoveState {
+                    crouchingState.leaveCrouchingMoveState()
                 }
             }
         }
     }
     
-    var marioMoveState: MarioMoveState = .still {
-        didSet {
-            switch oldValue {
-            case .walking: fallthrough
-            case .running: removeAction(forKey: "moveAnimation")
-            default: break
-            }
-            
-            switch marioMoveState {
-            case .still: texture = stillTexture
-            case .jumping: texture = jumpingTexture
-            case .walking: fallthrough
-            case .running: run(moveAnimation, withKey: "moveAnimation")
-            case .crouching: texture = crouchingTexture ?? stillTexture
-            default: break
-            }
+    var marioMoveState: MarioMoveState {
+        get {
+            let state = movementStateMachine.currentState as! MovementState
+            return state.MovementStateValue()
         }
     }
     
@@ -175,15 +153,35 @@ class Mario: SKSpriteNode {
         }
     }
     
+    var powerfull: Bool = false {
+        didSet {
+            guard oldValue != powerfull else { return }
+            if powerfull == true {
+                let animation = SKAction.repeatForever(GameAnimations.marioFlashAnimation)
+                self.run(animation, withKey: "marioFlash")
+                
+                delay(10.0) {
+                    self.powerfull = false
+                }
+            } else {
+                self.removeAction(forKey: "marioFlash")
+                self.alpha = 1.0
+            }
+        }
+    }
+    
     init() {
         super.init(texture: stillTexture, color: SKColor.clear, size: stillTexture.size())
-        physicsBody = makePhysicsBody()
+        
         zPosition = 1000
         
         moveFaster = false
         marioPower = .A
-        marioMoveState = .still
         marioFacing = .forward
+        
+        createMovementStateMachine()
+        
+        physicsBody = makePhysicsBody()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -193,51 +191,19 @@ class Mario: SKSpriteNode {
     // MARK: interface
     
     func update(deltaTime dt: CGFloat) {
-        guard let physicsBody = physicsBody else { return }
-        
-        let curX = abs(physicsBody.velocity.dx)
-        let vY = physicsBody.velocity.dy
-        var vX: CGFloat = 0.0
-        
-        var force: CGVector = .zero
-        if speedX {
-            if curX < maxSpeedX {
-                force = speedUpForce * physicsBody.mass * marioFacing.rawValue
-            } else {
-                vX = maxSpeedX
-            }
-        }
-        
-        if force != .zero {
-            physicsBody.applyForce(force)
-        } else {
-            physicsBody.velocity = CGVector(dx: vX * marioFacing.rawValue, dy: vY)
-        }
+        updatePhysicsBodyState(deltaTime: dt)
+        updateMovementStateMachine(deltaTime: dt)
+    }
     
-        guard marioMoveState != .crouching else { return }
+    // MARK: Help method
+    
+    fileprivate static func makeAnimations(animType: MarioPower, timePerFrame: TimeInterval) -> SKAction {
+        let mid = animType.rawValue
         
-        if jumping {
-            if marioMoveState != .jumping {
-                marioMoveState = .jumping
-            }
-            
-            return
-        }
-        
-        if speedX {
-            if moveFaster {
-                if marioMoveState != .running {
-                    marioMoveState = .running
-                }
-            } else {
-                if marioMoveState != .walking {
-                    marioMoveState = .walking
-                }
-            }
-        } else {
-            if marioMoveState != .still {
-                marioMoveState = .still
-            }
-        }
+        let texWalk1 = SKTexture(imageNamed: "mario_" + mid + "_walk1")
+        let texWalk2 = SKTexture(imageNamed: "mario_" + mid + "_walk2")
+        let texWalk3 = SKTexture(imageNamed: "mario_" + mid + "_walk3")
+        let animAction = SKAction.animate(with: [texWalk1, texWalk2, texWalk3], timePerFrame: timePerFrame)
+        return SKAction.repeatForever(animAction)
     }
 }

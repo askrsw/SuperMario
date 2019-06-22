@@ -20,7 +20,12 @@ func makeShrinkRoundRectangle(_ size: CGSize, xDelta: CGFloat = 1.5, yDelta: CGF
 }
 
 func DebugPrint(_ message: String) {
-    //#if DEBUG
+    #if DEBUG
         print(message)
-    //#endif
+    #endif
 }
+
+func delay(_ seconds: Double, completion: @escaping ()->Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
+}
+

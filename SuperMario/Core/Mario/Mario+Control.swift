@@ -63,7 +63,7 @@ extension Mario {
     }
     
     func fire() {
-        if marioPower == .C {
+        if marioPower == .C  && marioMoveState != .crouching {
             if let holder = GameManager.instance.currentScene?.bulletSpriteHolder {
                 let bullet = BulletSprite(faceTo: marioFacing, marioPos: position)
                 holder.addChild(bullet)

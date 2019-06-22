@@ -141,6 +141,10 @@ extension GameScene: SKPhysicsContactDelegate {
                 if abs(contact.contactNormal.dx) > 0.5 {
                     let node = first.node as! SKNode & SpriteReverseMovement
                     node.reverseMovement(contact.contactNormal)
+                } else if contact.contactNormal.dy > 0.5 {
+                    if let star = first.node as? StarSprite {
+                        star.fallToGround()
+                    }
                 }
             } else if first.categoryBitMask == PhysicsCategory.MBullet {
                 guard let bullet = first.node as? BulletSprite else { return }
