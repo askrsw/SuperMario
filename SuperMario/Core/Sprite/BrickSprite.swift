@@ -35,7 +35,7 @@ class BrickSprite : SKSpriteNode {
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.Brick
-        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.erasablePlat)
+        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.erasablePlat
         physicsBody!.isDynamic = false
     }
     

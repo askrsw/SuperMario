@@ -10,10 +10,56 @@ import SpriteKit
 
 class GameManager {
     static let instance = GameManager()
-    private init() {}
     
-    let mario = Mario()
+    let allSceneNames = [ "Scene1_1", "Scene1_1_A" ]
     
-    weak var gameView: SKView?
-    weak var currentScene: GameScene?
+    let mario    = Mario()
+    let gameView = SKView(frame: UIScreen.main.bounds)
+    
+    var allScenes: [String: GameScene] = [:]
+    var currentScene: GameScene?
+    
+    private init() {
+        
+    #if DEBUG
+        gameView.showsFPS       = true
+        gameView.showsNodeCount = true
+        gameView.showsQuadCount = true
+        gameView.showsPhysics   = true
+        gameView.showsFields    = true
+    #endif
+        
+        gameView.ignoresSiblingOrder       = true
+        gameView.shouldCullNonVisibleNodes = true
+        gameView.isMultipleTouchEnabled    = true  //very important
+        
+        GameAnimations.initializeFixedAnimations()
+    }
+    
+    func start() {
+        let sceneName = allSceneNames.first!
+        let scene = fetchScene(sceneName: sceneName)
+        gameView.presentScene(scene)
+    }
+    
+    func enterScene(_ param: SceneGadget) {
+        let scene = fetchScene(sceneName: param.destSceneName)
+        gameView.presentScene(scene)
+        mario.didEnterNextScene(param)
+    }
+    
+    // MARK: Help method
+    
+    private func fetchScene(sceneName name: String) -> GameScene {
+        if let scene = allScenes[name] {
+            return scene
+        }
+        
+        if let scene = SKScene(fileNamed: name) as? GameScene {
+            allScenes[name] = scene
+            return scene
+        } else {
+            fatalError("Can not load game scene: \(name)")
+        }
+    }
 }

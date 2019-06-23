@@ -42,9 +42,19 @@ extension GameScene {
         ErasePlatPhysicsNode(pos)
     }
     
+    func loadPhysicsDesc() {
+        let (shapeArray, gadgetArray) = GameScene.readPhysicsJsonData(file: physicsDescFileName)
+        
+        loadSolidPhysicsEdges(shapeArray)
+        
+        if let gadgets = gadgetArray {
+            loadPhysicsGadets(gadgets)
+        }
+    }
+    
     // MARK: Helper method
     
-    private func ErasePlatPhysicsNode(_ pos: CGPoint) {
+    fileprivate func ErasePlatPhysicsNode(_ pos: CGPoint) {
         let unitL = GameConstant.TileGridLength
         let rect = CGRect(x: pos.x - 0.5, y: pos.y, width: 1.0, height: unitL)
         
@@ -72,7 +82,7 @@ extension GameScene {
         }
     }
     
-    private func makeErasablePlatPhysics(_ pos1: CGPoint, _ pos2: CGPoint) -> SKPhysicsBody {
+    fileprivate func makeErasablePlatPhysics(_ pos1: CGPoint, _ pos2: CGPoint) -> SKPhysicsBody {
         let body = SKPhysicsBody(edgeFrom: pos1, to: pos2)
         body.categoryBitMask = PhysicsCategory.erasablePlat
         body.collisionBitMask = (body.collisionBitMask) & ~PhysicsCategory.erasablePlat
@@ -83,7 +93,7 @@ extension GameScene {
         return body
     }
     
-    private func rebuildErasePlatNode(_ node: SKNode, X gridX: CGFloat, Y gridY: CGFloat) {
+    fileprivate func rebuildErasePlatNode(_ node: SKNode, X gridX: CGFloat, Y gridY: CGFloat) {
         guard var rawParam = node.userData?["param"] as? ErasablePlatLineParam else { return }
         
         guard rawParam.gridY == gridY else { return }
@@ -103,6 +113,168 @@ extension GameScene {
             
             rawParam.len = firstLen
             self.makeErasablePlatNode(param: rawParam)
+        }
+    }
+    
+    fileprivate func loadSolidPhysicsEdges(_ shapeArray: Array<Dictionary<String, Any>>) {
+        let gridRatio = GameConstant.TileGridLength
+        let tileYOffset = GameConstant.TileYOffset
+        
+        var vertPhysicsBodies = [SKPhysicsBody]()
+        var horzPhysicsBodies = [SKPhysicsBody]()
+        
+        for edge in shapeArray {
+            let posDict = edge["pos"] as! Dictionary<String, CGFloat>
+            let type = PhysicsSolidEdgeType(rawValue: edge["type"] as! String)!
+            let len  = edge["len"] as! CGFloat
+            let posX = posDict["x"]!
+            let posY = posDict["y"]!
+            var horzPadding: CGFloat = 0.0
+            if edge["horzPadding"] != nil {
+                horzPadding = edge["horzPadding"] as! CGFloat
+            }
+            
+            switch type {
+            case .verticalLeftLine:
+                let point1 = CGPoint(x: posX * gridRatio + horzPadding, y: posY * gridRatio + tileYOffset)
+                let point2 = CGPoint(x: point1.x, y: point1.y + len * gridRatio)
+                let pp_body = SKPhysicsBody(edgeFrom: point1, to: point2)
+                vertPhysicsBodies.append(pp_body)
+            case .verticalRightLine:
+                let point1 = CGPoint(x: (posX + 1) * gridRatio + horzPadding, y: posY * gridRatio + tileYOffset)
+                let point2 = CGPoint(x: point1.x, y: point1.y + len * gridRatio)
+                let pp_body = SKPhysicsBody(edgeFrom: point1, to: point2)
+                vertPhysicsBodies.append(pp_body)
+            case .groundLine: fallthrough
+            case .pipeTopGroundLine:
+                var point1 = CGPoint(x: posX * gridRatio, y: (posY + 1) * gridRatio + tileYOffset)
+                var point2 = CGPoint(x: point1.x + len * gridRatio, y: point1.y)
+                
+                let leftPadding = edge["leftPadding"] as? CGFloat
+                if leftPadding != nil {
+                    point1.x += leftPadding!
+                }
+                
+                let rightPadding = edge["rightPadding"] as? CGFloat
+                if rightPadding != nil {
+                    point2.x += rightPadding!
+                }
+                
+                let pp_body = SKPhysicsBody(edgeFrom: point1, to: point2)
+                
+                horzPhysicsBodies.append(pp_body)
+            case .pipeLeftSideLine:
+                let path = GameScene.makeLeftPipeSideLinePath(posX, posY, len)
+                let pp_body = SKPhysicsBody(edgeChainFrom: path)
+                vertPhysicsBodies.append(pp_body)
+            case .pipeRightSideLine:
+                let path = GameScene.makeRightPipeSideLinePath(posX, posY, len)
+                let pp_body = SKPhysicsBody(edgeChainFrom: path)
+                vertPhysicsBodies.append(pp_body)
+            case .horzPlatformLine:
+                let param = ErasablePlatLineParam(gridX: posX, gridY: posY, len: len)
+                makeErasablePlatNode(param: param)
+            case .pipeTopUpSideLine:
+                let path = GameScene.makePipeUpSideLinePath(posX, posY, len)
+                let pp_body = SKPhysicsBody(edgeChainFrom: path)
+                horzPhysicsBodies.append(pp_body)
+            }
+        }
+        
+        if horzPhysicsBodies.count > 0 {
+            let horzPhysHostNode = SKNode()
+            let body = SKPhysicsBody(bodies: horzPhysicsBodies)
+            body.categoryBitMask = PhysicsCategory.Solid
+            body.isDynamic = false
+            body.friction = 0.0
+            body.restitution = 0.0
+            horzPhysHostNode.physicsBody = body
+            self.rootNode!.addChild(horzPhysHostNode)
+        }
+        
+        if vertPhysicsBodies.count > 0 {
+            let vertPhysHostNode = SKNode()
+            let body = SKPhysicsBody(bodies: vertPhysicsBodies)
+            body.categoryBitMask = PhysicsCategory.Solid
+            body.isDynamic = false
+            body.friction = 0.0
+            body.restitution = 0.0
+            vertPhysHostNode.physicsBody = body
+            self.rootNode!.addChild(vertPhysHostNode)
+        }
+    }
+    
+    static fileprivate func makeLeftPipeSideLinePath(_ gridX: CGFloat, _ gridY: CGFloat, _ len: CGFloat) -> CGPath {
+        let x1 = gridX * GameConstant.TileGridLength + 2.0
+        let y1 = gridY * GameConstant.TileGridLength + GameConstant.TileYOffset
+        let x2 = x1
+        let y2 = y1 + GameConstant.TileGridLength * (len - 1.0) + 2.0
+        let x3 = x1 - 2.0
+        let y3 = y2
+        let x4 = x3
+        let y4 = y2 + GameConstant.TileGridLength - 2.0 + GameConstant.groundYFixup
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1, y: y1))
+        path.addLine(to: CGPoint(x: x2, y: y2))
+        path.addLine(to: CGPoint(x: x3, y: y3))
+        path.addLine(to: CGPoint(x: x4, y: y4))
+        return path.cgPath
+    }
+    
+    static fileprivate func makeRightPipeSideLinePath(_ gridX: CGFloat, _ gridY: CGFloat, _ len: CGFloat) -> CGPath {
+        let x1 = (gridX + 1) * GameConstant.TileGridLength - 2.0
+        let y1 = gridY * GameConstant.TileGridLength + GameConstant.TileYOffset
+        let x2 = x1
+        let y2 = y1 + GameConstant.TileGridLength * (len - 1.0) + 2.0
+        let x3 = x1 + 2.0
+        let y3 = y2
+        let x4 = x3
+        let y4 = y2 + GameConstant.TileGridLength - 2.0 + GameConstant.groundYFixup
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1, y: y1))
+        path.addLine(to: CGPoint(x: x2, y: y2))
+        path.addLine(to: CGPoint(x: x3, y: y3))
+        path.addLine(to: CGPoint(x: x4, y: y4))
+        return path.cgPath
+    }
+    
+    static fileprivate func makePipeUpSideLinePath(_ gridX: CGFloat, _ gridY: CGFloat, _ len: CGFloat) -> CGPath {
+        let x1 = gridX * GameConstant.TileGridLength
+        let y1 = gridY * GameConstant.TileGridLength + GameConstant.TileYOffset
+        let x2 = x1 + GameConstant.TileGridLength - 2.0
+        let y2 = y1
+        let x3 = x2
+        let y3 = y2 - 2.0
+        let x4 = (gridX + len) * GameConstant.TileGridLength + 2.0
+        let y4 = y3
+        let x5 = x4
+        let y5 = y1
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1, y: y1))
+        path.addLine(to: CGPoint(x: x2, y: y2))
+        path.addLine(to: CGPoint(x: x3, y: y3))
+        path.addLine(to: CGPoint(x: x4, y: y4))
+        path.addLine(to: CGPoint(x: x5, y: y5))
+        
+        return path.cgPath
+    }
+    
+    static fileprivate func readPhysicsJsonData(file name:String) -> (Array<Dictionary<String, Any>>, Array<Dictionary<String, Any>>?) {
+        let filePath = Bundle.main.path(forResource: name, ofType: "geojson")
+        let url = URL(fileURLWithPath: filePath!)
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+            let jsonDict = jsonData as! Dictionary<String, Array<Any>>
+            let physicalShapes = jsonDict["shapes"] as! Array<Dictionary<String, Any>>
+            let physicalGadgets = jsonDict["gadgetes"] as? Array<Dictionary<String, Any>>
+            return (physicalShapes, physicalGadgets)
+        } catch let error as Error? {
+            fatalError("Error when load data from bundle:", file: error as Any as! StaticString)
         }
     }
 }
@@ -131,9 +303,15 @@ extension GameScene: SKPhysicsContactDelegate {
                             fragileContactNodes.append(node)
                         }
                     }
-                case PhysicsCategory.MarioPower:
+                case PhysicsCategory.MarioPower: fallthrough
+                case PhysicsCategory.Coin:
                     let node = second!.node as! SKNode & MarioBumpFragileNode
                     fragileContactNodes.append(node)
+                case PhysicsCategory.Gadget:
+                    let gadget = second!.node!.userData?["param"] as! SceneGadget
+                    if gadget.type == .vert {
+                        mario.checkVertGadget(gadget: gadget)
+                    }
                 default:
                     break
                 }

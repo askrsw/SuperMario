@@ -12,7 +12,9 @@ class GameAnimations {
     private init() {}
     
     private static var solidAnimationCreated = false
+    private static var sceneGridType: String = ""
     static var goldmAnimation: SKAction       = SKAction()
+    static var coinAmination: SKAction        = SKAction()
     static var flyCoinAnimation: SKAction     = SKAction()
     static var brickShakeAnimation: SKAction  = SKAction()
     static var marioFlashAnimation: SKAction  = SKAction()
@@ -31,6 +33,22 @@ class GameAnimations {
         let tex3 = SKTexture(imageNamed: texFileName3)
         
         goldmAnimation = SKAction.repeatForever(SKAction.animate(with: [tex1, tex2, tex3], timePerFrame: 0.5))
+    }
+    
+    static func updateCoinAnimation(_ suffix: String) {
+        let texFileName1 = "coin" + suffix + "_1"
+        let tex1 = SKTexture(imageNamed: texFileName1)
+        
+        let texFileName2 = "coin" + suffix + "_2"
+        let tex2 = SKTexture(imageNamed: texFileName2)
+        
+        let texFileName3 = "coin" + suffix + "_3"
+        let tex3 = SKTexture(imageNamed: texFileName3)
+        
+        let texFileName4 = "coin" + suffix + "_4"
+        let tex4 = SKTexture(imageNamed: texFileName4)
+        
+        coinAmination = SKAction.repeatForever(SKAction.animate(with: [tex1, tex2, tex3, tex4], timePerFrame: 0.5))
     }
     
     static func updateFlyCoinAnimation(_ suffix: String) {
@@ -100,9 +118,16 @@ class GameAnimations {
     }
     
     static func updateStoredAnimations(_ suffix: String) {
-        updateGoldAnimation(suffix)
-        updateFlyCoinAnimation(suffix)
+        if sceneGridType != suffix {
+            updateGoldAnimation(suffix)
+            updateCoinAnimation(suffix)
+            updateFlyCoinAnimation(suffix)
         
+            sceneGridType = suffix
+        }
+    }
+    
+    static func initializeFixedAnimations() {
         if solidAnimationCreated == false {
             updateBrickShakeAnimation()
             updateMarioFlashAnimation()
@@ -112,6 +137,5 @@ class GameAnimations {
             
             solidAnimationCreated = true
         }
-        
     }
 }

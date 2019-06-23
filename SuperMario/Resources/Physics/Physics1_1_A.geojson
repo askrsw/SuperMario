@@ -1,0 +1,28 @@
+{
+    "shapes": [
+        {"type": "verticalLeftLine",  "pos": {"x": 0, "y": 2}, "len": 18},
+        {"type": "verticalRightLine", "pos": {"x": 15, "y": 2}, "len": 18},
+        {"type": "groundLine",        "pos": {"x": 0, "y": 1}, "len": 16},
+        
+        {"type": "verticalLeftLine",  "pos": {"x": 1, "y": 2}, "len": 11},
+        {"type": "verticalLeftLine",  "pos": {"x": 4, "y": 2}, "len": 3},
+        {"type": "verticalRightLine", "pos": {"x": 10, "y": 2}, "len": 3},
+        {"type": "verticalLeftLine",  "pos": {"x": 15, "y": 4}, "len": 9, "horzPadding": 2},
+        {"type": "pipeTopGroundLine", "pos": {"x": 15, "y": 12}, "len": 1, "leftPadding": 2},
+        {"type": "verticalLeftLine",  "pos": {"x": 13, "y": 2}, "len": 2},
+        {"type": "pipeTopUpSideLine", "pos": {"x": 13, "y": 4}, "len": 2},
+        
+        {"type": "horzPlatformLine", "pos": {"x": 0, "y": 12}, "len": 1},
+        {"type": "horzPlatformLine", "pos": {"x": 4, "y": 12}, "len": 7},
+        {"type": "horzPlatformLine", "pos": {"x": 4, "y": 4}, "len": 7}
+    ],
+    
+    "gadgetes": [
+        { "type": "vertGaget",
+          "pos": {"x": 12, "y": 3},
+          "dest": "Scene1_1",
+          "dst_pos": {"x": 58, "y": 7},
+          "popOut": true
+        }
+    ]
+}

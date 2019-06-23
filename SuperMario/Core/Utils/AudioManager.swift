@@ -61,13 +61,19 @@ class AudioManager {
     private static let instance = AudioManager()
     private init() {}
     
+    var currentMusic: BackgroundMusic = .None
     var backgroundMusicPlayer: AVAudioPlayer?
     let soundCache: NSCache<NSString, SKAction> = NSCache()
 
     // MARK: Interface
     
-    static func play(music: BackgroundMusic) {
-        instance.play(musicName: music)
+    static func play(music: BackgroundMusic, _ remainRatio: Bool) {
+        instance.play(musicName: music, remainRatio)
+    }
+    
+    static func stopBackgroundMusic() {
+        instance.backgroundMusicPlayer?.stop()
+        instance.backgroundMusicPlayer = nil
     }
 
     static func play(sound: GameSound) {
@@ -77,7 +83,9 @@ class AudioManager {
 
 extension AudioManager {
     
-    private func play(musicName: BackgroundMusic) {
+    private func play(musicName: BackgroundMusic, _ remainRatio: Bool) {
+        guard currentMusic != musicName else { return }
+        
         let resourceUrl = Bundle.main.url(forResource: musicName.rawValue, withExtension: "wav")
         guard let url = resourceUrl else {
             print("Could not find file: \(musicName.rawValue)")
@@ -85,10 +93,19 @@ extension AudioManager {
         }
         
         do {
+            var ratio: Double = 0.0
+            if remainRatio, let preMusic = backgroundMusicPlayer {
+                ratio = preMusic.currentTime / preMusic.duration
+            }
+            
             try backgroundMusicPlayer = AVAudioPlayer(contentsOf: url)
             backgroundMusicPlayer!.numberOfLoops = -1
             backgroundMusicPlayer!.prepareToPlay()
             backgroundMusicPlayer!.play()
+            
+            backgroundMusicPlayer!.currentTime = backgroundMusicPlayer!.duration * ratio
+            
+            currentMusic = musicName
         } catch {
             print("Could not create audio player for background music!")
         }

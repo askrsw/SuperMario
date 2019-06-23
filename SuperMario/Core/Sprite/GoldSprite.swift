@@ -37,7 +37,7 @@ class GoldSprite : SKSpriteNode {
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.GoldMetal
-        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.erasablePlat)
+        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.erasablePlat
         physicsBody!.isDynamic = false
     
         run(GameAnimations.goldmAnimation, withKey: "animation")

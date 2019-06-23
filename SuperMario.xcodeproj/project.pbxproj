@@ -11,6 +11,8 @@
 		AB337A092291CE7900C9791B /* GameTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB337A082291CE7900C9791B /* GameTypes.swift */; };
 		AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */; };
 		AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */; };
+		AB3DA06B22BE16E800A35745 /* Scene1_1_A.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB3DA06A22BE16E800A35745 /* Scene1_1_A.sks */; };
+		AB3DF39F22BE814B00A130DD /* Physics1_1_A.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB3DA06C22BE1F1E00A35745 /* Physics1_1_A.geojson */; };
 		AB3E2F88227E0745003BC9B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E2F87227E0745003BC9B7 /* AppDelegate.swift */; };
 		AB3E2F8E227E0745003BC9B7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E2F8D227E0745003BC9B7 /* GameScene.swift */; };
 		AB3E2F90227E0745003BC9B7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3E2F8F227E0745003BC9B7 /* GameViewController.swift */; };
@@ -24,6 +26,8 @@
 		AB457C6C22923CEF00D2AC10 /* DirectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */; };
 		AB4815B822B04040002A1C7B /* Sprite.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4815B722B04040002A1C7B /* Sprite.xcassets */; };
 		AB5096FB2294EA990021A298 /* GameScene+TileProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5096FA2294EA990021A298 /* GameScene+TileProcess.swift */; };
+		AB514B2122BF645E002EE895 /* GameScene+Gadget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB514B2022BF645E002EE895 /* GameScene+Gadget.swift */; };
+		AB514B2322BF800A002EE895 /* Mario+SceneChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB514B2222BF800A002EE895 /* Mario+SceneChange.swift */; };
 		AB546A8B22AF297300A5C01D /* BrickSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A8A22AF297300A5C01D /* BrickSprite.swift */; };
 		AB546A8D22AF298200A5C01D /* GoldSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A8C22AF298200A5C01D /* GoldSprite.swift */; };
 		AB546A9122AF463800A5C01D /* GameAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB546A9022AF463800A5C01D /* GameAnimations.swift */; };
@@ -47,6 +51,7 @@
 		AB55758F228EA34200A570D5 /* TileSets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB55758E228EA34200A570D5 /* TileSets.xcassets */; };
 		AB57C7A222B1DF7100B11A60 /* MushroomSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C7A122B1DF7100B11A60 /* MushroomSprite.swift */; };
 		AB57C7A422B1F1A000B11A60 /* HelperMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB57C7A322B1F1A000B11A60 /* HelperMethod.swift */; };
+		AB5D23E122BF207600255226 /* CoinSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D23E022BF207600255226 /* CoinSprite.swift */; };
 		AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F465522B88DD40090F26C /* Mario+Control.swift */; };
 		AB65729922B39F32004D878B /* Mario+Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65729822B39F32004D878B /* Mario+Movement.swift */; };
 		AB90441E22BDB55200322412 /* In_Sky.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F622BDB55000322412 /* In_Sky.wav */; };
@@ -105,6 +110,8 @@
 		AB337A082291CE7900C9791B /* GameTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypes.swift; sourceTree = "<group>"; };
 		AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstant.swift; sourceTree = "<group>"; };
 		AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mario.xcassets; sourceTree = "<group>"; };
+		AB3DA06A22BE16E800A35745 /* Scene1_1_A.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_1_A.sks; sourceTree = "<group>"; };
+		AB3DA06C22BE1F1E00A35745 /* Physics1_1_A.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_1_A.geojson; sourceTree = "<group>"; };
 		AB3E2F84227E0745003BC9B7 /* SuperMario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperMario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB3E2F87227E0745003BC9B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB3E2F8D227E0745003BC9B7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -120,6 +127,8 @@
 		AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionButton.swift; sourceTree = "<group>"; };
 		AB4815B722B04040002A1C7B /* Sprite.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sprite.xcassets; sourceTree = "<group>"; };
 		AB5096FA2294EA990021A298 /* GameScene+TileProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+TileProcess.swift"; sourceTree = "<group>"; };
+		AB514B2022BF645E002EE895 /* GameScene+Gadget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Gadget.swift"; sourceTree = "<group>"; };
+		AB514B2222BF800A002EE895 /* Mario+SceneChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+SceneChange.swift"; sourceTree = "<group>"; };
 		AB546A8A22AF297300A5C01D /* BrickSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickSprite.swift; sourceTree = "<group>"; };
 		AB546A8C22AF298200A5C01D /* GoldSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldSprite.swift; sourceTree = "<group>"; };
 		AB546A9022AF463800A5C01D /* GameAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnimations.swift; sourceTree = "<group>"; };
@@ -143,6 +152,7 @@
 		AB55758E228EA34200A570D5 /* TileSets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TileSets.xcassets; sourceTree = "<group>"; };
 		AB57C7A122B1DF7100B11A60 /* MushroomSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MushroomSprite.swift; sourceTree = "<group>"; };
 		AB57C7A322B1F1A000B11A60 /* HelperMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethod.swift; sourceTree = "<group>"; };
+		AB5D23E022BF207600255226 /* CoinSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSprite.swift; sourceTree = "<group>"; };
 		AB5F465522B88DD40090F26C /* Mario+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Control.swift"; sourceTree = "<group>"; };
 		AB65729822B39F32004D878B /* Mario+Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Movement.swift"; sourceTree = "<group>"; };
 		AB9043F622BDB55000322412 /* In_Sky.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = In_Sky.wav; sourceTree = "<group>"; };
@@ -285,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */,
+				AB3DA06C22BE1F1E00A35745 /* Physics1_1_A.geojson */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -360,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				AB54E957228C0431000AE79E /* Scene1_1.sks */,
+				AB3DA06A22BE16E800A35745 /* Scene1_1_A.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -372,6 +384,7 @@
 				ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */,
 				AB5096FA2294EA990021A298 /* GameScene+TileProcess.swift */,
 				AB546A9222AF495700A5C01D /* GameScene+Physics.swift */,
+				AB514B2022BF645E002EE895 /* GameScene+Gadget.swift */,
 				AB40CDDA22B32BD0003E0067 /* GameScene+Audio.swift */,
 			);
 			path = Scenes;
@@ -392,6 +405,7 @@
 				AB5F465522B88DD40090F26C /* Mario+Control.swift */,
 				AB65729822B39F32004D878B /* Mario+Movement.swift */,
 				AB40CD3722B29289003E0067 /* Mario+Shapeshifting.swift */,
+				AB514B2222BF800A002EE895 /* Mario+SceneChange.swift */,
 			);
 			path = Mario;
 			sourceTree = "<group>";
@@ -418,6 +432,7 @@
 				AB546A8A22AF297300A5C01D /* BrickSprite.swift */,
 				ABDAFB7922B71551004DCE22 /* BrickPieceSprite.swift */,
 				AB546A8C22AF298200A5C01D /* GoldSprite.swift */,
+				AB5D23E022BF207600255226 /* CoinSprite.swift */,
 				AB57C7A122B1DF7100B11A60 /* MushroomSprite.swift */,
 				AB40CD3522B265E2003E0067 /* FlowerSprite.swift */,
 				ABB4EA0422BDEF9000C001B5 /* StarSprite.swift */,
@@ -484,9 +499,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB3DF39F22BE814B00A130DD /* Physics1_1_A.geojson in Resources */,
 				AB90443322BDB55200322412 /* Jump.wav in Resources */,
 				AB90443D22BDB55200322412 /* En_Castle.wav in Resources */,
 				AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */,
+				AB3DA06B22BE16E800A35745 /* Scene1_1_A.sks in Resources */,
 				AB90442022BDB55200322412 /* Outdoor.wav in Resources */,
 				AB90442822BDB55200322412 /* Indoor.wav in Resources */,
 				AB90443522BDB55200322412 /* Mario_Protected.wav in Resources */,
@@ -558,6 +575,7 @@
 				ABDAFB7A22B71551004DCE22 /* BrickPieceSprite.swift in Sources */,
 				AB5096FB2294EA990021A298 /* GameScene+TileProcess.swift in Sources */,
 				AB3E2F8E227E0745003BC9B7 /* GameScene.swift in Sources */,
+				AB514B2122BF645E002EE895 /* GameScene+Gadget.swift in Sources */,
 				ABB9774E228FEE3F0011ACE5 /* Mario.swift in Sources */,
 				AB546A9322AF495700A5C01D /* GameScene+Physics.swift in Sources */,
 				AB54E94E228BFDF7000AE79E /* SKAction+SpecialEffects.swift in Sources */,
@@ -573,8 +591,10 @@
 				AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */,
 				AB54E953228BFDF7000AE79E /* Vector3.swift in Sources */,
 				AB54E94D228BFDF7000AE79E /* SKAction+Extensions.swift in Sources */,
+				AB5D23E122BF207600255226 /* CoinSprite.swift in Sources */,
 				AB546A9122AF463800A5C01D /* GameAnimations.swift in Sources */,
 				AB40CDDB22B32BD0003E0067 /* GameScene+Audio.swift in Sources */,
+				AB514B2322BF800A002EE895 /* Mario+SceneChange.swift in Sources */,
 				AB3E2F90227E0745003BC9B7 /* GameViewController.swift in Sources */,
 				AB54E94B228BFDF7000AE79E /* Int+Extensions.swift in Sources */,
 				ABB4EA0522BDEF9000C001B5 /* StarSprite.swift in Sources */,

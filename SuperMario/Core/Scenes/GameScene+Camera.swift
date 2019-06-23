@@ -18,12 +18,16 @@ extension GameScene {
         
         halfCameraViewWidth = size.width * 0.5
         
-        let zeroDistance = SKRange(constantValue: 0)
-        let marioConstraint = SKConstraint.distance(zeroDistance, to: mario)
-        let xRange = SKRange(lowerLimit: size.width * 0.5 / scaleFactor, upperLimit: (sceneWidth - size.width * 0.5 / scaleFactor))
-        let yRange = SKRange(constantValue: size.height * 0.5 / scaleFactor)
-        let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
-        camera.constraints = [marioConstraint, edgeConstraint]
+        if size.width < sceneWidth * scaleFactor {
+            let zeroDistance = SKRange(constantValue: 0)
+            let marioConstraint = SKConstraint.distance(zeroDistance, to: mario)
+            let xRange = SKRange(lowerLimit: size.width * 0.5 / scaleFactor, upperLimit: (sceneWidth - size.width * 0.5 / scaleFactor))
+            let yRange = SKRange(constantValue: size.height * 0.5 / scaleFactor)
+            let edgeConstraint = SKConstraint.positionX(xRange, y: yRange)
+            camera.constraints = [marioConstraint, edgeConstraint]
+        } else {
+            camera.position = CGPoint(x: sceneWidth * 0.5, y: GameConstant.OriginalSceneHeight * 0.5)
+        }
         
         setDirButton()
         setActionButton()

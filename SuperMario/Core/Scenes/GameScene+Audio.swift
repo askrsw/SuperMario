@@ -12,9 +12,13 @@ extension GameScene {
     
     // MARK: Interface
     
-    func playBackgroundMusc() {
-        if let music = BackgroundMusic(rawValue: bkMusicName) {
-            AudioManager.play(music: music)
-        }
+    func playBackgroundMusc(_ rapid: Bool = false, _ remainRatio: Bool = false) {
+        let musicName = bkMusicName + (rapid ? "_Rapid" : "")
+        let music = BackgroundMusic(rawValue: musicName)!
+        AudioManager.play(music: music, remainRatio)
+    }
+    
+    func marioIsPowerfull() {
+        AudioManager.play(music: .MarioProtected, false)
     }
 }

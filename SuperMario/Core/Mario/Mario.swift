@@ -59,6 +59,13 @@ class Mario: SKSpriteNode {
     var underWater: Bool = false
     var shapeshifting: Bool = false
     
+    var pipingTime: Bool = false {
+        didSet {
+            speedX   = false
+            downWard = false
+        }
+    }
+    
     var movementStateMachine: GKStateMachine!
     
     var marioPower: MarioPower = .A {
@@ -99,6 +106,11 @@ class Mario: SKSpriteNode {
             case .C:
                 moveAnimation = moveFaster ? Mario.runAnimationC : Mario.walkAnimationC
             }
+            
+            if powerfull == false && pipingTime == false {
+                let scene = GameManager.instance.currentScene!
+                scene.playBackgroundMusc(moveFaster, true)
+            }
         }
     }
     
@@ -131,7 +143,9 @@ class Mario: SKSpriteNode {
     var downWard: Bool = false {
         didSet {
             if downWard == true {
-                movementStateMachine.enter(CrouchingMoveState.self)
+                if checkGadgetUnderFoot() == false {
+                    movementStateMachine.enter(CrouchingMoveState.self)
+                }
             } else {
                 if let crouchingState = movementStateMachine.currentState as? CrouchingMoveState {
                     crouchingState.leaveCrouchingMoveState()
@@ -149,13 +163,15 @@ class Mario: SKSpriteNode {
     
     var jumping: Bool {
         get {
-            return abs(physicsBody?.velocity.dy ?? 1.0) > 0.0
+            return abs(physicsBody?.velocity.dy ?? 0.0) > 0.0
         }
     }
     
     var powerfull: Bool = false {
         didSet {
             guard oldValue != powerfull else { return }
+            let scene = GameManager.instance.currentScene!
+            
             if powerfull == true {
                 let animation = SKAction.repeatForever(GameAnimations.marioFlashAnimation)
                 self.run(animation, withKey: "marioFlash")
@@ -163,9 +179,12 @@ class Mario: SKSpriteNode {
                 delay(10.0) {
                     self.powerfull = false
                 }
+                
+                scene.marioIsPowerfull()
             } else {
                 self.removeAction(forKey: "marioFlash")
                 self.alpha = 1.0
+                scene.playBackgroundMusc(moveFaster, false)
             }
         }
     }
