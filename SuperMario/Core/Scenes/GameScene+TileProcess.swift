@@ -20,7 +20,7 @@ extension GameScene {
             label.fontSize = 10.0
             label.fontColor = SKColor.white
             label.position = CGPoint(x: x, y: y)
-            rootNode!.addChild(label)
+            rootNode.addChild(label)
             
             x += GameConstant.TileGridLength
             index += 1
@@ -29,7 +29,7 @@ extension GameScene {
 #endif
     
     func loadBrickGridTile() {
-        if let brickTileMapNode = rootNode!.childNode(withName: "brick_grid") as? SKTileMapNode {
+        if let brickTileMapNode = rootNode.childNode(withName: "brick_grid") as? SKTileMapNode {
             let tileType = FragileGridType(rawValue: self.tileType)!
             
             for column in 0 ..< brickTileMapNode.numberOfColumns {
@@ -49,7 +49,7 @@ extension GameScene {
     }
     
     func loadGoldGridTile() {
-        if let goldTileMapNode = rootNode!.childNode(withName: "gold_grid") as? SKTileMapNode {
+        if let goldTileMapNode = rootNode.childNode(withName: "gold_grid") as? SKTileMapNode {
             let tileType = FragileGridType(rawValue: self.tileType)!
             
             for column in 0 ..< goldTileMapNode.numberOfColumns {
@@ -69,7 +69,7 @@ extension GameScene {
     }
     
     func loadCoinGridTile() {
-        if let coinTileMapNode = rootNode!.childNode(withName: "coin_grid") as? SKTileMapNode {
+        if let coinTileMapNode = rootNode.childNode(withName: "coin_grid") as? SKTileMapNode {
             let tileType = FragileGridType(rawValue: self.tileType)!
             
             for column in 0 ..< coinTileMapNode.numberOfColumns {

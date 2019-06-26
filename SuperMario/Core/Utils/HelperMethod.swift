@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 func makeShrinkRoundRectangle(_ size: CGSize, xDelta: CGFloat = 1.5, yDelta: CGFloat = 1.0, radius: CGFloat = 0.5) -> CGPath {
     let x = -size.width * 0.5 + xDelta
@@ -29,3 +30,19 @@ func delay(_ seconds: Double, completion: @escaping ()->Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
 }
 
+func makeAnimation(texName: String, suffix: String, count: Int, timePerFrame: TimeInterval, repeatForever: Bool = true) -> SKAction {
+    var textures: [SKTexture] = []
+    for index in 1...count {
+        let texFileName = texName + suffix + "_\(index)"
+        let tex = SKTexture(imageNamed: texFileName)
+        textures.append(tex)
+    }
+    
+    let animation = SKAction.animate(with: textures, timePerFrame: timePerFrame)
+    
+    if repeatForever {
+        return SKAction.repeatForever(animation)
+    } else {
+        return animation
+    }
+}

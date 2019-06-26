@@ -82,7 +82,7 @@ extension StarSprite: MarioBumpFragileNode {
     func marioBump() {
         self.removeAllActions()
         self.physicsBody = nil
-        self.run(GameAnimations.vanishAnimation)
+        self.run(GameAnimations.instance.vanishAnimation)
         
         GameManager.instance.mario.powerfull = true
     }

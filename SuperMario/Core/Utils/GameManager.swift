@@ -32,8 +32,6 @@ class GameManager {
         gameView.ignoresSiblingOrder       = true
         gameView.shouldCullNonVisibleNodes = true
         gameView.isMultipleTouchEnabled    = true  //very important
-        
-        GameAnimations.initializeFixedAnimations()
     }
     
     func start() {

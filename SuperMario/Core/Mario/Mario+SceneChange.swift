@@ -60,7 +60,7 @@ extension Mario {
                 cropNode.position = gadget.destPostion
             }
             
-            GameManager.instance.currentScene!.rootNode!.addChild(cropNode)
+            GameManager.instance.currentScene!.rootNode.addChild(cropNode)
             
             marioFacing = .forward
     

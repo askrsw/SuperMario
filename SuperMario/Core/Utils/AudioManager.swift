@@ -68,7 +68,7 @@ class AudioManager {
     // MARK: Interface
     
     static func play(music: BackgroundMusic, _ remainRatio: Bool) {
-        instance.play(musicName: music, remainRatio)
+        //instance.play(musicName: music, remainRatio)
     }
     
     static func stopBackgroundMusic() {
@@ -77,7 +77,7 @@ class AudioManager {
     }
 
     static func play(sound: GameSound) {
-        instance.play(soundName: sound)
+        //instance.play(soundName: sound)
     }
 }
 

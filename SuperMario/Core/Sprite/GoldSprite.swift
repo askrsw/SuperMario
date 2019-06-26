@@ -40,11 +40,26 @@ class GoldSprite : SKSpriteNode {
         physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.erasablePlat
         physicsBody!.isDynamic = false
     
-        run(GameAnimations.goldmAnimation, withKey: "animation")
+        run(animation, withKey: "animation")
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) hasn't been implemented.")
+    }
+    
+    // MARK: Animation Stuff
+    
+    private static var sAnimation: SKAction!
+    private static var sTexType = ""
+    var animation: SKAction {
+        get {
+            if GoldSprite.sTexType != GameScene.currentTileType {
+                GoldSprite.sAnimation = makeAnimation(texName: "goldm", suffix: GameScene.currentTileType, count: 3, timePerFrame: 0.5)
+                GoldSprite.sTexType = GameScene.currentTileType
+            }
+            
+            return GoldSprite.sAnimation
+        }
     }
 }
 
@@ -80,7 +95,7 @@ extension GoldSprite: MarioBumpFragileNode {
         let coin = SKSpriteNode(imageNamed: coinFileName)
         coin.zPosition = 1.0
         coin.position = CGPoint(x: 0.0, y: GameConstant.TileGridLength * 0.75)
-        coin.run(GameAnimations.flyCoinAnimation)
+        coin.run(GameAnimations.instance.flyCoinAnimation)
         self.addChild(coin)
         
         AudioManager.play(sound: .Coin)
@@ -106,9 +121,8 @@ extension GoldSprite: MarioBumpFragileNode {
             }
             
             if lifeMushroom == true {
-                let wait = SKAction.wait(forDuration: 1.0)
-                let remove = SKAction.removeFromParent()
-                run(SKAction.sequence([wait, remove]))
+                let fadeIn = SKAction.fadeIn(withDuration: 0.125)
+                self.run(fadeIn)
             }
         }
         

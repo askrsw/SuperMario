@@ -23,7 +23,7 @@ extension Mario {
             let repeatCount = Int(GameConstant.powerupSoundDuration / GameConstant.marioFlashTimeUnit / 2)
             let tex = SKTexture(imageNamed: "mario_b_normal1")
             let texAction = SKAction.setTexture(tex, resize: true)
-            let flashAction = SKAction.repeat(GameAnimations.marioFlashAnimation, count: repeatCount)
+            let flashAction = SKAction.repeat(GameAnimations.instance.flashAnimation, count: repeatCount)
             let blockAction = SKAction.run { [weak self] in
                 self?.marioPower = .B
                 self?.physicsBody = self?.makePhysicsBody(backupVelocity)
@@ -53,7 +53,7 @@ extension Mario {
             let repeatCount = Int(GameConstant.powerupSoundDuration / GameConstant.marioFlashTimeUnit / 2)
             let tex = SKTexture(imageNamed: "mario_c_normal1")
             let texAction = SKAction.setTexture(tex, resize: true)
-            let flashAction = SKAction.repeat(GameAnimations.marioFlashAnimation, count: repeatCount)
+            let flashAction = SKAction.repeat(GameAnimations.instance.flashAnimation, count: repeatCount)
             let blockAction = SKAction.run { [weak self] in
                 self?.marioPower = .C
                 self?.physicsBody = self?.makePhysicsBody(backupVelocity)

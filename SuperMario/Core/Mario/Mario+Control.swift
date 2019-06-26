@@ -61,7 +61,7 @@ extension Mario {
         guard pipingTime == false else { return }
         guard jumping == false else { return }
         guard let physicsBody = physicsBody else { return }
-        let verticalForce = physicsBody.mass * 500.0
+        let verticalForce = physicsBody.mass * 475.0
         physicsBody.applyImpulse(CGVector(dx: 0.0, dy: verticalForce))
     }
     

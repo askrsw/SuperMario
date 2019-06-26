@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB03AB9F22C118C10007F14A /* Enemies.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB03AB9E22C118C10007F14A /* Enemies.xcassets */; };
+		AB03ABA222C122BB0007F14A /* EnemiesBaseNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03ABA122C122BB0007F14A /* EnemiesBaseNode.swift */; };
+		AB03ABA422C1237B0007F14A /* GoombasGuy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03ABA322C1237B0007F14A /* GoombasGuy.swift */; };
 		AB0D8A5722AF08C2005DF87F /* Physics1_1.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */; };
 		AB337A092291CE7900C9791B /* GameTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB337A082291CE7900C9791B /* GameTypes.swift */; };
 		AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */; };
@@ -106,6 +109,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB03AB9E22C118C10007F14A /* Enemies.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Enemies.xcassets; sourceTree = "<group>"; };
+		AB03ABA122C122BB0007F14A /* EnemiesBaseNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesBaseNode.swift; sourceTree = "<group>"; };
+		AB03ABA322C1237B0007F14A /* GoombasGuy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoombasGuy.swift; sourceTree = "<group>"; };
 		AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Physics1_1.geojson; sourceTree = "<group>"; };
 		AB337A082291CE7900C9791B /* GameTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypes.swift; sourceTree = "<group>"; };
 		AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstant.swift; sourceTree = "<group>"; };
@@ -217,6 +223,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB03ABA022C122460007F14A /* Enemies */ = {
+			isa = PBXGroup;
+			children = (
+				AB03ABA122C122BB0007F14A /* EnemiesBaseNode.swift */,
+				AB03ABA322C1237B0007F14A /* GoombasGuy.swift */,
+			);
+			path = Enemies;
+			sourceTree = "<group>";
+		};
 		AB3E2F7B227E0745003BC9B7 = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +331,7 @@
 				AB3E2F94227E0747003BC9B7 /* Assets.xcassets */,
 				AB3EA5AE22913E4000FB33C4 /* Background.xcassets */,
 				AB4815B722B04040002A1C7B /* Sprite.xcassets */,
+				AB03AB9E22C118C10007F14A /* Enemies.xcassets */,
 				AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */,
 				AB55758E228EA34200A570D5 /* TileSets.xcassets */,
 				AB54E95C228C070C000AE79E /* LevelReference.xcassets */,
@@ -360,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				ABB9775022900C810011ACE5 /* Sprite */,
+				AB03ABA022C122460007F14A /* Enemies */,
 				ABB9774F22900C5E0011ACE5 /* Utils */,
 				ABB9774C228FEE1C0011ACE5 /* Mario */,
 				AB54E959228C044C000AE79E /* Scenes */,
@@ -539,6 +556,7 @@
 				AB90443622BDB55200322412 /* In_Water.wav in Resources */,
 				AB90443E22BDB55200322412 /* In_Prison.wav in Resources */,
 				AB90444022BDB55200322412 /* Connon_Fire.wav in Resources */,
+				AB03AB9F22C118C10007F14A /* Enemies.xcassets in Resources */,
 				AB90442F22BDB55200322412 /* Spawn_Powerup.wav in Resources */,
 				AB90442A22BDB55200322412 /* Break_Bridge.wav in Resources */,
 				AB90443422BDB55200322412 /* Tread_Evil.wav in Resources */,
@@ -569,6 +587,7 @@
 				AB546A8B22AF297300A5C01D /* BrickSprite.swift in Sources */,
 				AB546A8D22AF298200A5C01D /* GoldSprite.swift in Sources */,
 				AB337A092291CE7900C9791B /* GameTypes.swift in Sources */,
+				AB03ABA222C122BB0007F14A /* EnemiesBaseNode.swift in Sources */,
 				AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */,
 				ABB07A6322967B3100D3D7FE /* ActionButton.swift in Sources */,
 				AB457C6C22923CEF00D2AC10 /* DirectionButton.swift in Sources */,
@@ -586,6 +605,7 @@
 				AB54E94C228BFDF7000AE79E /* SKTTimingFunctions.swift in Sources */,
 				AB40CD3622B265E2003E0067 /* FlowerSprite.swift in Sources */,
 				AB40CD3A22B31356003E0067 /* AudioManager.swift in Sources */,
+				AB03ABA422C1237B0007F14A /* GoombasGuy.swift in Sources */,
 				AB57C7A422B1F1A000B11A60 /* HelperMethod.swift in Sources */,
 				ABB97757229099250011ACE5 /* GameProtocol.swift in Sources */,
 				AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */,

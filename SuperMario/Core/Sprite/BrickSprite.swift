@@ -42,6 +42,24 @@ class BrickSprite : SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) hasn't been implemented.")
     }
+    
+    // MARK: Animation Stuff
+    
+    private static var sShakeAnimation: SKAction!
+    var shakeAnimation: SKAction {
+        get {
+            if BrickSprite.sShakeAnimation == nil {
+                let vector = CGVector(dx: 0.0, dy: GameConstant.TileGridLength * 0.2)
+                let moveByAction = SKAction.move(by: vector, duration: 0.075)
+                moveByAction.timingMode = .easeOut
+                let reverseAction = moveByAction.reversed()
+                reverseAction.timingMode = .easeIn
+                BrickSprite.sShakeAnimation = SKAction.sequence([moveByAction, reverseAction])
+            }
+            
+            return BrickSprite.sShakeAnimation
+        }
+    }
 }
 
 extension BrickSprite: MarioBumpFragileNode {
@@ -74,19 +92,19 @@ extension BrickSprite: MarioBumpFragileNode {
                 scene.ErasePlatNode(self.position)
             }
         } else {
-            self.run(GameAnimations.brickShakeAnimation)
+            self.run(shakeAnimation)
             AudioManager.play(sound: .HitHard)
         }
     }
     
     private func coinBrickProccess() {
-        self.run(GameAnimations.brickShakeAnimation)
+        self.run(shakeAnimation)
         
         let coinFileName = "flycoin" + self.type.rawValue + "_1"
         let coin = SKSpriteNode(imageNamed: coinFileName)
         coin.zPosition = 1.0
         coin.position = CGPoint(x: 0.0, y: GameConstant.TileGridLength * 0.75)
-        coin.run(GameAnimations.flyCoinAnimation)
+        coin.run(GameAnimations.instance.flyCoinAnimation)
         self.addChild(coin)
         AudioManager.play(sound: .Coin)
         

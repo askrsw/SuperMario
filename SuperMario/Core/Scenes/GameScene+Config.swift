@@ -32,4 +32,10 @@ extension GameScene {
             return userData?["tileType"] as? String ?? "_a"
         }
     }
+    
+    static var currentTileType: String {
+        get {
+            return GameManager.instance.currentScene?.tileType ?? "_a"
+        }
+    }
 }

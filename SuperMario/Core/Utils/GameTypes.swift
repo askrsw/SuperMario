@@ -26,8 +26,10 @@ struct PhysicsCategory {
     static let GoldMetal: UInt32 = 0b10000
     static let Coin:      UInt32 = 0b100000
     static let Gadget:    UInt32 = 0b1000000
-    static let MarioPower:   UInt32 = 0b10000000
-    static let erasablePlat: UInt32 = 0b100000000
+    static let Evildoer:  UInt32 = 0b10000000
+    static let EBullet:   UInt32 = 0b100000000
+    static let MarioPower:   UInt32 = 0b1000000000
+    static let erasablePlat: UInt32 = 0b10000000000
                                    // 0b11111111111111111111111111111111
 }
 

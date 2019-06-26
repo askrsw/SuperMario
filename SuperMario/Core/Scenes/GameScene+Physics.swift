@@ -189,7 +189,7 @@ extension GameScene {
             body.friction = 0.0
             body.restitution = 0.0
             horzPhysHostNode.physicsBody = body
-            self.rootNode!.addChild(horzPhysHostNode)
+            self.rootNode.addChild(horzPhysHostNode)
         }
         
         if vertPhysicsBodies.count > 0 {
@@ -200,7 +200,7 @@ extension GameScene {
             body.friction = 0.0
             body.restitution = 0.0
             vertPhysHostNode.physicsBody = body
-            self.rootNode!.addChild(vertPhysHostNode)
+            self.rootNode.addChild(vertPhysHostNode)
         }
     }
     
@@ -288,6 +288,8 @@ extension GameScene: SKPhysicsContactDelegate {
         case MarioPowerIsB
         case MBulletIsA
         case MBulletIsB
+        case EnemyIsA
+        case EnemyIsB
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -312,6 +314,10 @@ extension GameScene: SKPhysicsContactDelegate {
                     if gadget.type == .vert {
                         mario.checkVertGadget(gadget: gadget)
                     }
+                case PhysicsCategory.Evildoer:
+                    if let _ = second!.node as? EnemiesBaseNode {
+                        //enemy.contactWithMario(contact)
+                    }
                 default:
                     break
                 }
@@ -331,6 +337,18 @@ extension GameScene: SKPhysicsContactDelegate {
                 } else if abs(contact.contactNormal.dx) > 0.5 {
                     bullet.hitSolidPhysicsBody()
                 }
+            } else if first.categoryBitMask == PhysicsCategory.Evildoer {
+                guard let enemy = first.node as? EnemiesBaseNode else { return }
+                if (second!.categoryBitMask & (PhysicsCategory.Solid | PhysicsCategory.GoldMetal | PhysicsCategory.Brick)) != PhysicsCategory.None {
+                    if abs(contact.contactNormal.dx) > 0.5 && abs(contact.contactNormal.dy) < 0.1 {
+                        needFlippingEnemies.insert(enemy)
+                    }
+                } else if second!.categoryBitMask == PhysicsCategory.Evildoer {
+                    if abs(contact.contactNormal.dx) > 0.5 && abs(contact.contactNormal.dy) < 0.1 {
+                        enemy.collideWithEnemy()
+                        needFlippingEnemies.insert(enemy)
+                    }
+                }
             }
         }
     }
@@ -340,8 +358,6 @@ extension GameScene: SKPhysicsContactDelegate {
     func postPhysicsProcess() {
         if fragileContactNodes.count == 1 {
             fragileContactNodes.first!.marioBump()
-            
-            fragileContactNodes.removeAll()
         } else if fragileContactNodes.count > 1 {
             var nearestIndex = -1
             var nearestDistance:CGFloat = 1000.0
@@ -358,9 +374,13 @@ extension GameScene: SKPhysicsContactDelegate {
             if nearestIndex != -1 {
                 fragileContactNodes[nearestIndex].marioBump()
             }
-            
-            fragileContactNodes.removeAll()
         }
+        fragileContactNodes.removeAll()
+        
+        for enemy in needFlippingEnemies {
+            enemy.faceLeft = !enemy.faceLeft
+        }
+        needFlippingEnemies.removeAll()
     }
     
     // MARK: Helper Method
@@ -378,6 +398,10 @@ extension GameScene: SKPhysicsContactDelegate {
             return (contact.bodyA, contact.bodyB, .MBulletIsA)
         } else if contact.bodyB.categoryBitMask == PhysicsCategory.MBullet {
             return (contact.bodyB, contact.bodyA, .MBulletIsB)
+        } else if contact.bodyA.categoryBitMask == PhysicsCategory.Evildoer {
+            return (contact.bodyA, contact.bodyB, .EnemyIsA)
+        } else if contact.bodyB.categoryBitMask == PhysicsCategory.Evildoer {
+            return (contact.bodyB, contact.bodyA, .EnemyIsB)
         } else {
             return (nil, nil, .Unkown)
         }

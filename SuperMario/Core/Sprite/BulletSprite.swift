@@ -18,7 +18,7 @@ class BulletSprite: SKSpriteNode {
         let tex = SKTexture(imageNamed: "fire_bullet_1")
         super.init(texture: tex, color: SKColor.clear, size: tex.size())
         
-        run(GameAnimations.bulletAnimation)
+        run(animation)
         
         let unitL = GameConstant.TileGridLength
         if dir == .forward {
@@ -47,7 +47,7 @@ class BulletSprite: SKSpriteNode {
         let flashSprite = SKSpriteNode(imageNamed: "bullet_flash")
         flashSprite.zPosition = zPosition
         flashSprite.position  = CGPoint(x: position.x + xDiff, y: position.y)
-        flashSprite.run(GameAnimations.bulletFlashAnimation)
+        flashSprite.run(flashAnimation)
         parent!.addChild(flashSprite)
         
         removeFromParent()
@@ -57,6 +57,38 @@ class BulletSprite: SKSpriteNode {
         guard let physicsBody = physicsBody else { return }
         let verticalForce = physicsBody.mass * 240.0
         physicsBody.applyImpulse(CGVector(dx: 0.0, dy: verticalForce))
+    }
+    
+    // MARK: Animation Stuff
+    
+    private static var sAnimation: SKAction!
+    var animation: SKAction {
+        get {
+            if BulletSprite.sAnimation == nil {
+                BulletSprite.sAnimation = makeAnimation(texName: "fire_bullet", suffix: "", count: 4, timePerFrame: 0.05)
+            }
+            
+            return BulletSprite.sAnimation
+        }
+    }
+    
+    private static var sFlashAnimation: SKAction!
+    var flashAnimation: SKAction {
+        get {
+            if BulletSprite.sFlashAnimation == nil {
+                let scaleExpand = SKAction.scale(to: 1.25, duration: 0.075)
+                scaleExpand.timingMode = .easeIn
+                
+                let fadeOutAction = SKAction.fadeOut(withDuration: 0.025)
+                fadeOutAction.timingMode = .easeOut
+                
+                let removeAction = SKAction.removeFromParent()
+                
+                BulletSprite.sFlashAnimation = SKAction.sequence([scaleExpand, fadeOutAction, removeAction])
+            }
+            
+            return BulletSprite.sFlashAnimation
+        }
     }
     
     // MARK: Helper Method

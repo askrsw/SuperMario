@@ -123,7 +123,7 @@ class Mario: SKSpriteNode {
     var maxSpeedX: CGFloat {
         get {
             if moveFaster && marioMoveState != .crouching {
-                return 180.0
+                return 200.0
             } else {
                 return 120.0
             }
@@ -173,7 +173,7 @@ class Mario: SKSpriteNode {
             let scene = GameManager.instance.currentScene!
             
             if powerfull == true {
-                let animation = SKAction.repeatForever(GameAnimations.marioFlashAnimation)
+                let animation = SKAction.repeatForever(GameAnimations.instance.flashAnimation)
                 self.run(animation, withKey: "marioFlash")
                 
                 delay(10.0) {

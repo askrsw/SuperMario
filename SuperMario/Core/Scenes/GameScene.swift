@@ -12,7 +12,7 @@ class GameScene: SKScene {
     
     var scaleFactor: CGFloat = 1.0
     
-    var rootNode: SKNode?
+    var rootNode: SKNode!
     let brickSpriteHolder  = SKNode()
     let goldSpriteHolder   = SKNode()
     let coinSpriteHolder   = SKNode()
@@ -21,6 +21,7 @@ class GameScene: SKScene {
     let bulletSpriteHolder = SKNode()
     let erasablePlatHolder = SKNode()
     let gadgetNodeHolder   = SKNode()
+    var enemySpriteHolder: SKNode!
     
     let mario = GameManager.instance.mario
     let dirButton = DirectionButton()
@@ -31,13 +32,12 @@ class GameScene: SKScene {
     
     fileprivate var lastUpdateTime: TimeInterval = 0.0
     var fragileContactNodes: Array<SKNode & MarioBumpFragileNode> = []
+    var needFlippingEnemies: Set<EnemiesBaseNode> = []
     
     var halfCameraViewWidth: CGFloat = 256.0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        GameAnimations.updateStoredAnimations(self.tileType)
         initializeScene()
     }
     
@@ -48,12 +48,10 @@ class GameScene: SKScene {
         
         GameManager.instance.currentScene = self
         
-        mario.move(toParent: self.rootNode!)
+        mario.move(toParent: self.rootNode)
         
         buttonA.actived = false
         buttonB.actived = false
-        
-        GameAnimations.updateStoredAnimations(self.tileType)
         
         playBackgroundMusc()
     }
@@ -72,6 +70,12 @@ class GameScene: SKScene {
         bulletSpriteHolder.enumerateChildNodes(withName: "*") { (node, _) in
             if let movingNode = node as? MovingSpriteNode {
                 movingNode.update(deltaTime: dt)
+            }
+        }
+        
+        enemySpriteHolder.enumerateChildNodes(withName: "*") { (node, _) in
+            if let enemy = node as? EnemiesBaseNode {
+                enemy.update(deltaTime: dt)
             }
         }
         
@@ -100,14 +104,14 @@ class GameScene: SKScene {
             marioRef.removeFromParent()
         }
         
-        rootNode!.addChild(coinSpriteHolder)
-        rootNode!.addChild(goldSpriteHolder)
-        rootNode!.addChild(brickSpriteHolder)
-        rootNode!.addChild(movingSpriteHolder)
-        rootNode!.addChild(staticSpriteHolder)
-        rootNode!.addChild(bulletSpriteHolder)
-        rootNode!.addChild(erasablePlatHolder)
-        rootNode!.addChild(gadgetNodeHolder)
+        rootNode.addChild(coinSpriteHolder)
+        rootNode.addChild(goldSpriteHolder)
+        rootNode.addChild(brickSpriteHolder)
+        rootNode.addChild(movingSpriteHolder)
+        rootNode.addChild(staticSpriteHolder)
+        rootNode.addChild(bulletSpriteHolder)
+        rootNode.addChild(erasablePlatHolder)
+        rootNode.addChild(gadgetNodeHolder)
         
         coinSpriteHolder.name   = "coinSpriteHolder"
         goldSpriteHolder.name   = "goldSpriteHolder"
@@ -117,6 +121,15 @@ class GameScene: SKScene {
         bulletSpriteHolder.name = "bulletSpriteHolder"
         erasablePlatHolder.name = "erasablePlatHolder"
         gadgetNodeHolder.name   = "gadgetNodeHolder"
+        
+        enemySpriteHolder = rootNode.childNode(withName: "Enemies")
+        
+        enemySpriteHolder.name = "enemySpriteHolder"
+        enemySpriteHolder.enumerateChildNodes(withName: "*") { (node, _) in
+            if let node = node as? EnemiesBaseNode {
+                node.createPhysicsBody()
+            }
+        }
         
         loadPhysicsDesc()
         loadBrickGridTile()

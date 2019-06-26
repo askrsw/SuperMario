@@ -25,11 +25,26 @@ class CoinSprite: SKSpriteNode {
         physicsBody!.categoryBitMask = PhysicsCategory.Coin
         physicsBody!.collisionBitMask = PhysicsCategory.None
         
-        self.run(GameAnimations.coinAmination)
+        self.run(animation)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Animation Stuff
+    
+    private static var sAnimation: SKAction!
+    private static var sTexType = ""
+    var animation: SKAction {
+        get {
+            if CoinSprite.sTexType != GameScene.currentTileType {
+                CoinSprite.sAnimation = makeAnimation(texName: "coin", suffix: GameScene.currentTileType, count: 4, timePerFrame: 0.5)
+                CoinSprite.sTexType = GameScene.currentTileType
+            }
+            
+            return CoinSprite.sAnimation
+        }
     }
 }
 
@@ -37,7 +52,7 @@ extension CoinSprite: MarioBumpFragileNode {
     func marioBump() {
         self.removeAllActions()
         self.physicsBody = nil
-        self.run(GameAnimations.vanishAnimation)
+        self.run(GameAnimations.instance.vanishAnimation)
         
         AudioManager.play(sound: .Coin)
     }

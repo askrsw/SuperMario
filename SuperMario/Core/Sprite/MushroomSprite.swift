@@ -77,7 +77,7 @@ extension MushroomSprite: MarioBumpFragileNode {
     func marioBump() {
         self.removeAllActions()
         self.physicsBody = nil
-        self.run(GameAnimations.vanishAnimation)
+        self.run(GameAnimations.instance.vanishAnimation)
         
         if self.isLifeMushroom == false {
             GameManager.instance.mario.powerUpToB()
