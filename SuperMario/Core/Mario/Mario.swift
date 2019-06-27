@@ -57,7 +57,16 @@ class Mario: SKSpriteNode {
     
     var speedX: Bool = false
     var underWater: Bool = false
-    var shapeshifting: Bool = false
+    
+    var shapeshifting: Bool = false {
+        didSet {
+            if shapeshifting {
+                GameManager.instance.currentScene?.marioWillShapeshift()
+            } else {
+                GameManager.instance.currentScene?.marioDidShapeshift()
+            }
+        }
+    }
     
     var pipingTime: Bool = false {
         didSet {
@@ -181,10 +190,28 @@ class Mario: SKSpriteNode {
                 }
                 
                 scene.marioIsPowerfull()
+                physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.Enemy)
             } else {
                 self.removeAction(forKey: "marioFlash")
                 self.alpha = 1.0
                 scene.playBackgroundMusc(moveFaster, false)
+                physicsBody!.collisionBitMask = physicsBody!.collisionBitMask | PhysicsCategory.Enemy
+            }
+        }
+    }
+    
+    var undead: Bool = false {
+        didSet {
+            if undead {
+                let animation = SKAction.repeatForever(GameAnimations.instance.flashAnimation)
+                self.run(animation, withKey: "marioFlash")
+                
+                delay(3.0) {
+                    self.undead = false
+                }
+            } else {
+                self.removeAction(forKey: "marioFlash")
+                self.alpha = 1.0
             }
         }
     }
@@ -212,6 +239,23 @@ class Mario: SKSpriteNode {
     func update(deltaTime dt: CGFloat) {
         updatePhysicsBodyState(deltaTime: dt)
         updateMovementStateMachine(deltaTime: dt)
+    }
+    
+    func collideWithEnemy() {
+        if !undead {
+            switch marioPower {
+            case .A:
+                marioDied()
+            case .B:
+                powerDownToA()
+            case .C:
+                powerDownToB()
+            }
+        }
+    }
+    
+    func marioDied() {
+        
     }
     
     // MARK: Help method

@@ -222,7 +222,7 @@ extension Mario {
         ppBody.restitution = 0.0
         ppBody.categoryBitMask = PhysicsCategory.Mario
         ppBody.contactTestBitMask = PhysicsCategory.Brick | PhysicsCategory.GoldMetal | PhysicsCategory.MarioPower | PhysicsCategory.Coin | PhysicsCategory.Gadget
-        ppBody.collisionBitMask = PhysicsCategory.All & ~(PhysicsCategory.MarioPower | PhysicsCategory.MBullet | PhysicsCategory.Coin | PhysicsCategory.Gadget)
+        ppBody.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.Enemy
         ppBody.velocity = velocity
         
         return ppBody

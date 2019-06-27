@@ -22,49 +22,66 @@ class GoombasGuy: EnemiesBaseNode {
         }
     }
     
-    override var physicalShape: UIBezierPath {
+    override var physicalShapeParam: PhysicalShapeParam {
         get {
-            let point1 = CGPoint(x: -3, y: 8)
-            let point2 = CGPoint(x: -8, y: 3)
-            let point3 = CGPoint(x: -8, y: -5)
-            let point4 = CGPoint(x: -5, y: -7)
-            let point5 = CGPoint(x: 5, y: -7)
-            let point6 = CGPoint(x: 8, y: -5)
-            let point7 = CGPoint(x: 8, y: 3)
-            let point8 = CGPoint(x: 3, y: 8)
-            
-            let shape = UIBezierPath()
-            shape.move(to: point1)
-            shape.addLine(to: point2)
-            shape.addLine(to: point3)
-            shape.addLine(to: point4)
-            shape.addLine(to: point5)
-            shape.addLine(to: point6)
-            shape.addLine(to: point7)
-            shape.addLine(to: point8)
-            shape.addLine(to: point1)
-            return shape
+            let pSize = CGSize(width: 16, height: 14)
+            let pCenter = CGPoint(x: 0, y: 1)
+            return PhysicalShapeParam(size: pSize, center: pCenter)
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func createPhysicsBody() {
-        super.createPhysicsBody()
-        
-        if let alive = userData?["Alive"] as? Bool, alive == true {
-            
+    override func isBeingSteppedOn(_ point: CGPoint) -> Bool {
+        if point.y > self.size.height * 0.25 {
+            return true
         } else {
-            removeFromParent()
+            return false
         }
+    }
+    
+    override func beSteppedOn() {
+        let deadTexFileName = "goombas" + GameScene.currentTileType + "_3"
+        let deadTex = SKTexture(imageNamed: deadTexFileName)
+        self.texture = deadTex
+        self.size = deadTex.size()
+        
+        let physicalSize = CGSize(width: size.width, height: size.height * 0.5)
+        let physicalCenter = CGPoint(x: 0.0, y: size.height * -0.25)
+        self.physicsBody = SKPhysicsBody(rectangleOf: physicalSize, center: physicalCenter)
+        self.physicsBody!.categoryBitMask = PhysicsCategory.None
+        self.physicsBody!.contactTestBitMask = PhysicsCategory.None
+        self.physicsBody!.collisionBitMask = PhysicsCategory.Static
+        self.physicsBody!.restitution = 0.0
+        self.physicsBody!.friction = 1.0
+        self.removeAllActions()
+        
+        AudioManager.play(sound: .TreadEvil)
+        
+        self.run(flaserDeathAction)
+    }
+    
+    override func update(deltaTime dt: CGFloat) {
+        super.update(deltaTime: dt)
+        //removeFromParent()
     }
     
     // MARK: Animation Stuff
     
-    private static var sAnimation: SKAction!
+    private static var sFlaserDeathAction: SKAction?
+    private var flaserDeathAction: SKAction {
+        get {
+            if GoombasGuy.sFlaserDeathAction == nil {
+                let wait = SKAction.wait(forDuration: 1.0)
+                let fadeOut = SKAction.fadeOut(withDuration: 1.0)
+                let remove = SKAction.removeFromParent()
+                GoombasGuy.sFlaserDeathAction = SKAction.sequence([wait, fadeOut, remove])
+            }
+            
+            return GoombasGuy.sFlaserDeathAction!
+        }
+    }
+    
     private static var sTexType = ""
+    private static var sAnimation: SKAction!
     override var animation: SKAction {
         get {
             if GoombasGuy.sTexType != GameScene.currentTileType {

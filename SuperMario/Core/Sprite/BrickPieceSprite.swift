@@ -19,6 +19,7 @@ class BrickPieceSprite: SKSpriteNode {
     
     private static var commonTexture: UIImage?
     private static var texType: FragileGridType?
+    var backup_physicsBody: SKPhysicsBody?
 
     private init(_ type: BrickPieceType, _ pos: CGPoint) {
         let commonTexture = BrickPieceSprite.commonTexture!
@@ -92,5 +93,15 @@ extension BrickPieceSprite: MovingSpriteNode {
         if position.y < -self.size.height {
             removeFromParent()
         }
+    }
+}
+
+extension BrickPieceSprite: MarioShapeshifting {
+    func marioWillShapeshift() {
+        (backup_physicsBody, physicsBody) = (physicsBody, backup_physicsBody)
+    }
+    
+    func marioDidShapeshift() {
+        (backup_physicsBody, physicsBody) = (physicsBody, backup_physicsBody)
     }
 }

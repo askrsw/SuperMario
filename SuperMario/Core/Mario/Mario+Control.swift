@@ -76,4 +76,10 @@ extension Mario {
             }
         }
     }
+    
+    func bounceALittle() {
+        guard let physicsBody = physicsBody else { return }
+        let verticalForce = physicsBody.mass * 225.0
+        physicsBody.applyImpulse(CGVector(dx: 0.0, dy: verticalForce))
+    }
 }

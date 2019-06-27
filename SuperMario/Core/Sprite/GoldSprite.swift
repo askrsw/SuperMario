@@ -37,7 +37,7 @@ class GoldSprite : SKSpriteNode {
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.GoldMetal
-        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.erasablePlat
+        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.ErasablePlat
         physicsBody!.isDynamic = false
     
         run(animation, withKey: "animation")
@@ -86,9 +86,18 @@ extension GoldSprite: MarioBumpFragileNode {
         } else {
             AudioManager.play(sound: .HitHard)
         }
+        
+        checkContactPhysicsBody()
     }
     
     // MARK: Helper Method
+    
+    private func checkContactPhysicsBody() {
+        let half_w = size.width * 0.49
+        let half_h = size.height * 0.5
+        let rect = CGRect(x: position.x - half_w, y: position.y + half_h, width: size.width * 0.98, height: 1.0)
+        GameManager.instance.currentScene?.checkRectForShake(rect: rect)
+    }
     
     private func spawnCoinFlyAnimation() {
         let coinFileName = "flycoin" + self.type.rawValue + "_1"
@@ -127,5 +136,19 @@ extension GoldSprite: MarioBumpFragileNode {
         }
         
         AudioManager.play(sound: .SpawnPowerup)
+    }
+}
+
+extension GoldSprite: MarioShapeshifting {
+    func marioWillShapeshift() {
+        if empty == false {
+            self.removeAction(forKey: "animation")
+        }
+    }
+    
+    func marioDidShapeshift() {
+        if empty == false {
+            self.run(animation, withKey: "animation")
+        }
     }
 }

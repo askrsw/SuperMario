@@ -11,6 +11,7 @@ import SpriteKit
 class BulletSprite: SKSpriteNode {
     
     let velocityX: CGFloat
+    var backup_physicsBody: SKPhysicsBody?
     
     init(faceTo dir: MarioFacing, marioPos pos: CGPoint) {
         velocityX = 260.0 * dir.rawValue
@@ -18,7 +19,7 @@ class BulletSprite: SKSpriteNode {
         let tex = SKTexture(imageNamed: "fire_bullet_1")
         super.init(texture: tex, color: SKColor.clear, size: tex.size())
         
-        run(animation)
+        run(animation, withKey: "animation")
         
         let unitL = GameConstant.TileGridLength
         if dir == .forward {
@@ -51,6 +52,12 @@ class BulletSprite: SKSpriteNode {
         parent!.addChild(flashSprite)
         
         removeFromParent()
+    }
+    
+    func hitEnemy() {
+        removeFromParent()
+        
+        AudioManager.play(sound: .FireHitEvil)
     }
     
     func fallToGround() {
@@ -96,8 +103,8 @@ class BulletSprite: SKSpriteNode {
     private func makePhysicsBody( ) {
         physicsBody = SKPhysicsBody(circleOfRadius: self.size.width * 0.5)
         physicsBody!.categoryBitMask = PhysicsCategory.MBullet
-        physicsBody!.contactTestBitMask = PhysicsCategory.Brick | PhysicsCategory.Solid | PhysicsCategory.GoldMetal
-        physicsBody!.collisionBitMask = PhysicsCategory.Solid | PhysicsCategory.Brick | PhysicsCategory.GoldMetal | PhysicsCategory.erasablePlat
+        physicsBody!.contactTestBitMask = PhysicsCategory.Static
+        physicsBody!.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
     }
@@ -125,3 +132,16 @@ extension BulletSprite: MovingSpriteNode {
         }
     }
 }
+
+extension BulletSprite: MarioShapeshifting {
+    func marioWillShapeshift() {
+        self.removeAction(forKey: "animation")
+        (backup_physicsBody, physicsBody) = (physicsBody, backup_physicsBody)
+    }
+    
+    func marioDidShapeshift() {
+        self.run(self.animation, withKey: "animation")
+        (backup_physicsBody, physicsBody) = (physicsBody, backup_physicsBody)
+    }
+}
+

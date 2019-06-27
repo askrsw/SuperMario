@@ -11,7 +11,8 @@ import SpriteKit
 class GameManager {
     static let instance = GameManager()
     
-    let allSceneNames = [ "Scene1_1", "Scene1_1_A" ]
+    let allSceneNames = [ "Scene1_1",
+                          "Scene1_2" ]
     
     let mario    = Mario()
     let gameView = SKView(frame: UIScreen.main.bounds)

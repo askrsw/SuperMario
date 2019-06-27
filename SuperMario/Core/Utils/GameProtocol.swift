@@ -19,3 +19,8 @@ protocol SpriteReverseMovement {
 protocol MovingSpriteNode {
     func update(deltaTime dt: CGFloat)
 }
+
+protocol MarioShapeshifting {
+    func marioWillShapeshift()
+    func marioDidShapeshift()
+}

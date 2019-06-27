@@ -25,7 +25,7 @@ class CoinSprite: SKSpriteNode {
         physicsBody!.categoryBitMask = PhysicsCategory.Coin
         physicsBody!.collisionBitMask = PhysicsCategory.None
         
-        self.run(animation)
+        self.run(animation, withKey: "animation")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,3 +57,14 @@ extension CoinSprite: MarioBumpFragileNode {
         AudioManager.play(sound: .Coin)
     }
 }
+
+extension CoinSprite: MarioShapeshifting {
+    func marioWillShapeshift() {
+        self.removeAction(forKey: "animation")
+    }
+    
+    func marioDidShapeshift() {
+        self.run(animation, withKey: "animation")
+    }
+}
+

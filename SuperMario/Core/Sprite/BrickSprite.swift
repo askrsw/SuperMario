@@ -35,7 +35,7 @@ class BrickSprite : SKSpriteNode {
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.Brick
-        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.erasablePlat
+        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.ErasablePlat
         physicsBody!.isDynamic = false
     }
     
@@ -77,9 +77,18 @@ extension BrickSprite: MarioBumpFragileNode {
         case .starBrick:
             self.starBrickProcess()
         }
+        
+        checkContactPhysicsBody()
     }
     
     // MARK: Helper method
+    
+    private func checkContactPhysicsBody() {
+        let half_w = size.width * 0.49
+        let half_h = size.height * 0.5
+        let rect = CGRect(x: position.x - half_w, y: position.y + half_h, width: size.width * 0.98, height: 1.0)
+        GameManager.instance.currentScene?.checkRectForShake(rect: rect)
+    }
     
     private func normalBrickProcess() {
         if GameManager.instance.mario.marioPower != .A && GameManager.instance.mario.marioMoveState != .crouching {

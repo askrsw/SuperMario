@@ -70,7 +70,7 @@ class FlowerSprite: SKSpriteNode {
         self.move(toParent: self.cropNode.parent!)
         self.cropNode.removeFromParent()
         
-        self.run(self.animation)
+        self.run(self.animation, withKey: "animation")
         
         self.growing = false
     }
@@ -83,5 +83,15 @@ extension FlowerSprite: MarioBumpFragileNode {
         self.run(GameAnimations.instance.vanishAnimation)
         
         GameManager.instance.mario.powerUpToC()
+    }
+}
+
+extension FlowerSprite: MarioShapeshifting {
+    func marioWillShapeshift() {
+        self.removeAction(forKey: "animation")
+    }
+    
+    func marioDidShapeshift() {
+        self.run(self.animation, withKey: "animation")
     }
 }

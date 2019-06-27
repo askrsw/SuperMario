@@ -16,6 +16,7 @@ class MushroomSprite: SKSpriteNode {
     
     var growing: Bool = true
     var velocityX: CGFloat = 80.0
+    var backup_physicsBody: SKPhysicsBody?
     
     init(_ type: FragileGridType, _ addLife: Bool) {
         self.type = type
@@ -61,13 +62,13 @@ class MushroomSprite: SKSpriteNode {
         physicsBody!.friction    = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.MarioPower
-        physicsBody!.contactTestBitMask = PhysicsCategory.Solid | PhysicsCategory.Brick | PhysicsCategory.GoldMetal
-        physicsBody!.collisionBitMask = PhysicsCategory.Solid | PhysicsCategory.Brick | PhysicsCategory.GoldMetal | PhysicsCategory.erasablePlat
+        physicsBody!.contactTestBitMask = PhysicsCategory.Static
+        physicsBody!.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat
         
         self.move(toParent: self.cropNode.parent!)
         self.cropNode.removeFromParent()
         
-        self.run(self.animation)
+        self.run(self.animation, withKey: "animation")
         
         self.growing = false
     }
@@ -107,5 +108,17 @@ extension MushroomSprite: SpriteReverseMovement {
         } else if direction.dx < -0.1 {
             velocityX = -80.0
         }
+    }
+}
+
+extension MushroomSprite: MarioShapeshifting {
+    func marioWillShapeshift() {
+        self.removeAction(forKey: "animation")
+        (backup_physicsBody, physicsBody) = (physicsBody, backup_physicsBody)
+    }
+    
+    func marioDidShapeshift() {
+        self.run(self.animation, withKey: "animation")
+        (backup_physicsBody, physicsBody) = (physicsBody, backup_physicsBody)
     }
 }

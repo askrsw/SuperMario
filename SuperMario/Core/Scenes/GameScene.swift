@@ -21,7 +21,7 @@ class GameScene: SKScene {
     let bulletSpriteHolder = SKNode()
     let erasablePlatHolder = SKNode()
     let gadgetNodeHolder   = SKNode()
-    var enemySpriteHolder: SKNode!
+    var enemySpriteHolder: SKNode?
     
     let mario = GameManager.instance.mario
     let dirButton = DirectionButton()
@@ -32,9 +32,9 @@ class GameScene: SKScene {
     
     fileprivate var lastUpdateTime: TimeInterval = 0.0
     var fragileContactNodes: Array<SKNode & MarioBumpFragileNode> = []
-    var needFlippingEnemies: Set<EnemiesBaseNode> = []
     
     var halfCameraViewWidth: CGFloat = 256.0
+    var halfScaledSceneWdith: CGFloat = 256.0
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -73,7 +73,7 @@ class GameScene: SKScene {
             }
         }
         
-        enemySpriteHolder.enumerateChildNodes(withName: "*") { (node, _) in
+        enemySpriteHolder?.enumerateChildNodes(withName: "*") { (node, _) in
             if let enemy = node as? EnemiesBaseNode {
                 enemy.update(deltaTime: dt)
             }
@@ -84,9 +84,15 @@ class GameScene: SKScene {
     
     override func didSimulatePhysics() {
         postPhysicsProcess()
+        
+        enemySpriteHolder?.enumerateChildNodes(withName: "*") { (node, _) in
+            if let enemy = node as? EnemiesBaseNode {
+                enemy.postPhysicsProcess()
+            }
+        }
     }
     
-    // MARK: helper method
+    // MARK: Helper method
     
     fileprivate func initializeScene() {
         scaleMode = .resizeFill
@@ -123,13 +129,7 @@ class GameScene: SKScene {
         gadgetNodeHolder.name   = "gadgetNodeHolder"
         
         enemySpriteHolder = rootNode.childNode(withName: "Enemies")
-        
-        enemySpriteHolder.name = "enemySpriteHolder"
-        enemySpriteHolder.enumerateChildNodes(withName: "*") { (node, _) in
-            if let node = node as? EnemiesBaseNode {
-                node.createPhysicsBody()
-            }
-        }
+        enemySpriteHolder?.name = "enemySpriteHolder"
         
         loadPhysicsDesc()
         loadBrickGridTile()
@@ -149,5 +149,7 @@ class GameScene: SKScene {
         let scaleFactor = height / GameConstant.OriginalSceneHeight
         size = UIScreen.main.bounds.size
         self.scaleFactor = scaleFactor
+        
+        self.halfScaledSceneWdith = size.width / scaleFactor * 0.5
     }
 }
