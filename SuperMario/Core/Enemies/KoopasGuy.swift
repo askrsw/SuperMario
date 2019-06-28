@@ -60,10 +60,13 @@ class KoopasGuy: EnemiesBaseNode {
         switch state {
         case .normal:
             shapeShiftToStillShell()
+            GameScene.addScore(score: ScoreConfig.treadNormalKoopas, pos: position)
         case .stillShell:
             shapeshiftToMovingShell()
+            GameScene.addScore(score: ScoreConfig.treadStillKoopas, pos: position)
         case .movingShell:
             shapeShiftToStillShell()
+            GameScene.addScore(score: ScoreConfig.treadMovingKoopas, pos: position)
         case .fly:
             break
         }
@@ -78,16 +81,17 @@ class KoopasGuy: EnemiesBaseNode {
     override func beforeKilledByBullet() {
         super.beforeKilledByBullet()
         
-        let texName = "koopas" + GameScene.currentTileType + "_5"
+        let texName = "koopas" + texType + "_5"
         let tex = SKTexture(imageNamed: texName)
         self.texture = tex
+        self.size = tex.size()
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }
     
     // MARK: Help method
     
     private func shapeshiftToMovingShell() {
-        let texFileName = "koopas" + GameScene.currentTileType + "_5"
+        let texFileName = "koopas" + texType + "_5"
         let tex = SKTexture(imageNamed: texFileName)
         self.texture = tex
         self.faceLeft = true    // a joke, you must set this value with reverse
@@ -102,7 +106,7 @@ class KoopasGuy: EnemiesBaseNode {
     }
     
     private func shapeShiftToStillShell() {
-        let texFileName = "koopas" + GameScene.currentTileType + "_5"
+        let texFileName = "koopas" + texType + "_5"
         let tex = SKTexture(imageNamed: texFileName)
         self.texture = tex
         self.size = tex.size()
@@ -126,7 +130,7 @@ class KoopasGuy: EnemiesBaseNode {
     
     private func shapeShiftToNormal() {
         let block = SKAction.run { [weak self] in
-            let texFileName = "koopas" + GameScene.currentTileType + "_1"
+            let texFileName = "koopas" + (self?.texType ?? "_a") + "_1"
             let tex = SKTexture(imageNamed: texFileName)
             self?.texture = tex
             
@@ -146,31 +150,40 @@ class KoopasGuy: EnemiesBaseNode {
     private static var sShellToNormalAnimation: SKAction!
     override var animation: SKAction {
         get {
-            if KoopasGuy.sTexType != GameScene.currentTileType {
-                KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: GameScene.currentTileType, count: 2, timePerFrame: 0.3)
-                KoopasGuy.makeShellToNormalAnimation()
-                KoopasGuy.sTexType = GameScene.currentTileType
+            if KoopasGuy.sTexType != texType {
+                KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3)
+                KoopasGuy.makeShellToNormalAnimation(texType)
+                KoopasGuy.sTexType = texType
             }
             
-            return KoopasGuy.sAnimation
+            if alive {
+                switch state {
+                case .normal:
+                    return KoopasGuy.sAnimation
+                default:
+                    break;
+                }
+            }
+            
+            return SKAction()
         }
     }
     
     var shellToNormalAnimation: SKAction {
-        if KoopasGuy.sTexType != GameScene.currentTileType {
-            KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: GameScene.currentTileType, count: 2, timePerFrame: 0.3)
-            KoopasGuy.makeShellToNormalAnimation()
-            KoopasGuy.sTexType = GameScene.currentTileType
+        if KoopasGuy.sTexType != texType {
+            KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3)
+            KoopasGuy.makeShellToNormalAnimation(texType)
+            KoopasGuy.sTexType = texType
         }
         
         return KoopasGuy.sShellToNormalAnimation
     }
     
-    private static func makeShellToNormalAnimation() {
-        let texName1 = "koopas" + GameScene.currentTileType + "_5"
+    private static func makeShellToNormalAnimation(_ texType: String) {
+        let texName1 = "koopas" + texType + "_5"
         let tex1 = SKTexture(imageNamed: texName1)
         
-        let texName2 = "koopas" + GameScene.currentTileType + "_6"
+        let texName2 = "koopas" + texType + "_6"
         let tex2 = SKTexture(imageNamed: texName2)
         
         let tAnimation = SKAction.animate(with: [tex1, tex2], timePerFrame: 0.15)

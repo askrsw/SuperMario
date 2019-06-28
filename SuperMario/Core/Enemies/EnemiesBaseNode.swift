@@ -55,9 +55,12 @@ class EnemiesBaseNode: SKSpriteNode {
     var xStart: CGFloat = -1.0
     var posXBefore: CGFloat = 0.0
     var backup_physicsBody: SKPhysicsBody?
+    var alive: Bool = true
+    var texType: String = ""
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        checkTexType()
         
         let xStart = userData?["xStart"] as! Int32
         if xStart > 0 {
@@ -71,7 +74,7 @@ class EnemiesBaseNode: SKSpriteNode {
     
     func update(deltaTime dt: CGFloat) {
         guard active else {
-            if xStart < 0.0 || GameManager.instance.mario.position.x > (xStart - GameManager.instance.currentScene!.halfScaledSceneWdith) {
+            if xStart < 0.0 || GameManager.instance.mario.position.x > (xStart - GameScene.halfScaledSceneWdith) {
                 createPhysicsBody()
                 active = true
             }
@@ -103,7 +106,7 @@ class EnemiesBaseNode: SKSpriteNode {
     
     func contactWithMario(point contactPoint: CGPoint, normal contactNormal: CGVector) {
         let fixedPoint = CGPoint(x: GameManager.instance.mario.position.x, y: contactPoint.y)
-        let localPoint = self.convert(fixedPoint, from: GameManager.instance.currentScene!)
+        let localPoint = self.convert(fixedPoint, from: GameScene.currentInstance!)
         if GameManager.instance.mario.powerfull {
             hitByBullet()
         } else if abs(contactNormal.dy) > 0.5 && isBeingSteppedOn(localPoint) {
@@ -122,8 +125,10 @@ class EnemiesBaseNode: SKSpriteNode {
         physicsBody!.collisionBitMask = PhysicsCategory.None
         physicsBody!.velocity = .zero
         
-        let verticalForce = physicsBody!.mass * 270.0
+        let verticalForce = physicsBody!.mass * 300.0
         physicsBody!.applyImpulse(CGVector(dx: 0.0, dy: verticalForce))
+    
+        GameScene.addScore(score: ScoreConfig.shootEnemy, pos: position)
     }
     
     func shakedByBottomSupport() {
@@ -140,6 +145,18 @@ class EnemiesBaseNode: SKSpriteNode {
     
     func beforeKilledByBullet() {
         self.removeAllActions()
+        self.alive = false
+    }
+    
+    private func checkTexType() {
+        let texString = "\(texture!)"
+        let subStrings = texString.split(separator: "_")
+        for str in subStrings {
+            if str == "a" || str == "b" || str == "c" {
+                texType = "_" + str
+                break
+            }
+        }
     }
     
     private func createPhysicsBody() {

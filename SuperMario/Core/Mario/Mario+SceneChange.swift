@@ -11,14 +11,12 @@ import SpriteKit
 extension Mario {
     
     func checkGadgetUnderFoot() -> Bool {
-        guard let scene = GameManager.instance.currentScene else { return false }
-        
         let rect = CGRect(x: position.x,
                           y: position.y - size.height * 0.5,
                           width: size.width, height: size.height)
         
         var gadget: SceneGadget? = nil
-        scene.physicsWorld.enumerateBodies(in: rect) { (body, _) in
+        GameScene.physicsWorld.enumerateBodies(in: rect) { (body, _) in
             if body.categoryBitMask == PhysicsCategory.Gadget {
                 if let node = body.node {
                     gadget = node.userData?["param"] as? SceneGadget
@@ -60,7 +58,7 @@ extension Mario {
                 cropNode.position = gadget.destPostion
             }
             
-            GameManager.instance.currentScene!.rootNode.addChild(cropNode)
+            GameScene.rootNode.addChild(cropNode)
             
             marioFacing = .forward
     

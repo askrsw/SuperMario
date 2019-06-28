@@ -54,9 +54,7 @@ class BrickPieceSprite: SKSpriteNode {
         self.position = pos + posDiff
         self.zPosition = GameManager.instance.mario.zPosition + 1
         
-        if let holder = GameManager.instance.currentScene?.movingSpriteHolder {
-            holder.addChild(self)
-        }
+        GameScene.addBrickPiece(self)
         
         physicsBody = SKPhysicsBody(rectangleOf: self.size)
         physicsBody?.categoryBitMask = PhysicsCategory.None

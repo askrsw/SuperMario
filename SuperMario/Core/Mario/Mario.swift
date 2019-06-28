@@ -61,9 +61,9 @@ class Mario: SKSpriteNode {
     var shapeshifting: Bool = false {
         didSet {
             if shapeshifting {
-                GameManager.instance.currentScene?.marioWillShapeshift()
+                GameScene.marioWillShapeshift()
             } else {
-                GameManager.instance.currentScene?.marioDidShapeshift()
+                GameScene.marioDidShapeshift()
             }
         }
     }
@@ -117,8 +117,7 @@ class Mario: SKSpriteNode {
             }
             
             if powerfull == false && pipingTime == false {
-                let scene = GameManager.instance.currentScene!
-                scene.playBackgroundMusc(moveFaster, true)
+                GameScene.playBackgroundMusc(moveFaster, true)
             }
         }
     }
@@ -179,7 +178,6 @@ class Mario: SKSpriteNode {
     var powerfull: Bool = false {
         didSet {
             guard oldValue != powerfull else { return }
-            let scene = GameManager.instance.currentScene!
             
             if powerfull == true {
                 let animation = SKAction.repeatForever(GameAnimations.instance.flashAnimation)
@@ -189,12 +187,12 @@ class Mario: SKSpriteNode {
                     self.powerfull = false
                 }
                 
-                scene.marioIsPowerfull()
+                GameScene.marioIsPowerfull()
                 physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.Enemy)
             } else {
                 self.removeAction(forKey: "marioFlash")
                 self.alpha = 1.0
-                scene.playBackgroundMusc(moveFaster, false)
+                GameScene.playBackgroundMusc(moveFaster, false)
                 physicsBody!.collisionBitMask = physicsBody!.collisionBitMask | PhysicsCategory.Enemy
             }
         }

@@ -87,7 +87,8 @@ extension BrickSprite: MarioBumpFragileNode {
         let half_w = size.width * 0.49
         let half_h = size.height * 0.5
         let rect = CGRect(x: position.x - half_w, y: position.y + half_h, width: size.width * 0.98, height: 1.0)
-        GameManager.instance.currentScene?.checkRectForShake(rect: rect)
+        
+        GameScene.checkRectForShake(rect: rect)
     }
     
     private func normalBrickProcess() {
@@ -97,9 +98,9 @@ extension BrickSprite: MarioBumpFragileNode {
             let position = CGPoint(x: self.position.x, y: self.position.y - GameConstant.TileGridLength * 0.5)
             let _ = BrickPieceSprite.spawnPieceGroup(self.type, position)
             
-            if let scene = GameManager.instance.currentScene {
-                scene.ErasePlatNode(self.position)
-            }
+            GameScene.ErasePlatNode(self.position)
+            
+            GameScene.addScore(score: ScoreConfig.brickBreak, pos: position)
         } else {
             self.run(shakeAnimation)
             AudioManager.play(sound: .HitHard)
@@ -117,6 +118,10 @@ extension BrickSprite: MarioBumpFragileNode {
         self.addChild(coin)
         AudioManager.play(sound: .Coin)
         
+        let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength * 0.75)
+        GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
+        GameHUD.instance.coinCount += 1
+        
         if self.lastCoin {
             let texFileName = "goldm" + self.type.rawValue + "_4"
             self.texture = SKTexture(imageNamed: texFileName)
@@ -133,18 +138,19 @@ extension BrickSprite: MarioBumpFragileNode {
     }
     
     private func starBrickProcess() {
-        if let holder = GameManager.instance.currentScene?.movingSpriteHolder {
-            let star = StarSprite(self.type)
-            let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
-            star.zPosition = self.zPosition
-            star.cropNode.position = position + self.parent!.position
-            holder.addChild(star.cropNode)
-        }
+        let star = StarSprite(self.type)
+        let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
+        star.zPosition = self.zPosition
+        star.cropNode.position = position + self.parent!.position
+        GameScene.addStar(star.cropNode)
         
         let texFileName = "goldm" + self.type.rawValue + "_4"
         self.texture = SKTexture(imageNamed: texFileName)
         self.empty = true
         
         AudioManager.play(sound: .SpawnPowerup)
+        
+        let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength * 0.75)
+        GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
     }
 }

@@ -56,4 +56,22 @@ class GameAnimations {
             return GameAnimations.sVanishAnimation
         }
     }
+    
+    private static var sFlyScoreAnimation: SKAction!
+    var flyScoreAnimation: SKAction {
+        get {
+            if GameAnimations.sFlyScoreAnimation == nil {
+                let upDir = CGVector(dx: 0.0, dy: GameConstant.TileGridLength * 2.5)
+                let moveBy = SKAction.move(by: upDir, duration: 0.5)
+                let wait = SKAction.wait(forDuration: 0.25)
+                let fadeOut = SKAction.fadeOut(withDuration: 0.25)
+                let fadeSquence = SKAction.sequence([wait, fadeOut])
+                let group = SKAction.group([moveBy, fadeSquence])
+                let remove = SKAction.removeFromParent()
+                GameAnimations.sFlyScoreAnimation = SKAction.sequence([group, remove])
+            }
+            
+            return GameAnimations.sFlyScoreAnimation
+        }
+    }
 }

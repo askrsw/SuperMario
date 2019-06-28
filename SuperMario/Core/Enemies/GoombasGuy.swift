@@ -39,7 +39,7 @@ class GoombasGuy: EnemiesBaseNode {
     }
     
     override func beSteppedOn() {
-        let deadTexFileName = "goombas" + GameScene.currentTileType + "_3"
+        let deadTexFileName = "goombas" + texType + "_3"
         let deadTex = SKTexture(imageNamed: deadTexFileName)
         self.texture = deadTex
         self.size = deadTex.size()
@@ -57,11 +57,14 @@ class GoombasGuy: EnemiesBaseNode {
         AudioManager.play(sound: .TreadEvil)
         
         self.run(flaserDeathAction)
+        
+        GameScene.addScore(score: ScoreConfig.treadGoombas, pos: position)
+        
+        alive = false
     }
     
     override func update(deltaTime dt: CGFloat) {
         super.update(deltaTime: dt)
-        //removeFromParent()
     }
     
     // MARK: Animation Stuff
@@ -84,12 +87,16 @@ class GoombasGuy: EnemiesBaseNode {
     private static var sAnimation: SKAction!
     override var animation: SKAction {
         get {
-            if GoombasGuy.sTexType != GameScene.currentTileType {
-                GoombasGuy.sAnimation = makeAnimation(texName: "goombas", suffix: GameScene.currentTileType, count: 2, timePerFrame: 0.3)
-                GoombasGuy.sTexType = GameScene.currentTileType
+            if GoombasGuy.sTexType != texType {
+                GoombasGuy.sAnimation = makeAnimation(texName: "goombas", suffix: texType, count: 2, timePerFrame: 0.3)
+                GoombasGuy.sTexType = texType
             }
             
-            return GoombasGuy.sAnimation
+            if alive {
+                return GoombasGuy.sAnimation
+            } else {
+                return SKAction()
+            }
         }
     }
 }

@@ -9,6 +9,7 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    static var currentInstance: GameScene?
     
     var scaleFactor: CGFloat = 1.0
     
@@ -22,6 +23,8 @@ class GameScene: SKScene {
     let erasablePlatHolder = SKNode()
     let gadgetNodeHolder   = SKNode()
     var enemySpriteHolder: SKNode?
+    let flyScoreHolder = SKNode()
+    let soundPlayNode  = SKNode()
     
     let mario = GameManager.instance.mario
     let dirButton = DirectionButton()
@@ -46,9 +49,11 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
-        GameManager.instance.currentScene = self
+        GameScene.currentInstance = self
         
         mario.move(toParent: self.rootNode)
+        GameHUD.instance.move(toParent: self.camera!)
+        GameHUD.instance.position = .zero
         
         buttonA.actived = false
         buttonB.actived = false
@@ -118,6 +123,8 @@ class GameScene: SKScene {
         rootNode.addChild(bulletSpriteHolder)
         rootNode.addChild(erasablePlatHolder)
         rootNode.addChild(gadgetNodeHolder)
+        rootNode.addChild(flyScoreHolder)
+        rootNode.addChild(soundPlayNode)
         
         coinSpriteHolder.name   = "coinSpriteHolder"
         goldSpriteHolder.name   = "goldSpriteHolder"
@@ -127,6 +134,10 @@ class GameScene: SKScene {
         bulletSpriteHolder.name = "bulletSpriteHolder"
         erasablePlatHolder.name = "erasablePlatHolder"
         gadgetNodeHolder.name   = "gadgetNodeHolder"
+        flyScoreHolder.name = "flyScoreHolder"
+        soundPlayNode.name = "soundPlayNode"
+        
+        flyScoreHolder.zPosition = 1001
         
         enemySpriteHolder = rootNode.childNode(withName: "Enemies")
         enemySpriteHolder?.name = "enemySpriteHolder"

@@ -28,4 +28,9 @@ class GameConstant {
 
     public static let directionButtonCircleRadius: CGFloat = 30.0
     public static let directionButtonSmallCircleRadius: CGFloat = 6.0
+    
+    public static let hudLabelFontName = "Chalkduster"
+    public static let hudLabelFontSize: CGFloat = 18.0
+    public static let flyScoreFontName = "Helvetica"
+    public static let flyScoreFontSize: CGFloat = 10.0
 }

@@ -38,9 +38,9 @@ class CoinSprite: SKSpriteNode {
     private static var sTexType = ""
     var animation: SKAction {
         get {
-            if CoinSprite.sTexType != GameScene.currentTileType {
-                CoinSprite.sAnimation = makeAnimation(texName: "coin", suffix: GameScene.currentTileType, count: 4, timePerFrame: 0.5)
-                CoinSprite.sTexType = GameScene.currentTileType
+            if CoinSprite.sTexType != self.type.rawValue {
+                CoinSprite.sAnimation = makeAnimation(texName: "coin", suffix: self.type.rawValue, count: 4, timePerFrame: 0.5)
+                CoinSprite.sTexType = self.type.rawValue
             }
             
             return CoinSprite.sAnimation
@@ -55,6 +55,10 @@ extension CoinSprite: MarioBumpFragileNode {
         self.run(GameAnimations.instance.vanishAnimation)
         
         AudioManager.play(sound: .Coin)
+        
+        GameScene.addScore(score: ScoreConfig.hitCoin, pos: position)
+        
+        GameHUD.instance.coinCount += 1
     }
 }
 

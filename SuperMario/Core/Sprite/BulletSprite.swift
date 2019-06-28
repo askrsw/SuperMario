@@ -122,11 +122,8 @@ extension BulletSprite: MovingSpriteNode {
         }
         
         if let parent = parent {
-            let scene = GameManager.instance.currentScene!
-            let camera = scene.camera!
-            let cameraPos = camera.convert(position, from: parent)
-            
-            if abs(cameraPos.x) > scene.halfCameraViewWidth + size.width * 4 {
+            let cameraPos = GameScene.camera.convert(position, from: parent)
+            if abs(cameraPos.x) > GameScene.halfCameraViewWidth + size.width * 4 {
                 removeFromParent()
             }
         }

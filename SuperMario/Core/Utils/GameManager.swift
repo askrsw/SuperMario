@@ -18,7 +18,7 @@ class GameManager {
     let gameView = SKView(frame: UIScreen.main.bounds)
     
     var allScenes: [String: GameScene] = [:]
-    var currentScene: GameScene?
+    //var currentScene: GameScene?
     
     private init() {
         
@@ -33,6 +33,8 @@ class GameManager {
         gameView.ignoresSiblingOrder       = true
         gameView.shouldCullNonVisibleNodes = true
         gameView.isMultipleTouchEnabled    = true  //very important
+        
+        let _ = GameHUD.instance
     }
     
     func start() {

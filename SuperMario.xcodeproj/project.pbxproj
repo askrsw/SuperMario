@@ -26,7 +26,10 @@
 		AB40CD3A22B31356003E0067 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40CD3922B31356003E0067 /* AudioManager.swift */; };
 		AB40CDDB22B32BD0003E0067 /* GameScene+Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40CDDA22B32BD0003E0067 /* GameScene+Audio.swift */; };
 		AB40CDDD22B32F67003E0067 /* GameScene+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB40CDDC22B32F67003E0067 /* GameScene+Config.swift */; };
+		AB44B5DB22C6689000F73B78 /* ScoreConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB44B5DA22C6689000F73B78 /* ScoreConfig.swift */; };
 		AB457C6C22923CEF00D2AC10 /* DirectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */; };
+		AB46F1B622C609C80001BED6 /* GameScene+FlyScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB46F1B522C609C80001BED6 /* GameScene+FlyScore.swift */; };
+		AB46F1B822C613810001BED6 /* GameScene+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB46F1B722C613810001BED6 /* GameScene+Static.swift */; };
 		AB4815B822B04040002A1C7B /* Sprite.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB4815B722B04040002A1C7B /* Sprite.xcassets */; };
 		AB4C573A22C4909C009011B5 /* GameScene+ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C573922C4909C009011B5 /* GameScene+ContactDelegate.swift */; };
 		AB4C573C22C4CD27009011B5 /* KoopasGuy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C573B22C4CD27009011B5 /* KoopasGuy.swift */; };
@@ -60,6 +63,7 @@
 		AB5D23E122BF207600255226 /* CoinSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5D23E022BF207600255226 /* CoinSprite.swift */; };
 		AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F465522B88DD40090F26C /* Mario+Control.swift */; };
 		AB65729922B39F32004D878B /* Mario+Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65729822B39F32004D878B /* Mario+Movement.swift */; };
+		AB6643E022C5BC2500901DA5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6643DF22C5BC2500901DA5 /* GameHUD.swift */; };
 		AB711F2422C3C5160093C49F /* Scene1_2.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2322C3C5160093C49F /* Scene1_2.sks */; };
 		AB711F2622C3CDF00093C49F /* Physics1_2.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2522C3C89E0093C49F /* Physics1_2.geojson */; };
 		AB711F2922C3D15A0093C49F /* Scene1_2_A.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */; };
@@ -136,7 +140,10 @@
 		AB40CD3922B31356003E0067 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		AB40CDDA22B32BD0003E0067 /* GameScene+Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Audio.swift"; sourceTree = "<group>"; };
 		AB40CDDC22B32F67003E0067 /* GameScene+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Config.swift"; sourceTree = "<group>"; };
+		AB44B5DA22C6689000F73B78 /* ScoreConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreConfig.swift; sourceTree = "<group>"; };
 		AB457C6B22923CEF00D2AC10 /* DirectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionButton.swift; sourceTree = "<group>"; };
+		AB46F1B522C609C80001BED6 /* GameScene+FlyScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+FlyScore.swift"; sourceTree = "<group>"; };
+		AB46F1B722C613810001BED6 /* GameScene+Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Static.swift"; sourceTree = "<group>"; };
 		AB4815B722B04040002A1C7B /* Sprite.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sprite.xcassets; sourceTree = "<group>"; };
 		AB4C573922C4909C009011B5 /* GameScene+ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+ContactDelegate.swift"; sourceTree = "<group>"; };
 		AB4C573B22C4CD27009011B5 /* KoopasGuy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoopasGuy.swift; sourceTree = "<group>"; };
@@ -170,6 +177,7 @@
 		AB5D23E022BF207600255226 /* CoinSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinSprite.swift; sourceTree = "<group>"; };
 		AB5F465522B88DD40090F26C /* Mario+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Control.swift"; sourceTree = "<group>"; };
 		AB65729822B39F32004D878B /* Mario+Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Movement.swift"; sourceTree = "<group>"; };
+		AB6643DF22C5BC2500901DA5 /* GameHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHUD.swift; sourceTree = "<group>"; };
 		AB711F2322C3C5160093C49F /* Scene1_2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_2.sks; sourceTree = "<group>"; };
 		AB711F2522C3C89E0093C49F /* Physics1_2.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2.geojson; sourceTree = "<group>"; };
 		AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_A.geojson; sourceTree = "<group>"; };
@@ -423,6 +431,8 @@
 				AB40CDDA22B32BD0003E0067 /* GameScene+Audio.swift */,
 				AB4F584222C46FD900D23EF6 /* GameScene+MarioShapeshifting.swift */,
 				AB4C573922C4909C009011B5 /* GameScene+ContactDelegate.swift */,
+				AB46F1B522C609C80001BED6 /* GameScene+FlyScore.swift */,
+				AB46F1B722C613810001BED6 /* GameScene+Static.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -459,6 +469,8 @@
 				AB546A9022AF463800A5C01D /* GameAnimations.swift */,
 				AB40CD3922B31356003E0067 /* AudioManager.swift */,
 				AB57C7A322B1F1A000B11A60 /* HelperMethod.swift */,
+				AB6643DF22C5BC2500901DA5 /* GameHUD.swift */,
+				AB44B5DA22C6689000F73B78 /* ScoreConfig.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -616,6 +628,7 @@
 				AB457C6C22923CEF00D2AC10 /* DirectionButton.swift in Sources */,
 				ABDAFB7A22B71551004DCE22 /* BrickPieceSprite.swift in Sources */,
 				AB5096FB2294EA990021A298 /* GameScene+TileProcess.swift in Sources */,
+				AB44B5DB22C6689000F73B78 /* ScoreConfig.swift in Sources */,
 				AB3E2F8E227E0745003BC9B7 /* GameScene.swift in Sources */,
 				AB514B2122BF645E002EE895 /* GameScene+Gadget.swift in Sources */,
 				ABB9774E228FEE3F0011ACE5 /* Mario.swift in Sources */,
@@ -632,6 +645,7 @@
 				AB40CD3A22B31356003E0067 /* AudioManager.swift in Sources */,
 				AB03ABA422C1237B0007F14A /* GoombasGuy.swift in Sources */,
 				AB57C7A422B1F1A000B11A60 /* HelperMethod.swift in Sources */,
+				AB46F1B622C609C80001BED6 /* GameScene+FlyScore.swift in Sources */,
 				ABB97757229099250011ACE5 /* GameProtocol.swift in Sources */,
 				AB4C573A22C4909C009011B5 /* GameScene+ContactDelegate.swift in Sources */,
 				AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */,
@@ -641,9 +655,11 @@
 				AB546A9122AF463800A5C01D /* GameAnimations.swift in Sources */,
 				AB40CDDB22B32BD0003E0067 /* GameScene+Audio.swift in Sources */,
 				AB514B2322BF800A002EE895 /* Mario+SceneChange.swift in Sources */,
+				AB6643E022C5BC2500901DA5 /* GameHUD.swift in Sources */,
 				AB3E2F90227E0745003BC9B7 /* GameViewController.swift in Sources */,
 				AB54E94B228BFDF7000AE79E /* Int+Extensions.swift in Sources */,
 				ABB4EA0522BDEF9000C001B5 /* StarSprite.swift in Sources */,
+				AB46F1B822C613810001BED6 /* GameScene+Static.swift in Sources */,
 				AB54E950228BFDF7000AE79E /* CGPoint+Extensions.swift in Sources */,
 				AB54E94F228BFDF7000AE79E /* SKNode+Extensions.swift in Sources */,
 				ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */,

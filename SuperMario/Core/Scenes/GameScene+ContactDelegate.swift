@@ -17,8 +17,8 @@ extension GameScene: SKPhysicsContactDelegate {
         case MarioPowerIsB
         case MBulletIsA
         case MBulletIsB
-        case EnemyIsA
-        case EnemyIsB
+        case EShellIsA
+        case EShellIsB
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -46,8 +46,7 @@ extension GameScene: SKPhysicsContactDelegate {
                     }
                 case PhysicsCategory.EShell: fallthrough
                 case PhysicsCategory.Evildoer:
-                    if let _ = second!.node as? EnemiesBaseNode {
-                        let enemy = second!.node as! EnemiesBaseNode
+                    if let enemy = second!.node as? EnemiesBaseNode {
                         enemy.contactWithMario(point: contact.contactPoint, normal: contact.contactNormal)
                     }
                 default:
@@ -55,8 +54,9 @@ extension GameScene: SKPhysicsContactDelegate {
                 }
             } else if first.categoryBitMask == PhysicsCategory.MarioPower {
                 if abs(contact.contactNormal.dx) > 0.5 {
-                    let node = first.node as! SKNode & SpriteReverseMovement
-                    node.reverseMovement(contact.contactNormal)
+                    if let node = first.node as? SKNode & SpriteReverseMovement {
+                        node.reverseMovement(contact.contactNormal)
+                    }
                 } else if contact.contactNormal.dy > 0.5 {
                     if let star = first.node as? StarSprite {
                         star.fallToGround()
@@ -71,6 +71,16 @@ extension GameScene: SKPhysicsContactDelegate {
                     bullet.fallToGround()
                 } else if abs(contact.contactNormal.dx) > 0.5 {
                     bullet.hitSolidPhysicsBody()
+                }
+            } else if first.categoryBitMask == PhysicsCategory.EShell {
+                guard let enemy = second?.node as? EnemiesBaseNode else { return }
+                if second!.categoryBitMask == PhysicsCategory.Evildoer {
+                    enemy.hitByBullet()
+                } else if second!.categoryBitMask == PhysicsCategory.EShell {
+                    enemy.hitByBullet()
+                    if let enemy2 = first.node as? EnemiesBaseNode {
+                        enemy2.hitByBullet()
+                    }
                 }
             }
         }
@@ -116,10 +126,10 @@ extension GameScene: SKPhysicsContactDelegate {
             return (contact.bodyA, contact.bodyB, .MBulletIsA)
         } else if contact.bodyB.categoryBitMask == PhysicsCategory.MBullet {
             return (contact.bodyB, contact.bodyA, .MBulletIsB)
-        } else if contact.bodyA.categoryBitMask == PhysicsCategory.Evildoer {
-            return (contact.bodyA, contact.bodyB, .EnemyIsA)
-        } else if contact.bodyB.categoryBitMask == PhysicsCategory.Evildoer {
-            return (contact.bodyB, contact.bodyA, .EnemyIsB)
+        } else if contact.bodyA.categoryBitMask == PhysicsCategory.EShell {
+            return (contact.bodyA, contact.bodyB, .EShellIsA)
+        } else if contact.bodyB.categoryBitMask == PhysicsCategory.EShell {
+            return (contact.bodyB, contact.bodyA, .EShellIsB)
         } else {
             return (nil, nil, .Unkown)
         }

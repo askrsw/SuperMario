@@ -80,10 +80,12 @@ extension MushroomSprite: MarioBumpFragileNode {
         self.physicsBody = nil
         self.run(GameAnimations.instance.vanishAnimation)
         
+        GameScene.addScore(score: ScoreConfig.hitPowerup, pos: position)
+        
         if self.isLifeMushroom == false {
             GameManager.instance.mario.powerUpToB()
         } else {
-            GameManager.instance.mario.lifeCount += 1
+            GameHUD.instance.marioLifeCount += 1
             AudioManager.play(sound: .AddLife)
         }
     }

@@ -83,6 +83,8 @@ extension FlowerSprite: MarioBumpFragileNode {
         self.run(GameAnimations.instance.vanishAnimation)
         
         GameManager.instance.mario.powerUpToC()
+        
+        GameScene.addScore(score: ScoreConfig.hitPowerup, pos: position)
     }
 }
 

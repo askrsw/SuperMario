@@ -53,9 +53,9 @@ class GoldSprite : SKSpriteNode {
     private static var sTexType = ""
     var animation: SKAction {
         get {
-            if GoldSprite.sTexType != GameScene.currentTileType {
-                GoldSprite.sAnimation = makeAnimation(texName: "goldm", suffix: GameScene.currentTileType, count: 3, timePerFrame: 0.5)
-                GoldSprite.sTexType = GameScene.currentTileType
+            if GoldSprite.sTexType != self.type.rawValue {
+                GoldSprite.sAnimation = makeAnimation(texName: "goldm", suffix: self.type.rawValue, count: 3, timePerFrame: 0.5)
+                GoldSprite.sTexType = self.type.rawValue
             }
             
             return GoldSprite.sAnimation
@@ -71,9 +71,13 @@ extension GoldSprite: MarioBumpFragileNode {
             self.texture = SKTexture(imageNamed: texFileName)
             self.removeAction(forKey: "animation")
             
+            let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength * 0.75)
+            GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
+            
             switch self.goldTileType {
             case .gold:
                 spawnCoinFlyAnimation()
+                GameHUD.instance.coinCount += 1
             case .power:
                 spawnPowerUpSprite(false)
                 break
@@ -96,7 +100,7 @@ extension GoldSprite: MarioBumpFragileNode {
         let half_w = size.width * 0.49
         let half_h = size.height * 0.5
         let rect = CGRect(x: position.x - half_w, y: position.y + half_h, width: size.width * 0.98, height: 1.0)
-        GameManager.instance.currentScene?.checkRectForShake(rect: rect)
+        GameScene.checkRectForShake(rect: rect)
     }
     
     private func spawnCoinFlyAnimation() {
@@ -112,22 +116,17 @@ extension GoldSprite: MarioBumpFragileNode {
     
     private func spawnPowerUpSprite(_ lifeMushroom: Bool) {
         if lifeMushroom == false && GameManager.instance.mario.marioPower != .A {
-            if let holder = GameManager.instance.currentScene?.staticSpriteHolder {
-                let flower = FlowerSprite(self.type)
-                let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
-                flower.zPosition = self.zPosition
-                flower.cropNode.position = position + self.parent!.position
-                holder.addChild(flower.cropNode)
-            }
-            
+            let flower = FlowerSprite(self.type)
+            let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
+            flower.zPosition = self.zPosition
+            flower.cropNode.position = position + self.parent!.position
+            GameScene.addFlower(flower.cropNode)
         } else {
-            if let holder = GameManager.instance.currentScene?.movingSpriteHolder {
-                let mushroom = MushroomSprite(self.type, lifeMushroom)
-                let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
-                mushroom.zPosition = self.zPosition
-                mushroom.cropNode.position = position + self.parent!.position
-                holder.addChild(mushroom.cropNode)
-            }
+            let mushroom = MushroomSprite(self.type, lifeMushroom)
+            let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
+            mushroom.zPosition = self.zPosition
+            mushroom.cropNode.position = position + self.parent!.position
+            GameScene.addMushroom(mushroom.cropNode)
             
             if lifeMushroom == true {
                 let fadeIn = SKAction.fadeIn(withDuration: 0.125)

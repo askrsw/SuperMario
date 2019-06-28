@@ -114,10 +114,10 @@ extension AudioManager {
     private func play(soundName: GameSound) {
         let name = NSString(string: soundName.rawValue)
         if let sound = soundCache.object(forKey: name) {
-            GameManager.instance.currentScene?.run(sound)
+            GameScene.soundPlayNode.run(sound)
         } else {
             let sound = SKAction.playSoundFileNamed(soundName.rawValue, waitForCompletion: false)
-            GameManager.instance.currentScene?.run(sound)
+            GameScene.soundPlayNode.run(sound)
             soundCache.setObject(sound, forKey: name)
         }
     }
