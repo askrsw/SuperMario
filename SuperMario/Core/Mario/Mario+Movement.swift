@@ -118,6 +118,26 @@ extension Mario {
             super.willExit(to: nextState)
             if let pBody = mario.physicsBody {
                 mario.physicsBody = mario.makePhysicsBody(pBody.velocity, false)
+                
+                let unitL = GameConstant.TileGridLength
+                
+                let pos1 = CGPoint(x: mario.position.x - unitL * 0.5 + 1, y: mario.position.y + unitL - 6.0)
+                if let brick = GameScene.currentInstance?.brickSpriteHolder.atPoint(pos1) as? BrickSprite {
+                    brick.turnIntoPieces()
+                }
+                
+                let pos2 = CGPoint(x: mario.position.x + unitL * 0.5 - 1, y: mario.position.y + unitL - 6.0)
+                if let brick = GameScene.currentInstance?.brickSpriteHolder.atPoint(pos2) as? BrickSprite {
+                    brick.turnIntoPieces()
+                }
+            }
+        }
+        
+        override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+            if stateClass is CrouchingMoveState.Type {
+                 return false
+            } else {
+                return super.isValidNextState(stateClass)
             }
         }
         
@@ -199,21 +219,16 @@ extension Mario {
                 physicalSize = Mario.normalTextureC.size()
             }
             
-            physicalSize.height -= 1.0
+            physicalSize.height -= 3.0
+            physicalSize.width  -= 4.0
             
-            if marioPower == .A {
-                physicalSize.width  -= 4.0
-            } else {
-                physicalSize.width  -= 2.0
-            }
-            
-            physicalCenter = CGPoint(x: 0.0, y: 1.0 / 2.0)
+            physicalCenter = CGPoint(x: 0.0, y: 0.0 / 2.0)
         } else {
             physicalSize = Mario.normalTextureA.size()
-            physicalSize.height -= 1.0
-            physicalSize.width  -= 2.0
+            physicalSize.height -= 3.0
+            physicalSize.width  -= 4.0
             
-            physicalCenter = CGPoint(x: 0.0, y: -GameConstant.TileGridLength / 2.0 + 1.0 / 2.0)
+            physicalCenter = CGPoint(x: 0.0, y: -GameConstant.TileGridLength / 2.0)
         }
         
         let ppBody = SKPhysicsBody(rectangleOf: physicalSize, center: physicalCenter)
@@ -222,7 +237,7 @@ extension Mario {
         ppBody.restitution = 0.0
         ppBody.categoryBitMask = PhysicsCategory.Mario
         ppBody.contactTestBitMask = PhysicsCategory.Brick | PhysicsCategory.GoldMetal | PhysicsCategory.MarioPower | PhysicsCategory.Coin | PhysicsCategory.Gadget
-        ppBody.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.Enemy
+        ppBody.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.DummyVertLine | PhysicsCategory.Enemy
         ppBody.velocity = velocity
         
         return ppBody

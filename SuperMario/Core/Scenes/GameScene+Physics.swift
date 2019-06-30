@@ -8,6 +8,12 @@
 
 import SpriteKit
 
+enum TileGridType: Int {
+    case None  = 0
+    case Brick = 1
+    case Solid = 2
+}
+
 struct ErasablePlatLineParam {
     var gridX: CGFloat
     let gridY: CGFloat
@@ -29,17 +35,84 @@ struct ErasablePlatLineParam {
     }
 }
 
+enum VerticalDummyLineSide {
+    case left
+    case right
+}
+
+struct VerticalDummyLine {
+    let side: VerticalDummyLineSide
+    let gridX: CGFloat
+    var gridY: CGFloat
+    var len:   CGFloat
+    
+    var nodePosition: CGPoint {
+        get {
+            let x = (gridX + (side == .left ? -0.25: 1.25)) * GameConstant.TileGridLength
+            let y = (gridY + len * 0.5) * GameConstant.TileGridLength + GameConstant.TileYOffset
+            return CGPoint(x: x, y: y)
+        }
+    }
+    
+    var nodeSize: CGSize {
+        get {
+            let width = GameConstant.TileGridLength * 0.5
+            let height = len * GameConstant.TileGridLength
+            return CGSize(width: width, height: height)
+        }
+    }
+    
+    var physicalPosition1: CGPoint {
+        get {
+            let x = (side == .left ? 0.25 : -0.25) * GameConstant.TileGridLength
+            let y = -len * 0.5 * GameConstant.TileGridLength + 4.0
+            return CGPoint(x: x, y: y)
+        }
+    }
+    
+    var physicalPosition2: CGPoint {
+        get {
+            let x = physicalPosition1.x
+            let y = physicalPosition1.y + nodeSize.height - 5.0
+            return CGPoint(x: x, y: y)
+        }
+    }
+}
+
 extension GameScene {
     func makeErasablePlatNode(param: ErasablePlatLineParam) {
         let node = SKNode()
         node.physicsBody = makeErasablePlatPhysics(param.position1, param.position2)
         node.userData = NSMutableDictionary(dictionary: ["param" : param])
-        
         erasablePlatHolder.addChild(node)
     }
     
-    func ErasePlatNode(_ pos: CGPoint) {
+    func makeVerticalDummyLineNode(param: VerticalDummyLine) {
+        let node = SKShapeNode(rectOf: param.nodeSize)
+        node.physicsBody = makeVerticalDummyLinePhysics(param.physicalPosition1, param.physicalPosition2)
+        node.position = param.nodePosition
+        node.zPosition = 900
+        node.lineWidth = 0.0
+        node.alpha = 0.0
+        node.userData = NSMutableDictionary(dictionary: ["param" : param])
+        erasablePlatHolder.addChild(node)
+        
+    #if DEBUG
+        node.alpha = 0.5
+        if param.side == .left {
+            node.fillColor = .red
+        } else {
+            node.fillColor = .blue
+        }
+    #endif
+    }
+    
+    func ErasePlatNode(_ pos: CGPoint, _ index: Int) {
         ErasePlatPhysicsNode(pos)
+        
+        if verticalPhysicsLine {
+            EraseVerticalDummyPhysicsLineNode(pos, index: index)
+        }
     }
     
     func loadPhysicsDesc() {
@@ -62,6 +135,71 @@ extension GameScene {
     
     // MARK: Helper method
     
+    fileprivate func EraseVerticalDummyPhysicsLineNode(_ pos: CGPoint, index: Int) {
+        let leftIndex = index - GameConstant.sceneRowCount
+        let rightIndex = index + GameConstant.sceneRowCount
+        let unitL = GameConstant.TileGridLength
+        
+        if tileTypeDict[leftIndex] == nil {
+            let testPoint = CGPoint(x: pos.x - unitL * 0.75, y: pos.y)
+            EraseLastVerticalDummySectionLine(testPoint)
+        } else {
+            let testPoint = CGPoint(x: pos.x - unitL * 0.25, y: pos.y)
+            ReshapeVerticalDummySectionLine(point: testPoint, index: leftIndex, side: .right)
+        }
+        
+        if tileTypeDict[rightIndex] == nil {
+            let testPoint = CGPoint(x: pos.x + unitL * 0.75, y: pos.y)
+            EraseLastVerticalDummySectionLine(testPoint)
+        } else {
+            let testPoint = CGPoint(x: pos.x + unitL * 0.25, y: pos.y)
+            ReshapeVerticalDummySectionLine(point: testPoint, index: rightIndex, side: .left)
+        }
+    }
+    
+    fileprivate func EraseLastVerticalDummySectionLine(_ point: CGPoint) {
+        if let shape = erasablePlatHolder.atPoint(point) as? SKShapeNode {
+            shape.removeFromParent()
+            var param = shape.userData!["param"] as! VerticalDummyLine
+            param.gridY += 1
+            param.len   -= 1
+            if param.len > 0.5 {
+                makeVerticalDummyLineNode(param: param)
+            }
+        }
+    }
+    
+    fileprivate func ReshapeVerticalDummySectionLine(point: CGPoint, index: Int, side: VerticalDummyLineSide) {
+        let unitL = GameConstant.TileGridLength
+        let topPoint = CGPoint(x: point.x, y: point.y + unitL)
+        let bottomPoint = CGPoint(x: point.x, y: point.y - unitL)
+        
+        if let top = erasablePlatHolder.atPoint(topPoint) as? SKShapeNode, let bottom = erasablePlatHolder.atPoint(bottomPoint) as? SKShapeNode {
+            let topParam = top.userData!["param"] as! VerticalDummyLine
+            var bottomParam = bottom.userData!["param"] as! VerticalDummyLine
+            bottomParam.len += 1 + topParam.len
+            top.removeFromParent()
+            bottom.removeFromParent()
+            makeVerticalDummyLineNode(param: bottomParam)
+        } else if let top = erasablePlatHolder.atPoint(topPoint) as? SKShapeNode {
+            var topParam = top.userData!["param"] as! VerticalDummyLine
+            topParam.len += 1
+            topParam.gridY -= 1
+            top.removeFromParent()
+            makeVerticalDummyLineNode(param: topParam)
+        } else if let bottom = erasablePlatHolder.atPoint(topPoint) as? SKShapeNode {
+            var bottomParam = bottom.userData!["param"] as! VerticalDummyLine
+            bottomParam.len += 1
+            bottom.removeFromParent()
+            makeVerticalDummyLineNode(param: bottomParam)
+        } else {
+            let gridX = index / GameConstant.sceneRowCount
+            let gridY = index % GameConstant.sceneRowCount
+            let param = VerticalDummyLine(side: side, gridX: CGFloat(gridX), gridY: CGFloat(gridY), len: 1.0)
+            makeVerticalDummyLineNode(param: param)
+        }
+    }
+    
     fileprivate func ErasePlatPhysicsNode(_ pos: CGPoint) {
         let unitL = GameConstant.TileGridLength
         let rect = CGRect(x: pos.x - 0.5, y: pos.y, width: 1.0, height: unitL)
@@ -77,9 +215,10 @@ extension GameScene {
                 if let node = body.node {
                     let gridX: CGFloat = floor(pos.x / unitL)
                     let gridY: CGFloat = round((pos.y - unitL * 0.25) / unitL)
-                    self?.rebuildErasePlatNode(node, X: gridX, Y: gridY)
                     
-                    willBeRemovedNodes.append(node)
+                    if let ret = self?.rebuildErasePlatNode(node, X: gridX, Y: gridY), ret {
+                        willBeRemovedNodes.append(node)
+                    }
                 }
             }
         }
@@ -93,7 +232,7 @@ extension GameScene {
     fileprivate func makeErasablePlatPhysics(_ pos1: CGPoint, _ pos2: CGPoint) -> SKPhysicsBody {
         let body = SKPhysicsBody(edgeFrom: pos1, to: pos2)
         body.categoryBitMask = PhysicsCategory.ErasablePlat
-        body.collisionBitMask = (body.collisionBitMask) & ~PhysicsCategory.ErasablePlat
+        body.collisionBitMask = body.collisionBitMask & ~PhysicsCategory.ErasablePlat
         body.isDynamic = false
         body.friction = 0.0
         body.restitution = 0.0
@@ -101,11 +240,23 @@ extension GameScene {
         return body
     }
     
-    fileprivate func rebuildErasePlatNode(_ node: SKNode, X gridX: CGFloat, Y gridY: CGFloat) {
-        guard var rawParam = node.userData?["param"] as? ErasablePlatLineParam else { return }
+    fileprivate func makeVerticalDummyLinePhysics(_ pos1: CGPoint, _ pos2: CGPoint) -> SKPhysicsBody {
+        let body = SKPhysicsBody(edgeFrom: pos1, to: pos2)
+        body.categoryBitMask = PhysicsCategory.DummyVertLine
+        body.collisionBitMask = body.collisionBitMask & ~PhysicsCategory.DummyVertLine
+        body.isDynamic = false
+        body.friction = 0.0
+        body.restitution = 0.0
         
-        guard rawParam.gridY == gridY else { return }
-        guard rawParam.len != 1.0 else { return }
+        return body
+    }
+    
+    fileprivate func rebuildErasePlatNode(_ node: SKNode, X gridX: CGFloat, Y gridY: CGFloat) -> Bool {
+        guard var rawParam = node.userData?["param"] as? ErasablePlatLineParam else { return false }
+        
+        guard rawParam.gridY == gridY else { return false }
+        guard rawParam.gridX <= gridX && gridX < (rawParam.gridX + rawParam.len) else { return false }
+        guard rawParam.len != 1.0 else { return true }
         
         if gridX == rawParam.gridX {
             rawParam.gridX += 1.0
@@ -122,6 +273,8 @@ extension GameScene {
             rawParam.len = firstLen
             self.makeErasablePlatNode(param: rawParam)
         }
+        
+        return true
     }
     
     fileprivate func loadSolidPhysicsEdges(_ shapeArray: Array<Dictionary<String, Any>>) {
@@ -186,6 +339,12 @@ extension GameScene {
                 let path = GameScene.makePipeUpSideLinePath(posX, posY, len)
                 let pp_body = SKPhysicsBody(edgeChainFrom: path)
                 horzPhysicsBodies.append(pp_body)
+            case .vertLeftDummyLine:
+                let param = VerticalDummyLine(side: .left, gridX: posX, gridY: posY, len: len)
+                makeVerticalDummyLineNode(param: param)
+            case .vertRightDummyLine:
+                let param = VerticalDummyLine(side: .right, gridX: posX, gridY: posY, len: len)
+                makeVerticalDummyLineNode(param: param)
             }
         }
         

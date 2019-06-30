@@ -67,6 +67,7 @@
 		AB711F2422C3C5160093C49F /* Scene1_2.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2322C3C5160093C49F /* Scene1_2.sks */; };
 		AB711F2622C3CDF00093C49F /* Physics1_2.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2522C3C89E0093C49F /* Physics1_2.geojson */; };
 		AB711F2922C3D15A0093C49F /* Scene1_2_A.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */; };
+		AB895D6422C6F1AB007923EB /* Physics1_2_A.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */; };
 		AB90441E22BDB55200322412 /* In_Sky.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F622BDB55000322412 /* In_Sky.wav */; };
 		AB90441F22BDB55200322412 /* Auto_Walk_to_Pipe.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F722BDB55000322412 /* Auto_Walk_to_Pipe.wav */; };
 		AB90442022BDB55200322412 /* Outdoor.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F822BDB55100322412 /* Outdoor.wav */; };
@@ -548,6 +549,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB895D6422C6F1AB007923EB /* Physics1_2_A.geojson in Resources */,
 				AB711F2622C3CDF00093C49F /* Physics1_2.geojson in Resources */,
 				AB3DF39F22BE814B00A130DD /* Physics1_1_A.geojson in Resources */,
 				AB0D8A5722AF08C2005DF87F /* Physics1_1.geojson in Resources */,

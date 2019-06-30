@@ -13,6 +13,7 @@ extension GameScene {
     func setCamera() {
         guard let camera = camera else { return }
         
+        camera.zPosition = 2000
         camera.xScale = 1.0 / scaleFactor
         camera.yScale = 1.0 / scaleFactor
         

@@ -32,4 +32,10 @@ extension GameScene {
             return userData?["tileType"] as? String ?? "_a"
         }
     }
+    
+    var verticalPhysicsLine: Bool {
+        get {
+            return userData?["VerticalPhysicsLine"] as? Bool ?? false
+        }
+    }
 }

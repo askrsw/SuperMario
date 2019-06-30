@@ -12,6 +12,7 @@ class GameConstant {
     private init() {}
     
     public static let OriginalSceneHeight: CGFloat = 224.0
+    public static let sceneRowCount: Int = 15
     
     public static let TileGridLength: CGFloat = 16.0
     public static let TileYOffset: CGFloat    = -8.0

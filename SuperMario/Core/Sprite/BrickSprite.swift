@@ -17,13 +17,15 @@ fileprivate enum BrickTileType: String {
 class BrickSprite : SKSpriteNode {
     fileprivate let brickTileType: BrickTileType
     let type: FragileGridType
+    let index: Int
     var empty: Bool = false
     var lastCoin: Bool = false
     var coinTimerSetted = false
     
-    init(_ type: FragileGridType, _ tileName: String) {
+    init(_ type: FragileGridType, _ tileName: String, _ index: Int) {
         self.type = type
         self.brickTileType = BrickTileType(rawValue: tileName) ?? .brick
+        self.index = index
         
         let texFileName = "brick" + type.rawValue
         let tex = SKTexture(imageNamed: texFileName)
@@ -41,6 +43,24 @@ class BrickSprite : SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) hasn't been implemented.")
+    }
+    
+    func turnIntoPieces() {
+        AudioManager.play(sound: .BreakBrick)
+        let position = CGPoint(x: self.position.x, y: self.position.y - GameConstant.TileGridLength * 0.5)
+        let _ = BrickPieceSprite.spawnPieceGroup(self.type, position)
+        
+        GameScene.setTileTypeDictionary(index: index, type: .None)
+        GameScene.ErasePlatNode(self.position, index)
+        
+        GameScene.addScore(score: ScoreConfig.brickBreak, pos: position)
+        
+        removeFromParent()
+        
+        let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength)
+        if let coin = GameScene.currentInstance?.coinSpriteHolder.atPoint(pos) as? CoinSprite {
+            coin.marioBump()
+        }
     }
     
     // MARK: Animation Stuff
@@ -93,14 +113,7 @@ extension BrickSprite: MarioBumpFragileNode {
     
     private func normalBrickProcess() {
         if GameManager.instance.mario.marioPower != .A && GameManager.instance.mario.marioMoveState != .crouching {
-            removeFromParent()
-            AudioManager.play(sound: .BreakBrick)
-            let position = CGPoint(x: self.position.x, y: self.position.y - GameConstant.TileGridLength * 0.5)
-            let _ = BrickPieceSprite.spawnPieceGroup(self.type, position)
-            
-            GameScene.ErasePlatNode(self.position)
-            
-            GameScene.addScore(score: ScoreConfig.brickBreak, pos: position)
+            turnIntoPieces()
         } else {
             self.run(shakeAnimation)
             AudioManager.play(sound: .HitHard)
@@ -126,6 +139,8 @@ extension BrickSprite: MarioBumpFragileNode {
             let texFileName = "goldm" + self.type.rawValue + "_4"
             self.texture = SKTexture(imageNamed: texFileName)
             self.empty = true
+            
+            GameScene.setTileTypeDictionary(index: index, type: .Solid)
         }
         
         if self.coinTimerSetted == false {
@@ -152,5 +167,7 @@ extension BrickSprite: MarioBumpFragileNode {
         
         let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength * 0.75)
         GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
+        
+        GameScene.setTileTypeDictionary(index: index, type: .Solid)
     }
 }

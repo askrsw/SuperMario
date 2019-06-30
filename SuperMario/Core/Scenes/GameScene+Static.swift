@@ -55,8 +55,8 @@ extension GameScene {
         currentInstance!.checkRectForShake(rect: rect)
     }
     
-    static func ErasePlatNode(_ pos: CGPoint) {
-        currentInstance!.ErasePlatNode(pos)
+    static func ErasePlatNode(_ pos: CGPoint, _ index: Int) {
+        currentInstance!.ErasePlatNode(pos, index)
     }
 
     static func addBullet(_ bullet: BulletSprite) {
@@ -97,5 +97,15 @@ extension GameScene {
     
     static func addScore(score: Int, pos: CGPoint) {
         currentInstance!.addScore(score: score, pos: pos)
+    }
+    
+    static func setTileTypeDictionary(index: Int, type: TileGridType) {
+        guard currentInstance!.verticalPhysicsLine else { return }
+        
+        if type == .None {
+            currentInstance!.tileTypeDict.removeValue(forKey: index)
+        } else {
+            currentInstance!.tileTypeDict[index] = type
+        }
     }
 }

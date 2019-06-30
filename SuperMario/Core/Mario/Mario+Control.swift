@@ -12,23 +12,25 @@ extension Mario {
     
     func directionAction(_ dir: UInt32) {
         guard pipingTime == false else { return }
-        
-        downWard = false
-        
         switch dir {
         case ButtonDirectionCategory.Left:
             speedX = true
+            downWard = false
             marioFacing = .backward
         case ButtonDirectionCategory.Up:
             speedX = false
+            downWard = false
         case ButtonDirectionCategory.Left | ButtonDirectionCategory.Up:
             speedX = true
+            downWard = false
             marioFacing = .backward
         case ButtonDirectionCategory.Right:
             speedX = true
+            downWard = false
             marioFacing = .forward
         case ButtonDirectionCategory.Right | ButtonDirectionCategory.Up:
             speedX = true
+            downWard = false
             marioFacing = .forward
         case ButtonDirectionCategory.Down:
             downWard = true
@@ -43,6 +45,7 @@ extension Mario {
             downWard = true
         case ButtonDirectionCategory.None:
             speedX = false
+            downWard = false
         default:
             break;
         }

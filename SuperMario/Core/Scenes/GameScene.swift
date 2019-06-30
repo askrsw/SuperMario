@@ -26,6 +26,11 @@ class GameScene: SKScene {
     let flyScoreHolder = SKNode()
     let soundPlayNode  = SKNode()
     
+#if DEBUG
+    let horzIndexLabelHolder = SKNode()
+    let vertIndexLabelHolder = SKNode()
+#endif
+    
     let mario = GameManager.instance.mario
     let dirButton = DirectionButton()
     let buttonA = ActionButton(actionType: .A)
@@ -35,6 +40,7 @@ class GameScene: SKScene {
     
     fileprivate var lastUpdateTime: TimeInterval = 0.0
     var fragileContactNodes: Array<SKNode & MarioBumpFragileNode> = []
+    var tileTypeDict: Dictionary<Int, TileGridType> = [:]
     
     var halfCameraViewWidth: CGFloat = 256.0
     var halfScaledSceneWdith: CGFloat = 256.0
@@ -151,6 +157,12 @@ class GameScene: SKScene {
         setCamera()
         
     #if DEBUG
+        rootNode.addChild(horzIndexLabelHolder)
+        camera!.addChild(vertIndexLabelHolder)
+        
+        vertIndexLabelHolder.zPosition = 20
+        horzIndexLabelHolder.zPosition = 20
+        
         drawColumnNumber()
     #endif
     }
