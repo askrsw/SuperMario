@@ -37,7 +37,7 @@ class GoldSprite : SKSpriteNode {
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.GoldMetal
-        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.ErasablePlat
+        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.ErasablePlat | PhysicsCategory.EBarrier)
         physicsBody!.isDynamic = false
     
         run(animation, withKey: "animation")
@@ -80,10 +80,8 @@ extension GoldSprite: MarioBumpFragileNode {
                 GameHUD.instance.coinCount += 1
             case .power:
                 spawnPowerUpSprite(false)
-                break
             case .lifeAdd:
                 spawnPowerUpSprite(true)
-                break
             }
             
             self.empty = true

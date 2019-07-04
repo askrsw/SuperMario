@@ -42,8 +42,8 @@ class KoopasGuy: EnemiesBaseNode {
     
     override var physicalShapeParam: PhysicalShapeParam {
         get {
-            let pSize = CGSize(width: 16, height: 14)
-            let pCenter = CGPoint(x: 0, y: 1)
+            let pSize = CGSize(width: 16, height: 13)
+            let pCenter = CGPoint(x: 0, y: 0.5)
             return PhysicalShapeParam(size: pSize, center: pCenter)
         }
     }
@@ -151,7 +151,7 @@ class KoopasGuy: EnemiesBaseNode {
     override var animation: SKAction {
         get {
             if KoopasGuy.sTexType != texType {
-                KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3)
+                KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.1)
                 KoopasGuy.makeShellToNormalAnimation(texType)
                 KoopasGuy.sTexType = texType
             }

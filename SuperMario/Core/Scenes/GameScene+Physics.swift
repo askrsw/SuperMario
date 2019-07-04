@@ -116,12 +116,22 @@ extension GameScene {
     }
     
     func loadPhysicsDesc() {
-        let (shapeArray, gadgetArray) = GameScene.readPhysicsJsonData(file: physicsDescFileName)
+        let jsonDict = GameScene.readPhysicsJsonData(file: physicsDescFileName)
         
-        loadSolidPhysicsEdges(shapeArray)
+        if let physicalShapes = jsonDict["shapes"] as? Array<Dictionary<String, Any>> {
+            loadSolidPhysicsEdges(physicalShapes)
+        }
         
-        if let gadgets = gadgetArray {
-            loadPhysicsGadets(gadgets)
+        if let physicalGadgets = jsonDict["gadgetes"] as? Array<Dictionary<String, Any>> {
+            loadPhysicsGadets(physicalGadgets)
+        }
+        
+        if let physicalLadders = jsonDict["ladders"] as? Array<Dictionary<String, Any>> {
+            loadPhysicsLadders(physicalLadders)
+        }
+        
+        if let pirhanas = jsonDict["pirhanas"] as? Array<Dictionary<String, Any>> {
+            loadPirhanaPlant(pirhanas)
         }
     }
     
@@ -283,6 +293,7 @@ extension GameScene {
         
         var vertPhysicsBodies = [SKPhysicsBody]()
         var horzPhysicsBodies = [SKPhysicsBody]()
+        var vertEBarrierBodies = [SKPhysicsBody]()
         
         for edge in shapeArray {
             let posDict = edge["pos"] as! Dictionary<String, CGFloat>
@@ -345,6 +356,16 @@ extension GameScene {
             case .vertRightDummyLine:
                 let param = VerticalDummyLine(side: .right, gridX: posX, gridY: posY, len: len)
                 makeVerticalDummyLineNode(param: param)
+            case .vertLeftEBarrierLine:
+                let point1 = CGPoint(x: posX * gridRatio - 2.0, y: posY * gridRatio + tileYOffset)
+                let point2 = CGPoint(x: point1.x, y: point1.y + len * gridRatio)
+                let pp_body = SKPhysicsBody(edgeFrom: point1, to: point2)
+                vertEBarrierBodies.append(pp_body)
+            case .vertRightEBarrierLine:
+                let point1 = CGPoint(x: (posX + 1) * gridRatio + 2.0, y: posY * gridRatio + tileYOffset)
+                let point2 = CGPoint(x: point1.x, y: point1.y + len * gridRatio)
+                let pp_body = SKPhysicsBody(edgeFrom: point1, to: point2)
+                vertEBarrierBodies.append(pp_body)
             }
         }
         
@@ -356,6 +377,7 @@ extension GameScene {
             body.friction = 0.0
             body.restitution = 0.0
             horzPhysHostNode.physicsBody = body
+            horzPhysHostNode.name = "horzPhysHostNode"
             self.rootNode.addChild(horzPhysHostNode)
         }
         
@@ -367,7 +389,44 @@ extension GameScene {
             body.friction = 0.0
             body.restitution = 0.0
             vertPhysHostNode.physicsBody = body
+            vertPhysHostNode.name = "vertPhysHostNode"
             self.rootNode.addChild(vertPhysHostNode)
+        }
+        
+        if vertEBarrierBodies.count > 0 {
+            let vertEBarrierPhysHostNode = SKNode()
+            let body = SKPhysicsBody(bodies: vertEBarrierBodies)
+            body.categoryBitMask = PhysicsCategory.EBarrier
+            body.isDynamic = false
+            body.friction = 0.0
+            body.restitution = 0.0
+            vertEBarrierPhysHostNode.physicsBody = body
+            vertEBarrierPhysHostNode.name = "vertEBarrierPhysHostNode"
+            self.rootNode.addChild(vertEBarrierPhysHostNode)
+        }
+    }
+    
+    fileprivate func loadPhysicsLadders(_ ladderArray: Array<Dictionary<String, Any>>) {
+        for item in ladderArray {
+            let count = item["count"] as! Int
+            let posX  = item["pos_x"] as! CGFloat
+            let length = item["len"] as! Int
+            
+            let ladder = CycleMovingLadder(posX: posX, len: length, count: count)
+            movingSpriteHolder.addChild(ladder)
+        }
+    }
+    
+    fileprivate func loadPirhanaPlant(_ pirhanaArray: Array<Dictionary<String, Any>>) {
+        for item in pirhanaArray {
+            let posDict = item["pos"] as! Dictionary<String, CGFloat>
+            let posX = posDict["x"]! * GameConstant.TileGridLength
+            let posY = posDict["y"]! * GameConstant.TileGridLength + GameConstant.TileYOffset
+            
+            let pirhanaPlant = PirhanaPlant(tileType: tileType)
+            pirhanaPlant.position = CGPoint(x: posX, y: posY)
+            
+            movingSpriteHolder.addChild(pirhanaPlant)
         }
     }
     
@@ -429,7 +488,7 @@ extension GameScene {
         return path.cgPath
     }
     
-    static fileprivate func readPhysicsJsonData(file name:String) -> (Array<Dictionary<String, Any>>, Array<Dictionary<String, Any>>?) {
+    static fileprivate func readPhysicsJsonData(file name:String) -> Dictionary<String, Array<Any>> {
         let filePath = Bundle.main.path(forResource: name, ofType: "geojson")
         let url = URL(fileURLWithPath: filePath!)
         
@@ -437,9 +496,7 @@ extension GameScene {
             let data = try Data(contentsOf: url)
             let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
             let jsonDict = jsonData as! Dictionary<String, Array<Any>>
-            let physicalShapes = jsonDict["shapes"] as! Array<Dictionary<String, Any>>
-            let physicalGadgets = jsonDict["gadgetes"] as? Array<Dictionary<String, Any>>
-            return (physicalShapes, physicalGadgets)
+            return jsonDict
         } catch let error as Error? {
             fatalError("Error when load data from bundle:", file: error as Any as! StaticString)
         }

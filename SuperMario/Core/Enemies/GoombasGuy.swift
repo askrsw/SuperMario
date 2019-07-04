@@ -24,8 +24,8 @@ class GoombasGuy: EnemiesBaseNode {
     
     override var physicalShapeParam: PhysicalShapeParam {
         get {
-            let pSize = CGSize(width: 16, height: 14)
-            let pCenter = CGPoint(x: 0, y: 1)
+            let pSize = CGSize(width: 16, height: 13)
+            let pCenter = CGPoint(x: 0, y: 0.5)
             return PhysicalShapeParam(size: pSize, center: pCenter)
         }
     }

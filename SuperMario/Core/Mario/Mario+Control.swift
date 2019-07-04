@@ -56,10 +56,6 @@ extension Mario {
         moveFaster = v
     }
     
-    func jump(_ v: Bool) {
-        guard pipingTime == false else { return }
-    }
-    
     func jumpHigh() {
         guard pipingTime == false else { return }
         guard jumping == false else { return }

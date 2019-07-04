@@ -11,6 +11,11 @@
 		AB03ABA222C122BB0007F14A /* EnemiesBaseNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03ABA122C122BB0007F14A /* EnemiesBaseNode.swift */; };
 		AB03ABA422C1237B0007F14A /* GoombasGuy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03ABA322C1237B0007F14A /* GoombasGuy.swift */; };
 		AB0D8A5722AF08C2005DF87F /* Physics1_1.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */; };
+		AB17075122CE340A003EEA2A /* PirhanaPlant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB17075022CE340A003EEA2A /* PirhanaPlant.swift */; };
+		AB17075322CE36C7003EEA2A /* Scene1_2_C.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB17075222CE36C7003EEA2A /* Scene1_2_C.sks */; };
+		AB17075522CE36DB003EEA2A /* Scene1_2_B.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB17075422CE36DB003EEA2A /* Scene1_2_B.sks */; };
+		AB17075722CE42C3003EEA2A /* Physics1_2_B.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB17075622CE3FC5003EEA2A /* Physics1_2_B.geojson */; };
+		AB17075922CE47BC003EEA2A /* Physics1_2_C.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB17075822CE46EF003EEA2A /* Physics1_2_C.geojson */; };
 		AB337A092291CE7900C9791B /* GameTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB337A082291CE7900C9791B /* GameTypes.swift */; };
 		AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */; };
 		AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */; };
@@ -117,6 +122,7 @@
 		ABDAFB7A22B71551004DCE22 /* BrickPieceSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDAFB7922B71551004DCE22 /* BrickPieceSprite.swift */; };
 		ABDAFB7C22B740CD004DCE22 /* BulletSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDAFB7B22B740CD004DCE22 /* BulletSprite.swift */; };
 		ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE0845C228D02B000BD6ADB /* Extensions.swift */; };
+		ABFB7FB722CDA9BB0079658B /* CycleMovingLadder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB7FB622CDA9BB0079658B /* CycleMovingLadder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +130,11 @@
 		AB03ABA122C122BB0007F14A /* EnemiesBaseNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesBaseNode.swift; sourceTree = "<group>"; };
 		AB03ABA322C1237B0007F14A /* GoombasGuy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoombasGuy.swift; sourceTree = "<group>"; };
 		AB0D8A5622AF08C2005DF87F /* Physics1_1.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Physics1_1.geojson; sourceTree = "<group>"; };
+		AB17075022CE340A003EEA2A /* PirhanaPlant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PirhanaPlant.swift; sourceTree = "<group>"; };
+		AB17075222CE36C7003EEA2A /* Scene1_2_C.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_2_C.sks; sourceTree = "<group>"; };
+		AB17075422CE36DB003EEA2A /* Scene1_2_B.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_2_B.sks; sourceTree = "<group>"; };
+		AB17075622CE3FC5003EEA2A /* Physics1_2_B.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_B.geojson; sourceTree = "<group>"; };
+		AB17075822CE46EF003EEA2A /* Physics1_2_C.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_C.geojson; sourceTree = "<group>"; };
 		AB337A082291CE7900C9791B /* GameTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypes.swift; sourceTree = "<group>"; };
 		AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstant.swift; sourceTree = "<group>"; };
 		AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mario.xcassets; sourceTree = "<group>"; };
@@ -232,6 +243,7 @@
 		ABDAFB7922B71551004DCE22 /* BrickPieceSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickPieceSprite.swift; sourceTree = "<group>"; };
 		ABDAFB7B22B740CD004DCE22 /* BulletSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletSprite.swift; sourceTree = "<group>"; };
 		ABE0845C228D02B000BD6ADB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		ABFB7FB622CDA9BB0079658B /* CycleMovingLadder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleMovingLadder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +348,8 @@
 				AB3DA06C22BE1F1E00A35745 /* Physics1_1_A.geojson */,
 				AB711F2522C3C89E0093C49F /* Physics1_2.geojson */,
 				AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */,
+				AB17075622CE3FC5003EEA2A /* Physics1_2_B.geojson */,
+				AB17075822CE46EF003EEA2A /* Physics1_2_C.geojson */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -400,6 +414,7 @@
 		AB54E955228C0305000AE79E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				ABFB7FB522CDA9240079658B /* Fixed */,
 				ABB9775022900C810011ACE5 /* Sprite */,
 				AB03ABA022C122460007F14A /* Enemies */,
 				ABB9774F22900C5E0011ACE5 /* Utils */,
@@ -416,6 +431,8 @@
 				AB3DA06A22BE16E800A35745 /* Scene1_1_A.sks */,
 				AB711F2322C3C5160093C49F /* Scene1_2.sks */,
 				AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */,
+				AB17075422CE36DB003EEA2A /* Scene1_2_B.sks */,
+				AB17075222CE36C7003EEA2A /* Scene1_2_C.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -491,6 +508,15 @@
 			path = Sprite;
 			sourceTree = "<group>";
 		};
+		ABFB7FB522CDA9240079658B /* Fixed */ = {
+			isa = PBXGroup;
+			children = (
+				ABFB7FB622CDA9BB0079658B /* CycleMovingLadder.swift */,
+				AB17075022CE340A003EEA2A /* PirhanaPlant.swift */,
+			);
+			path = Fixed;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -549,6 +575,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB17075922CE47BC003EEA2A /* Physics1_2_C.geojson in Resources */,
+				AB17075722CE42C3003EEA2A /* Physics1_2_B.geojson in Resources */,
 				AB895D6422C6F1AB007923EB /* Physics1_2_A.geojson in Resources */,
 				AB711F2622C3CDF00093C49F /* Physics1_2.geojson in Resources */,
 				AB3DF39F22BE814B00A130DD /* Physics1_1_A.geojson in Resources */,
@@ -569,6 +597,7 @@
 				AB90442522BDB55200322412 /* Fire_Bullet.wav in Resources */,
 				AB3E2F95227E0747003BC9B7 /* Assets.xcassets in Resources */,
 				AB54E958228C0431000AE79E /* Scene1_1.sks in Resources */,
+				AB17075322CE36C7003EEA2A /* Scene1_2_C.sks in Resources */,
 				AB55758F228EA34200A570D5 /* TileSets.xcassets in Resources */,
 				AB4815B822B04040002A1C7B /* Sprite.xcassets in Resources */,
 				AB711F2922C3D15A0093C49F /* Scene1_2_A.sks in Resources */,
@@ -601,6 +630,7 @@
 				AB54E95D228C070C000AE79E /* LevelReference.xcassets in Resources */,
 				AB90444522BDB55200322412 /* En_Pipe.wav in Resources */,
 				AB90442D22BDB55200322412 /* Powerdown.wav in Resources */,
+				AB17075522CE36DB003EEA2A /* Scene1_2_B.sks in Resources */,
 				AB90441F22BDB55200322412 /* Auto_Walk_to_Pipe.wav in Resources */,
 				AB90442922BDB55200322412 /* Level_Finish.wav in Resources */,
 				AB90442E22BDB55200322412 /* Hit_Hard.wav in Resources */,
@@ -662,12 +692,14 @@
 				AB54E94B228BFDF7000AE79E /* Int+Extensions.swift in Sources */,
 				ABB4EA0522BDEF9000C001B5 /* StarSprite.swift in Sources */,
 				AB46F1B822C613810001BED6 /* GameScene+Static.swift in Sources */,
+				AB17075122CE340A003EEA2A /* PirhanaPlant.swift in Sources */,
 				AB54E950228BFDF7000AE79E /* CGPoint+Extensions.swift in Sources */,
 				AB54E94F228BFDF7000AE79E /* SKNode+Extensions.swift in Sources */,
 				ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */,
 				AB40CD3822B29289003E0067 /* Mario+Shapeshifting.swift in Sources */,
 				ABDAFB7C22B740CD004DCE22 /* BulletSprite.swift in Sources */,
 				AB3E2F88227E0745003BC9B7 /* AppDelegate.swift in Sources */,
+				ABFB7FB722CDA9BB0079658B /* CycleMovingLadder.swift in Sources */,
 				AB54E949228BFDF7000AE79E /* SKColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

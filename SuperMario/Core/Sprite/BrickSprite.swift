@@ -12,6 +12,8 @@ fileprivate enum BrickTileType: String {
     case brick = "brick"
     case coinBrick = "coin"
     case starBrick = "star"
+    case power = "mushroom"
+    case lifeAdd = "mushroom_life"
 }
 
 class BrickSprite : SKSpriteNode {
@@ -37,7 +39,7 @@ class BrickSprite : SKSpriteNode {
         physicsBody!.friction = 0.0
         physicsBody!.restitution = 0.0
         physicsBody!.categoryBitMask = PhysicsCategory.Brick
-        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~PhysicsCategory.ErasablePlat
+        physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.ErasablePlat | PhysicsCategory.EBarrier)
         physicsBody!.isDynamic = false
     }
     
@@ -96,6 +98,10 @@ extension BrickSprite: MarioBumpFragileNode {
             self.coinBrickProccess()
         case .starBrick:
             self.starBrickProcess()
+        case .power:
+            self.spawnPowerUpSprite(false)
+        case .lifeAdd:
+            self.spawnPowerUpSprite(true)
         }
         
         checkContactPhysicsBody()
@@ -117,6 +123,11 @@ extension BrickSprite: MarioBumpFragileNode {
         } else {
             self.run(shakeAnimation)
             AudioManager.play(sound: .HitHard)
+            
+            let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength)
+            if let coin = GameScene.currentInstance?.coinSpriteHolder.atPoint(pos) as? CoinSprite {
+                coin.marioBump()
+            }
         }
     }
     
@@ -169,5 +180,32 @@ extension BrickSprite: MarioBumpFragileNode {
         GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
         
         GameScene.setTileTypeDictionary(index: index, type: .Solid)
+    }
+    
+    private func spawnPowerUpSprite(_ lifeMushroom: Bool) {
+        if lifeMushroom == false && GameManager.instance.mario.marioPower != .A {
+            let flower = FlowerSprite(self.type)
+            let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
+            flower.zPosition = self.zPosition
+            flower.cropNode.position = position + self.parent!.position
+            GameScene.addFlower(flower.cropNode)
+        } else {
+            let mushroom = MushroomSprite(self.type, lifeMushroom)
+            let position = CGPoint(x: self.position.x, y: self.position.y + GameConstant.TileGridLength)
+            mushroom.zPosition = self.zPosition
+            mushroom.cropNode.position = position + self.parent!.position
+            GameScene.addMushroom(mushroom.cropNode)
+            
+            if lifeMushroom == true {
+                let fadeIn = SKAction.fadeIn(withDuration: 0.125)
+                self.run(fadeIn)
+            }
+        }
+        
+        AudioManager.play(sound: .SpawnPowerup)
+        
+        let texFileName = "goldm" + self.type.rawValue + "_4"
+        self.texture = SKTexture(imageNamed: texFileName)
+        self.empty = true
     }
 }

@@ -1,0 +1,29 @@
+{
+    "shapes": [
+        {"type": "groundLine",        "pos": {"x": 0, "y": 1}, "len": 38},
+        {"type": "verticalLeftLine",  "pos": {"x": 0, "y": 2}, "len": 12},
+        {"type": "verticalRightLine", "pos": {"x": 37, "y": 2}, "len": 12},
+        
+        {"type": "pipeLeftSideLine",  "pos": {"x": 3, "y": 2}, "len": 2},
+        {"type": "pipeTopGroundLine", "pos": {"x": 3, "y": 3}, "len": 2},
+        {"type": "pipeRightSideLine", "pos": {"x": 4, "y": 2}, "len": 2},
+        
+        {"type": "verticalLeftLine", "pos": {"x": 5, "y": 2}, "len": 1},
+        {"type": "verticalLeftLine", "pos": {"x": 6, "y": 3}, "len": 1, "horzPadding": 2},
+        {"type": "verticalLeftLine", "pos": {"x": 7, "y": 4}, "len": 1},
+        {"type": "verticalLeftLine", "pos": {"x": 8, "y": 5}, "len": 1},
+        {"type": "verticalLeftLine", "pos": {"x": 9, "y": 6}, "len": 1},
+        {"type": "verticalLeftLine", "pos": {"x": 10, "y": 7}, "len": 1},
+        {"type": "verticalLeftLine", "pos": {"x": 11, "y": 8}, "len": 1},
+        {"type": "verticalLeftLine", "pos": {"x": 12, "y": 9}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 5, "y": 2}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 6, "y": 3}, "len": 1, "leftPadding": 2},
+        {"type": "groundLine",       "pos": {"x": 7, "y": 4}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 8, "y": 5}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 9, "y": 6}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 10, "y": 7}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 11, "y": 8}, "len": 1},
+        {"type": "groundLine",       "pos": {"x": 12, "y": 9}, "len": 2},
+        {"type": "verticalRightLine", "pos": {"x": 13, "y": 2}, "len": 8},
+    ]
+}

@@ -13,7 +13,10 @@ class GameManager {
     
     let allSceneNames = [ "Scene1_1",
                           "Scene1_2",
-                          "Scene1_2_A" ]
+                          "Scene1_2_A",
+                          "Scene1_2_B",
+                          "Scene1_2_C"
+    ]
     
     let mario    = Mario()
     let gameView = SKView(frame: UIScreen.main.bounds)
@@ -38,7 +41,7 @@ class GameManager {
     }
     
     func start() {
-        let sceneName = allSceneNames.last!
+        let sceneName = allSceneNames[2]
         let scene = fetchScene(sceneName: sceneName)
         gameView.presentScene(scene)
     }

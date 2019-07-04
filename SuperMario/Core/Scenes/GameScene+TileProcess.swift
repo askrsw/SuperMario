@@ -54,7 +54,7 @@ extension GameScene {
                     guard let tile = brickTileMapNode.tileDefinition(atColumn: column, row: row) else { continue }
                     let center = brickTileMapNode.centerOfTile(atColumn: column, row: row)
                     let index = column * GameConstant.sceneRowCount + row
-                    let brick = BrickSprite(tileType, tile.name ?? "", index)
+                    let brick = BrickSprite(tileType, tile.name!, index)
                     brick.position = CGPoint(x: center.x, y: center.y + GameConstant.TileYOffset)
                     brickSpriteHolder.addChild(brick)
                     
@@ -78,7 +78,7 @@ extension GameScene {
                     guard let tile = goldTileMapNode.tileDefinition(atColumn: column, row: row) else { continue }
                     let center = goldTileMapNode.centerOfTile(atColumn: column, row: row)
                     
-                    let goldMetal = GoldSprite(tileType, tile.name ?? "")
+                    let goldMetal = GoldSprite(tileType, tile.name!)
                     goldMetal.position = CGPoint(x: center.x, y: center.y + GameConstant.TileYOffset)
                     goldSpriteHolder.addChild(goldMetal)
                     

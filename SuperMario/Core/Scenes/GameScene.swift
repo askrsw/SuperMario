@@ -147,6 +147,7 @@ class GameScene: SKScene {
         
         enemySpriteHolder = rootNode.childNode(withName: "Enemies")
         enemySpriteHolder?.name = "enemySpriteHolder"
+        enemySpriteHolder?.zPosition = 120
         
         loadPhysicsDesc()
         loadBrickGridTile()

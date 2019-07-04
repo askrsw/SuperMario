@@ -15,7 +15,7 @@ class MushroomSprite: SKSpriteNode {
     let animation: SKAction
     
     var growing: Bool = true
-    var velocityX: CGFloat = 80.0
+    var velocityX: CGFloat = 110.0
     var backup_physicsBody: SKPhysicsBody?
     
     init(_ type: FragileGridType, _ addLife: Bool) {

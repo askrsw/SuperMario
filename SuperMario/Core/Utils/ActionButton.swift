@@ -35,8 +35,20 @@ class ActionButton: SKNode {
             switch actionType {
             case .A:
                 GameManager.instance.mario.turbo(actived)
+            
             case .B:
-                GameManager.instance.mario.jump(actived)
+            #if DEBUG
+                if actived {
+                    GameScene.rootNode.alpha = 0.0
+                    GameScene.currentInstance?.vertIndexLabelHolder.alpha = 0.0
+                } else {
+                    GameScene.rootNode.alpha = 1.0
+                    GameScene.currentInstance?.vertIndexLabelHolder.alpha = 1.0
+                }
+            #else
+                break
+            #endif
+                
             default:
                 break
             }

@@ -162,7 +162,7 @@ class EnemiesBaseNode: SKSpriteNode {
     private func createPhysicsBody() {
         physicsBody = SKPhysicsBody(rectangleOf: physicalShapeParam.size, center: physicalShapeParam.center)
         physicsBody!.categoryBitMask = PhysicsCategory.Evildoer
-        physicsBody!.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.Evildoer
+        physicsBody!.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.Evildoer | PhysicsCategory.EBarrier
         physicsBody!.contactTestBitMask = PhysicsCategory.Mario | PhysicsCategory.MBullet
         physicsBody!.restitution = 0.0
         physicsBody!.friction = 1.0

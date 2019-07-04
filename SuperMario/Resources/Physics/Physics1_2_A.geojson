@@ -51,6 +51,7 @@
         {"type": "vertRightDummyLine", "pos": {"x": 53, "y": 6}, "len": 4},
         {"type": "vertRightDummyLine", "pos": {"x": 55, "y": 10}, "len": 2},
         {"type": "vertRightDummyLine", "pos": {"x": 55, "y": 3}, "len": 3},
+        {"type": "horzPlatformLine", "pos": {"x": 52, "y": 9}, "len": 2},
         {"type": "horzPlatformLine", "pos": {"x": 54, "y": 5}, "len": 2},
         {"type": "horzPlatformLine", "pos": {"x": 58, "y": 5}, "len": 4},
         {"type": "vertLeftDummyLine", "pos": {"x": 58, "y": 10}, "len": 2},
@@ -130,7 +131,27 @@
         {"type": "pipeLeftSideLine",  "pos": {"x": 186, "y": 2}, "len": 3},
         {"type": "pipeTopGroundLine", "pos": {"x": 186, "y": 4}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 187, "y": 2}, "len": 3},
+        
+        {"type": "vertLeftEBarrierLine", "pos": {"x": 72, "y": 10}, "len": 1},
+        {"type": "vertRightEBarrierLine", "pos": {"x": 73, "y": 10}, "len": 1},
+        
+        {"type": "vertLeftEBarrierLine", "pos": {"x": 76, "y": 6}, "len": 1},
+        {"type": "vertRightEBarrierLine", "pos": {"x": 79, "y": 6}, "len": 1},
+        
+        {"type": "vertLeftEBarrierLine", "pos": {"x": 145, "y": 2}, "len": 1},
+        {"type": "vertRightEBarrierLine", "pos": {"x": 152, "y": 2}, "len": 1},
     ],
     
-    "gadgetes": []
+    "gadgetes": [],
+    
+    "ladders": [
+        { "pos_x": 140, "len": 3, "count": 2 },
+        { "pos_x": 155, "len": 3, "count": 2 }
+    ],
+    
+    "pirhanas": [
+        { "pos": {"x": 104, "y": 5 } },
+        { "pos": {"x": 110, "y": 6 } },
+        { "pos": {"x": 116, "y": 4 } }
+    ]
 }
