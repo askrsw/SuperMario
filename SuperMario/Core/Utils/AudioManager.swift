@@ -74,6 +74,7 @@ class AudioManager {
     static func stopBackgroundMusic() {
         instance.backgroundMusicPlayer?.stop()
         instance.backgroundMusicPlayer = nil
+        instance.currentMusic = .None
     }
 
     static func play(sound: GameSound) {

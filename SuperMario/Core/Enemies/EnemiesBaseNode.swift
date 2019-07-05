@@ -74,7 +74,7 @@ class EnemiesBaseNode: SKSpriteNode {
     
     func update(deltaTime dt: CGFloat) {
         guard active else {
-            if xStart < 0.0 || GameManager.instance.mario.position.x > (xStart - GameScene.halfScaledSceneWdith) {
+            if xStart < 0.0 || GameManager.instance.mario.posX > (xStart - GameScene.halfScaledSceneWdith) {
                 createPhysicsBody()
                 active = true
             }

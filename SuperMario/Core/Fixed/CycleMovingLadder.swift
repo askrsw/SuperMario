@@ -14,6 +14,7 @@ class CycleMovingLadder: SKNode {
     let maxPosY: CGFloat
     let minPosY: CGFloat
     let ladderLength: Int
+    var marioShapeshift: Bool = false
     
     init(posX: CGFloat, len: Int, count: Int) {
         let unitH = GameConstant.OriginalSceneHeight / CGFloat(count)
@@ -82,6 +83,9 @@ class CycleMovingLadder: SKNode {
 
 extension CycleMovingLadder: MovingSpriteNode {
     func update(deltaTime dt: CGFloat) {
+        guard dt < 0.25 else { return }
+        guard !marioShapeshift else { return }
+        
         let delta = speedY * dt
         
         for ladder in array {
@@ -94,5 +98,15 @@ extension CycleMovingLadder: MovingSpriteNode {
                 ladder.position.y = ladder.position.y.truncatingRemainder(dividingBy: diff)
             }
         }
+    }
+}
+
+extension CycleMovingLadder: MarioShapeshifting {
+    func marioWillShapeshift() {
+        self.marioShapeshift = true
+    }
+    
+    func marioDidShapeshift() {
+        self.marioShapeshift = false
     }
 }

@@ -422,8 +422,10 @@ extension GameScene {
             let posDict = item["pos"] as! Dictionary<String, CGFloat>
             let posX = posDict["x"]! * GameConstant.TileGridLength
             let posY = posDict["y"]! * GameConstant.TileGridLength + GameConstant.TileYOffset
+            let xStart = item["xStart"] as! CGFloat
+            let xEnd = item["xEnd"] as! CGFloat
             
-            let pirhanaPlant = PirhanaPlant(tileType: tileType)
+            let pirhanaPlant = PirhanaPlant(tileType: tileType, xStart: xStart, xEnd: xEnd)
             pirhanaPlant.position = CGPoint(x: posX, y: posY)
             
             movingSpriteHolder.addChild(pirhanaPlant)

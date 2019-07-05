@@ -25,5 +25,9 @@
         {"type": "groundLine",       "pos": {"x": 11, "y": 8}, "len": 1},
         {"type": "groundLine",       "pos": {"x": 12, "y": 9}, "len": 2},
         {"type": "verticalRightLine", "pos": {"x": 13, "y": 2}, "len": 8},
+    ],
+    
+    "pirhanas": [
+        { "pos": {"x": 4, "y": 4 }, "xStart": -1, "xEnd": -1 }
     ]
 }

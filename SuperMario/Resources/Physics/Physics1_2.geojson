@@ -11,5 +11,12 @@
         {"type": "verticalLeftLine",  "pos": {"x": 10, "y": 2}, "len": 2}
     ],
     
-    "gadgetes": []
+    "gadgetes": [
+        { "type": "vertGaget",
+            "pos": {"x": 9, "y": 3},
+            "dest": "Scene1_2_A",
+            "dst_pos": {"x": 2.5, "y": 14},
+            "popOut": false
+        }
+    ]
 }

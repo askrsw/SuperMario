@@ -97,61 +97,92 @@
         {"type": "verticalLeftLine",  "pos": {"x": 160, "y": 0}, "len": 5},
         {"type": "groundLine",        "pos": {"x": 160, "y": 4}, "len": 6},
         {"type": "horzPlatformLine",  "pos": {"x": 161, "y": 12}, "len": 26},
-        
+
         {"type": "pipeLeftSideLine",  "pos": {"x": 103, "y": 2}, "len": 3},
         {"type": "pipeTopGroundLine", "pos": {"x": 103, "y": 4}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 104, "y": 2}, "len": 3},
-        
+
         {"type": "pipeLeftSideLine",  "pos": {"x": 109, "y": 2}, "len": 4},
         {"type": "pipeTopGroundLine", "pos": {"x": 109, "y": 5}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 110, "y": 2}, "len": 4},
-        
+
         {"type": "pipeLeftSideLine",  "pos": {"x": 115, "y": 2}, "len": 2},
         {"type": "pipeTopGroundLine", "pos": {"x": 115, "y": 3}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 116, "y": 2}, "len": 2},
-        
+
         {"type": "verticalLeftLine",  "pos": {"x": 168, "y": 7}, "len": 6, "horzPadding": 2},
         {"type": "verticalLeftLine",  "pos": {"x": 166, "y": 5}, "len": 2},
         {"type": "pipeTopUpSideLine", "pos": {"x": 166, "y": 7}, "len": 2},
-        
+
         {"type": "vertRightDummyLine", "pos": {"x": 176, "y": 2}, "len": 10},
         {"type": "groundLine",        "pos": {"x": 176, "y": 1}, "len": 16},
         {"type": "vertLeftDummyLine", "pos": {"x": 190, "y": 2}, "len": 11},
         {"type": "groundLine",        "pos": {"x": 190, "y": 12}, "len": 2},
         {"type": "verticalRightLine", "pos": {"x": 191, "y": 0}, "len": 18},
-        
+
         {"type": "pipeLeftSideLine",  "pos": {"x": 178, "y": 2}, "len": 3},
         {"type": "pipeTopGroundLine", "pos": {"x": 178, "y": 4}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 179, "y": 2}, "len": 3},
-        
+
         {"type": "pipeLeftSideLine",  "pos": {"x": 182, "y": 2}, "len": 3},
         {"type": "pipeTopGroundLine", "pos": {"x": 182, "y": 4}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 183, "y": 2}, "len": 3},
-        
+
         {"type": "pipeLeftSideLine",  "pos": {"x": 186, "y": 2}, "len": 3},
         {"type": "pipeTopGroundLine", "pos": {"x": 186, "y": 4}, "len": 2},
         {"type": "pipeRightSideLine", "pos": {"x": 187, "y": 2}, "len": 3},
-        
+
         {"type": "vertLeftEBarrierLine", "pos": {"x": 72, "y": 10}, "len": 1},
         {"type": "vertRightEBarrierLine", "pos": {"x": 73, "y": 10}, "len": 1},
-        
+
         {"type": "vertLeftEBarrierLine", "pos": {"x": 76, "y": 6}, "len": 1},
         {"type": "vertRightEBarrierLine", "pos": {"x": 79, "y": 6}, "len": 1},
-        
+
         {"type": "vertLeftEBarrierLine", "pos": {"x": 145, "y": 2}, "len": 1},
         {"type": "vertRightEBarrierLine", "pos": {"x": 152, "y": 2}, "len": 1},
     ],
-    
-    "gadgetes": [],
-    
+
+    "gadgetes": [
+        { "type": "horzGaget",
+          "pos": {"x": 103, "y": 5},
+          "dest": "Scene1_2_B",
+          "dst_pos": {"x": 2.5, "y": 14},
+          "popOut": false
+        },
+        { "type": "vertGaget",
+          "pos": {"x": 165, "y": 6},
+          "dest": "Scene1_2_C",
+          "dst_pos": {"x": 4, "y": 5},
+          "popOut": true
+        },
+        { "type": "horzGaget",
+          "pos": {"x": 178, "y": 5},
+          "dest": "Scene1_2_C",
+          "dst_pos": {"x": 4, "y": 5},
+          "popOut": true
+        },
+        { "type": "horzGaget",
+          "pos": {"x": 182, "y": 5},
+          "dest": "Scene1_2_C",
+          "dst_pos": {"x": 4, "y": 5},
+          "popOut": true
+        },
+        { "type": "horzGaget",
+          "pos": {"x": 186, "y": 5},
+          "dest": "Scene1_2_C",
+          "dst_pos": {"x": 4, "y": 5},
+          "popOut": true
+        }
+    ],
+
     "ladders": [
         { "pos_x": 140, "len": 3, "count": 2 },
         { "pos_x": 155, "len": 3, "count": 2 }
     ],
-    
+
     "pirhanas": [
-        { "pos": {"x": 104, "y": 5 } },
-        { "pos": {"x": 110, "y": 6 } },
-        { "pos": {"x": 116, "y": 4 } }
+        { "pos": {"x": 104, "y": 5 }, "xStart": 102, "xEnd": 105 },
+        { "pos": {"x": 110, "y": 6 }, "xStart": 108, "xEnd": 111 },
+        { "pos": {"x": 116, "y": 4 }, "xStart": 114, "xEnd": 117 }
     ]
 }

@@ -130,6 +130,7 @@ class KoopasGuy: EnemiesBaseNode {
     
     private func shapeShiftToNormal() {
         let block = SKAction.run { [weak self] in
+            self?.state = .normal
             let texFileName = "koopas" + (self?.texType ?? "_a") + "_1"
             let tex = SKTexture(imageNamed: texFileName)
             self?.texture = tex
@@ -137,7 +138,6 @@ class KoopasGuy: EnemiesBaseNode {
             self?.size = tex.size()
             self?.anchorPoint = CGPoint(x: 0.5, y: 0.3333)
             self?.run((self?.animation)!, withKey: "animation")
-            self?.state = .normal
         }
         let squence = SKAction.sequence([shellToNormalAnimation, block])
         run(squence, withKey: "shapeShiftingToNormal")

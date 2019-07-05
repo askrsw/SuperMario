@@ -18,8 +18,8 @@
     "gadgetes": [
         { "type": "vertGaget",
             "pos": {"x": 12, "y": 3},
-            "dest": "Scene1_1",
-            "dst_pos": {"x": 58, "y": 7},
+            "dest": "Scene1_2_A",
+            "dst_pos": {"x": 104, "y": 6},
             "popOut": true
         }
     ]

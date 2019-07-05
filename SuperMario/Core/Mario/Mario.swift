@@ -214,6 +214,16 @@ class Mario: SKSpriteNode {
         }
     }
     
+    var posX: CGFloat {
+        get {
+            if let scene = GameScene.currentInstance, let parent = parent {
+                return scene.convert(position, from: parent).x
+            } else {
+                return 0.0
+            }
+        }
+    }
+    
     init() {
         super.init(texture: stillTexture, color: SKColor.clear, size: stillTexture.size())
         

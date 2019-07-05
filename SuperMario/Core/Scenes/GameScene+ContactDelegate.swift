@@ -49,6 +49,10 @@ extension GameScene: SKPhysicsContactDelegate {
                     if let enemy = second!.node as? EnemiesBaseNode {
                         enemy.contactWithMario(point: contact.contactPoint, normal: contact.contactNormal)
                     }
+                case PhysicsCategory.EPirhana:
+                    if let pirhana = second!.node?.parent?.parent as? PirhanaPlant {
+                        pirhana.contactWithMario()
+                    }
                 default:
                     break
                 }
@@ -67,6 +71,12 @@ extension GameScene: SKPhysicsContactDelegate {
                 if let enemy = second!.node as? EnemiesBaseNode {
                     enemy.hitByBullet()
                     bullet.hitEnemy()
+                } else if second!.categoryBitMask == PhysicsCategory.EPirhana {
+                    if let pirhana = second!.node?.parent?.parent as? PirhanaPlant {
+                        if pirhana.hitByBullet() {
+                            bullet.hitEnemy()
+                        }
+                    }
                 } else if abs(contact.contactNormal.dy) > 0.25 {
                     bullet.fallToGround()
                 } else if abs(contact.contactNormal.dx) > 0.5 {
