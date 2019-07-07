@@ -133,6 +133,10 @@ extension GameScene {
         if let pirhanas = jsonDict["pirhanas"] as? Array<Dictionary<String, Any>> {
             loadPirhanaPlant(pirhanas)
         }
+        
+        if let singleladders = jsonDict["singleladders"] as? Array<Dictionary<String, Any>> {
+            loadSinglePhysicsLadders(singleladders)
+        }
     }
     
     func checkRectForShake(rect: CGRect) {
@@ -366,6 +370,20 @@ extension GameScene {
                 let point2 = CGPoint(x: point1.x, y: point1.y + len * gridRatio)
                 let pp_body = SKPhysicsBody(edgeFrom: point1, to: point2)
                 vertEBarrierBodies.append(pp_body)
+            case .woodPlatformLine:
+                let path = GameScene.makeWoodPlatformLinePath(posX, posY, len)
+                let pp_body = SKPhysicsBody(edgeLoopFrom: path)
+                horzPhysicsBodies.append(pp_body)
+                
+                let point1 = CGPoint(x: posX * gridRatio, y: (posY + 1.0) * gridRatio + tileYOffset)
+                let point2 = CGPoint(x: point1.x, y: point1.y + gridRatio)
+                let pp_body1 = SKPhysicsBody(edgeFrom: point1, to: point2)
+                vertEBarrierBodies.append(pp_body1)
+                
+                let point3 = CGPoint(x: (posX + len) * gridRatio, y: (posY + 1.0) * gridRatio + tileYOffset)
+                let point4 = CGPoint(x: point3.x, y: point3.y + gridRatio)
+                let pp_body2 = SKPhysicsBody(edgeFrom: point3, to: point4)
+                vertEBarrierBodies.append(pp_body2)
             }
         }
         
@@ -414,6 +432,27 @@ extension GameScene {
             
             let ladder = CycleMovingLadder(posX: posX, len: length, count: count)
             movingSpriteHolder.addChild(ladder)
+        }
+    }
+    
+    fileprivate func loadSinglePhysicsLadders(_ ladderArray: Array<Dictionary<String, Any>>) {
+        for item in ladderArray {
+            let len = item["len"] as! Int
+            let gridX = item["pos_x"] as! CGFloat
+            let gridY = item["pos_y"] as! CGFloat
+            let minY = item["min_y"] as! CGFloat
+            let maxY = item["max_y"] as! CGFloat
+            let downward = item["downward"] as? Bool ?? false
+            
+            let ladder = OneMovingLadder(len: len)
+            movingSpriteHolder.addChild(ladder)
+            
+            let posX = gridX * GameConstant.TileGridLength
+            let posY = gridY * GameConstant.TileGridLength + GameConstant.TileYOffset
+            ladder.position = CGPoint(x: posX, y: posY)
+            ladder.maxY = maxY * GameConstant.TileGridLength + GameConstant.TileYOffset
+            ladder.minY = minY * GameConstant.TileGridLength + GameConstant.TileYOffset
+            ladder.downward = downward
         }
     }
     
@@ -486,6 +525,32 @@ extension GameScene {
         path.addLine(to: CGPoint(x: x3, y: y3))
         path.addLine(to: CGPoint(x: x4, y: y4))
         path.addLine(to: CGPoint(x: x5, y: y5))
+        
+        return path.cgPath
+    }
+    
+    static fileprivate func makeWoodPlatformLinePath(_ gridX: CGFloat, _ gridY: CGFloat, _ len: CGFloat) -> CGPath {
+        let x1 = gridX * GameConstant.TileGridLength
+        let y1 = gridY * GameConstant.TileGridLength + GameConstant.TileYOffset
+        let x2 = x1 + len * GameConstant.TileGridLength
+        let y2 = y1
+        let x3 = x2
+        let y3 = y2 + GameConstant.TileGridLength - 3.0
+        let x4 = x3 - 2.0
+        let y4 = y3 + 3.0
+        let x5 = x1 + 2.0
+        let y5 = y4
+        let x6 = x1
+        let y6 = y3
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: x1, y: y1))
+        path.addLine(to: CGPoint(x: x2, y: y2))
+        path.addLine(to: CGPoint(x: x3, y: y3))
+        path.addLine(to: CGPoint(x: x4, y: y4))
+        path.addLine(to: CGPoint(x: x5, y: y5))
+        path.addLine(to: CGPoint(x: x6, y: y6))
+        path.addLine(to: CGPoint(x: x1, y: y1))
         
         return path.cgPath
     }

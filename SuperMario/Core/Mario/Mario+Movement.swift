@@ -236,7 +236,7 @@ extension Mario {
         ppBody.friction = 1.0
         ppBody.restitution = 0.0
         ppBody.categoryBitMask = PhysicsCategory.Mario
-        ppBody.contactTestBitMask = PhysicsCategory.Brick | PhysicsCategory.GoldMetal | PhysicsCategory.MarioPower | PhysicsCategory.Coin | PhysicsCategory.Gadget
+        ppBody.contactTestBitMask = PhysicsCategory.Brick | PhysicsCategory.GoldMetal | PhysicsCategory.MarioPower | PhysicsCategory.Coin | PhysicsCategory.Gadget | PhysicsCategory.Solid
         ppBody.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.DummyVertLine | PhysicsCategory.Enemy
         ppBody.velocity = velocity
         

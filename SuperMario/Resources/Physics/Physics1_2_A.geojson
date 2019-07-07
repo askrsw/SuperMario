@@ -139,7 +139,7 @@
         {"type": "vertRightEBarrierLine", "pos": {"x": 79, "y": 6}, "len": 1},
 
         {"type": "vertLeftEBarrierLine", "pos": {"x": 145, "y": 2}, "len": 1},
-        {"type": "vertRightEBarrierLine", "pos": {"x": 152, "y": 2}, "len": 1},
+        {"type": "vertRightEBarrierLine", "pos": {"x": 152, "y": 2}, "len": 1}
     ],
 
     "gadgetes": [

@@ -113,7 +113,7 @@
         {"type": "horzPlatformLine", "pos": {"x": 109, "y": 5}, "len": 1},
         {"type": "horzPlatformLine", "pos": {"x": 109, "y": 9}, "len": 1},
         {"type": "horzPlatformLine", "pos": {"x": 112, "y": 5}, "len": 1},
-        {"type": "horzPlatformLine", "pos": {"x": 118, "y": 5}, "len": 1},
+        {"type": "horzPlatformLine", "pos": {"x": 118, "y": 5}, "len": 1}
     ],
     
     "gadgetes": [

@@ -17,6 +17,7 @@
 		AB17075722CE42C3003EEA2A /* Physics1_2_B.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB17075622CE3FC5003EEA2A /* Physics1_2_B.geojson */; };
 		AB17075922CE47BC003EEA2A /* Physics1_2_C.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB17075822CE46EF003EEA2A /* Physics1_2_C.geojson */; };
 		AB337A092291CE7900C9791B /* GameTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB337A082291CE7900C9791B /* GameTypes.swift */; };
+		AB384A7122CF539F00189394 /* Scene1_3.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB384A7022CF539F00189394 /* Scene1_3.sks */; };
 		AB3D07BE22AAD46C00A1B5C0 /* GameConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */; };
 		AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */; };
 		AB3DA06B22BE16E800A35745 /* Scene1_1_A.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB3DA06A22BE16E800A35745 /* Scene1_1_A.sks */; };
@@ -69,6 +70,8 @@
 		AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5F465522B88DD40090F26C /* Mario+Control.swift */; };
 		AB65729922B39F32004D878B /* Mario+Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65729822B39F32004D878B /* Mario+Movement.swift */; };
 		AB6643E022C5BC2500901DA5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6643DF22C5BC2500901DA5 /* GameHUD.swift */; };
+		AB6C6F8522D0455100137B7A /* Physics1_3.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB384A7222CF5AB600189394 /* Physics1_3.geojson */; };
+		AB6C6F8722D09B3200137B7A /* OneMovingLadder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C6F8622D09B3200137B7A /* OneMovingLadder.swift */; };
 		AB711F2422C3C5160093C49F /* Scene1_2.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2322C3C5160093C49F /* Scene1_2.sks */; };
 		AB711F2622C3CDF00093C49F /* Physics1_2.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2522C3C89E0093C49F /* Physics1_2.geojson */; };
 		AB711F2922C3D15A0093C49F /* Scene1_2_A.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */; };
@@ -136,6 +139,8 @@
 		AB17075622CE3FC5003EEA2A /* Physics1_2_B.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_B.geojson; sourceTree = "<group>"; };
 		AB17075822CE46EF003EEA2A /* Physics1_2_C.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_C.geojson; sourceTree = "<group>"; };
 		AB337A082291CE7900C9791B /* GameTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTypes.swift; sourceTree = "<group>"; };
+		AB384A7022CF539F00189394 /* Scene1_3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_3.sks; sourceTree = "<group>"; };
+		AB384A7222CF5AB600189394 /* Physics1_3.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_3.geojson; sourceTree = "<group>"; };
 		AB3D07BD22AAD46C00A1B5C0 /* GameConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstant.swift; sourceTree = "<group>"; };
 		AB3D8AC1228C6AD900C1E002 /* Mario.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mario.xcassets; sourceTree = "<group>"; };
 		AB3DA06A22BE16E800A35745 /* Scene1_1_A.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_1_A.sks; sourceTree = "<group>"; };
@@ -190,6 +195,7 @@
 		AB5F465522B88DD40090F26C /* Mario+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Control.swift"; sourceTree = "<group>"; };
 		AB65729822B39F32004D878B /* Mario+Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mario+Movement.swift"; sourceTree = "<group>"; };
 		AB6643DF22C5BC2500901DA5 /* GameHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHUD.swift; sourceTree = "<group>"; };
+		AB6C6F8622D09B3200137B7A /* OneMovingLadder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneMovingLadder.swift; sourceTree = "<group>"; };
 		AB711F2322C3C5160093C49F /* Scene1_2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_2.sks; sourceTree = "<group>"; };
 		AB711F2522C3C89E0093C49F /* Physics1_2.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2.geojson; sourceTree = "<group>"; };
 		AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_A.geojson; sourceTree = "<group>"; };
@@ -350,6 +356,7 @@
 				AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */,
 				AB17075622CE3FC5003EEA2A /* Physics1_2_B.geojson */,
 				AB17075822CE46EF003EEA2A /* Physics1_2_C.geojson */,
+				AB384A7222CF5AB600189394 /* Physics1_3.geojson */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -433,6 +440,7 @@
 				AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */,
 				AB17075422CE36DB003EEA2A /* Scene1_2_B.sks */,
 				AB17075222CE36C7003EEA2A /* Scene1_2_C.sks */,
+				AB384A7022CF539F00189394 /* Scene1_3.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -512,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				ABFB7FB622CDA9BB0079658B /* CycleMovingLadder.swift */,
+				AB6C6F8622D09B3200137B7A /* OneMovingLadder.swift */,
 				AB17075022CE340A003EEA2A /* PirhanaPlant.swift */,
 			);
 			path = Fixed;
@@ -575,6 +584,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6C6F8522D0455100137B7A /* Physics1_3.geojson in Resources */,
 				AB17075922CE47BC003EEA2A /* Physics1_2_C.geojson in Resources */,
 				AB17075722CE42C3003EEA2A /* Physics1_2_B.geojson in Resources */,
 				AB895D6422C6F1AB007923EB /* Physics1_2_A.geojson in Resources */,
@@ -585,6 +595,7 @@
 				AB90443D22BDB55200322412 /* En_Castle.wav in Resources */,
 				AB711F2422C3C5160093C49F /* Scene1_2.sks in Resources */,
 				AB3D8AC2228C6AD900C1E002 /* Mario.xcassets in Resources */,
+				AB384A7122CF539F00189394 /* Scene1_3.sks in Resources */,
 				AB3DA06B22BE16E800A35745 /* Scene1_1_A.sks in Resources */,
 				AB90442022BDB55200322412 /* Outdoor.wav in Resources */,
 				AB90442822BDB55200322412 /* Indoor.wav in Resources */,
@@ -676,6 +687,7 @@
 				AB4C573C22C4CD27009011B5 /* KoopasGuy.swift in Sources */,
 				AB40CD3A22B31356003E0067 /* AudioManager.swift in Sources */,
 				AB03ABA422C1237B0007F14A /* GoombasGuy.swift in Sources */,
+				AB6C6F8722D09B3200137B7A /* OneMovingLadder.swift in Sources */,
 				AB57C7A422B1F1A000B11A60 /* HelperMethod.swift in Sources */,
 				AB46F1B622C609C80001BED6 /* GameScene+FlyScore.swift in Sources */,
 				ABB97757229099250011ACE5 /* GameProtocol.swift in Sources */,

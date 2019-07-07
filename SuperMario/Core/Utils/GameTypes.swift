@@ -53,6 +53,7 @@ enum PhysicsSolidEdgeType: String {
     case vertRightDummyLine = "vertRightDummyLine"
     case vertLeftEBarrierLine  = "vertLeftEBarrierLine"
     case vertRightEBarrierLine = "vertRightEBarrierLine"
+    case woodPlatformLine  = "woodPlatformLine"
 }
 
 enum FragileGridType: String {

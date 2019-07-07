@@ -34,6 +34,12 @@ extension GameScene: SKPhysicsContactDelegate {
                             fragileContactNodes.append(node)
                         }
                     }
+                case PhysicsCategory.Solid:
+                    if abs(contact.contactNormal.dx) < 10e-2 {
+                        if (result == .MarioIsA && contact.contactNormal.dy > 0.0) || (result == .MarioIsB && contact.contactNormal.dy < 0.0) {
+                            AudioManager.play(sound: .HitHard)
+                        }
+                    }
                 case PhysicsCategory.MarioPower: fallthrough
                 case PhysicsCategory.Coin:
                     if let node = second!.node as? SKNode & MarioBumpFragileNode {

@@ -62,17 +62,7 @@ class CycleMovingLadder: SKNode {
     private var texImage: UIImage {
         get {
             if CycleMovingLadder.sLadderLength != ladderLength {
-                let rawImage = UIImage(named: "ladder")
-                let unitL = GameConstant.TileGridLength
-                let imgSize = CGSize(width: unitL * CGFloat(ladderLength), height: unitL)
-                UIGraphicsBeginImageContext(imgSize)
-                for i in 0 ..< ladderLength {
-                    let rect = CGRect(x: unitL * CGFloat(i), y: 0, width: unitL, height: unitL)
-                    rawImage?.draw(in: rect)
-                }
-                CycleMovingLadder.sLadderImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                
+                CycleMovingLadder.sLadderImage = makeRepeatGridImage(imageName: "ladder", count: ladderLength)
                 CycleMovingLadder.sLadderLength = ladderLength
             }
             

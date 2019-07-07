@@ -84,13 +84,14 @@ class EnemiesBaseNode: SKSpriteNode {
         
         posXBefore = position.x
         
+        if position.y < -self.size.height {
+            removeFromParent()
+            return
+        }
+        
         if let physicsBody = physicsBody, physicsBody.categoryBitMask != PhysicsCategory.None {
             let velocityX: CGFloat = speedX * (self.faceLeft ? -1.0 : 1.0)
             physicsBody.velocity = CGVector(dx: velocityX, dy: physicsBody.velocity.dy)
-        }
-        
-        if position.y < -self.size.height {
-            removeFromParent()
         }
     }
     
@@ -159,7 +160,7 @@ class EnemiesBaseNode: SKSpriteNode {
         }
     }
     
-    private func createPhysicsBody() {
+    func createPhysicsBody() {
         physicsBody = SKPhysicsBody(rectangleOf: physicalShapeParam.size, center: physicalShapeParam.center)
         physicsBody!.categoryBitMask = PhysicsCategory.Evildoer
         physicsBody!.collisionBitMask = PhysicsCategory.Static | PhysicsCategory.ErasablePlat | PhysicsCategory.Evildoer | PhysicsCategory.EBarrier

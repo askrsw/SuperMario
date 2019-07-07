@@ -30,9 +30,10 @@ func delay(_ seconds: Double, completion: @escaping ()->Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
 }
 
-func makeAnimation(texName: String, suffix: String, count: Int, timePerFrame: TimeInterval, repeatForever: Bool = true) -> SKAction {
+func makeAnimation(texName: String, suffix: String, count: Int, timePerFrame: TimeInterval, startIndex: Int = 1, repeatForever: Bool = true) -> SKAction {
+    let endIndex = startIndex + count - 1
     var textures: [SKTexture] = []
-    for index in 1...count {
+    for index in startIndex...endIndex {
         let texFileName = texName + suffix + "_\(index)"
         let tex = SKTexture(imageNamed: texFileName)
         textures.append(tex)
@@ -45,4 +46,20 @@ func makeAnimation(texName: String, suffix: String, count: Int, timePerFrame: Ti
     } else {
         return animation
     }
+}
+
+func makeRepeatGridImage(imageName: String, count: Int) -> UIImage {
+    let rawImage = UIImage(named: imageName)
+    let unitL = GameConstant.TileGridLength
+    let imgSize = CGSize(width: unitL * CGFloat(count), height: unitL)
+    
+    UIGraphicsBeginImageContext(imgSize)
+    for i in 0 ..< count {
+        let rect = CGRect(x: unitL * CGFloat(i), y: 0, width: unitL, height: unitL)
+        rawImage?.draw(in: rect)
+    }
+    let resultImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return resultImage!
 }
