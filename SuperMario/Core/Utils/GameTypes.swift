@@ -59,4 +59,5 @@ enum PhysicsSolidEdgeType: String {
 enum FragileGridType: String {
     case A = "_a"
     case B = "_b"
+    case C = "_c"
 }

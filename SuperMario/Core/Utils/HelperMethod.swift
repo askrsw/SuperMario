@@ -50,7 +50,7 @@ func makeAnimation(texName: String, suffix: String, count: Int, timePerFrame: Ti
 
 func makeRepeatGridImage(imageName: String, count: Int) -> UIImage {
     let rawImage = UIImage(named: imageName)
-    let unitL = GameConstant.TileGridLength
+    let unitL = rawImage!.size.width
     let imgSize = CGSize(width: unitL * CGFloat(count), height: unitL)
     
     UIGraphicsBeginImageContext(imgSize)

@@ -137,6 +137,10 @@ extension GameScene {
         if let singleladders = jsonDict["singleladders"] as? Array<Dictionary<String, Any>> {
             loadSinglePhysicsLadders(singleladders)
         }
+        
+        if let rotatefireballs = jsonDict["rotatefireballs"] as? Array<Dictionary<String, Any>> {
+            loadRotateFireBalls(rotatefireballs)
+        }
     }
     
     func checkRectForShake(rect: CGRect) {
@@ -421,6 +425,19 @@ extension GameScene {
             vertEBarrierPhysHostNode.physicsBody = body
             vertEBarrierPhysHostNode.name = "vertEBarrierPhysHostNode"
             self.rootNode.addChild(vertEBarrierPhysHostNode)
+        }
+    }
+    
+    fileprivate func loadRotateFireBalls(_ rotateFireBalls: Array<Dictionary<String, Any>>) {
+        for item in rotateFireBalls {
+            let posX = (item["pos_x"] as! CGFloat) * GameConstant.TileGridLength
+            let posY = (item["pos_y"] as! CGFloat) * GameConstant.TileGridLength
+            let angle = (item["angle"] as! CGFloat) / 180.0 * π
+            
+            let fireBalls = RotateFireballs(startAngle: angle)
+            fireBalls.position = CGPoint(x: posX, y: posY)
+            
+            movingSpriteHolder.addChild(fireBalls)
         }
     }
     

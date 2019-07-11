@@ -12,6 +12,7 @@ fileprivate enum GoldTileType: String {
     case gold = "goldm"
     case power = "mushroom"
     case lifeAdd = "mushroom_life"
+    case void = "void"
 }
 
 class GoldSprite : SKSpriteNode {
@@ -23,11 +24,11 @@ class GoldSprite : SKSpriteNode {
         self.type = type
         self.goldTileType = GoldTileType(rawValue: tileName) ?? .gold
         
-        let texFileName = "goldm" + type.rawValue + "_1"
+        let texFileName = "goldm" + type.rawValue + (self.goldTileType == .void ? "_4" :  "_1")
         let tex = SKTexture(imageNamed: texFileName)
         super.init(texture: tex, color: SKColor.clear, size: tex.size())
         
-        if self.goldTileType == .lifeAdd {
+        if self.goldTileType == .lifeAdd || self.goldTileType == .void {
             self.alpha = 0.0
         }
 
@@ -40,7 +41,9 @@ class GoldSprite : SKSpriteNode {
         physicsBody!.collisionBitMask = physicsBody!.collisionBitMask & ~(PhysicsCategory.ErasablePlat | PhysicsCategory.EBarrier)
         physicsBody!.isDynamic = false
     
-        run(animation, withKey: "animation")
+        if goldTileType != .void {
+            run(animation, withKey: "animation")
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -67,12 +70,14 @@ extension GoldSprite: MarioBumpFragileNode {
     
     func marioBump() {
         if self.empty == false {
-            let texFileName = "goldm" + self.type.rawValue + "_4"
-            self.texture = SKTexture(imageNamed: texFileName)
-            self.removeAction(forKey: "animation")
-            
-            let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength * 0.75)
-            GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
+            if self.goldTileType != .void {
+                let texFileName = "goldm" + self.type.rawValue + "_4"
+                self.texture = SKTexture(imageNamed: texFileName)
+                self.removeAction(forKey: "animation")
+                
+                let pos = CGPoint(x: position.x, y: position.y + GameConstant.TileGridLength * 0.75)
+                GameScene.addScore(score: ScoreConfig.hitOutBonus, pos: pos)
+            }
             
             switch self.goldTileType {
             case .gold:
@@ -82,6 +87,9 @@ extension GoldSprite: MarioBumpFragileNode {
                 spawnPowerUpSprite(false)
             case .lifeAdd:
                 spawnPowerUpSprite(true)
+            case .void:
+                self.alpha = 1.0
+                AudioManager.play(sound: .HitHard)
             }
             
             self.empty = true
@@ -138,12 +146,14 @@ extension GoldSprite: MarioBumpFragileNode {
 
 extension GoldSprite: MarioShapeshifting {
     func marioWillShapeshift() {
+        guard self.goldTileType != .void else { return }
         if empty == false {
             self.removeAction(forKey: "animation")
         }
     }
     
     func marioDidShapeshift() {
+        guard self.goldTileType != .void else { return }
         if empty == false {
             self.run(animation, withKey: "animation")
         }
