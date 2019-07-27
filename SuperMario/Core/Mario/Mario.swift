@@ -224,6 +224,41 @@ class Mario: SKSpriteNode {
         }
     }
     
+    var leftX: CGFloat {
+        get {
+            if let scene = GameScene.currentInstance, let parent = parent {
+                return scene.convert(position, from: parent).x - GameConstant.TileGridLength * 0.5
+            } else {
+                return 0.0
+            }
+        }
+    }
+    
+    var rightX: CGFloat {
+        get {
+            if let scene = GameScene.currentInstance, let parent = parent {
+                return scene.convert(position, from: parent).x + GameConstant.TileGridLength * 0.5
+            } else {
+                return 0.0
+            }
+        }
+    }
+    
+    var bottomY: CGFloat {
+        get {
+            if let scene = GameScene.currentInstance, let parent = parent {
+                let posY = scene.convert(position, from: parent).y + GameConstant.TileGridLength * 0.5
+                if marioPower != .A && marioMoveState != .crouching {
+                    return posY - GameConstant.TileGridLength
+                } else {
+                    return posY - GameConstant.TileGridLength * 0.5
+                }
+            } else {
+                return 0.0
+            }
+        }
+    }
+    
     init() {
         super.init(texture: stillTexture, color: SKColor.clear, size: stillTexture.size())
         

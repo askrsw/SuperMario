@@ -63,6 +63,10 @@ extension GameScene {
         currentInstance!.bulletSpriteHolder.addChild(bullet)
     }
     
+    static func addBullet(_ bullet: EBulletSprite) {
+        currentInstance!.bulletSpriteHolder.addChild(bullet)
+    }
+    
     static func addStar(_ star: SKNode) {
         currentInstance!.movingSpriteHolder.addChild(star)
     }

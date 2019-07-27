@@ -34,7 +34,7 @@
         {"type": "verticalRightLine", "pos": {"x": 143, "y": 2}, "len": 8}
     ],
     
-    "singleladders": [
+    "singlevertladders": [
         { "pos_x": 56.5, "pos_y": 5.5, "len": 3, "max_y": 10, "min_y": 1},
         { "pos_x": 87.5, "pos_y": 2.5, "len": 3, "max_y": 10, "min_y": 1},
         { "pos_x": 92.5, "pos_y": 7.5, "len": 3, "max_y": 10, "min_y": 1, "downward": true},

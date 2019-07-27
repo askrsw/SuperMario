@@ -19,6 +19,8 @@ extension GameScene: SKPhysicsContactDelegate {
         case MBulletIsB
         case EShellIsA
         case EShellIsB
+        case EBulletIsA
+        case EBulletIsB
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -58,6 +60,14 @@ extension GameScene: SKPhysicsContactDelegate {
                 case PhysicsCategory.EPirhana:
                     if let pirhana = second!.node?.parent?.parent as? PirhanaPlant {
                         pirhana.contactWithMario()
+                    } else if let rotateFires = second!.node?.parent as? RotateFireballs {
+                        rotateFires.contactWithMario()
+                    } else if let boss = second!.node as? BowserGuy {
+                        boss.contactWithMario()
+                    }
+                case PhysicsCategory.EBullet:
+                    if let ebullet = second?.node as? EBulletSprite {
+                        ebullet.contactWithMario()
                     }
                 default:
                     break
@@ -82,6 +92,10 @@ extension GameScene: SKPhysicsContactDelegate {
                         if pirhana.hitByBullet() {
                             bullet.hitEnemy()
                         }
+                    } else if let boss = second!.node as? BowserGuy {
+                        if boss.hitByBullet() {
+                            bullet.hitEnemy()
+                        }
                     }
                 } else if abs(contact.contactNormal.dy) > 0.25 {
                     bullet.fallToGround()
@@ -96,6 +110,12 @@ extension GameScene: SKPhysicsContactDelegate {
                     enemy.hitByBullet()
                     if let enemy2 = first.node as? EnemiesBaseNode {
                         enemy2.hitByBullet()
+                    }
+                }
+            } else if first.categoryBitMask == PhysicsCategory.EBullet {
+                if let second = second, second.categoryBitMask & PhysicsCategory.Static != PhysicsCategory.None {
+                    if let ebullet = first.node as? EBulletSprite {
+                        ebullet.contactWithStatic()
                     }
                 }
             }
@@ -146,6 +166,10 @@ extension GameScene: SKPhysicsContactDelegate {
             return (contact.bodyA, contact.bodyB, .EShellIsA)
         } else if contact.bodyB.categoryBitMask == PhysicsCategory.EShell {
             return (contact.bodyB, contact.bodyA, .EShellIsB)
+        } else if contact.bodyA.categoryBitMask == PhysicsCategory.EBullet {
+            return (contact.bodyA, contact.bodyB, .EBulletIsA)
+        } else if contact.bodyB.categoryBitMask == PhysicsCategory.EBullet {
+            return (contact.bodyB, contact.bodyA, .EBulletIsB)
         } else {
             return (nil, nil, .Unkown)
         }

@@ -9,32 +9,78 @@
 import SpriteKit
 
 class RotateFireballs: SKNode {
-    static var sSixFireBalls: UIImage!
+    static var sFireBalls: UIImage!
     
-    let sixFireBalls: SKSpriteNode
-    let rotateSpeed: CGFloat = π * 2 / 4.0
+    let fireBalls: SKSpriteNode
+    let rotateSpeed: CGFloat = π * 2 / 2.5
+    var marioShapeshift: Bool = false
+    private var fireBallCount: Int = 6
     
     init(startAngle: CGFloat) {
-        if RotateFireballs.sSixFireBalls == nil {
-            RotateFireballs.sSixFireBalls = makeRepeatGridImage(imageName: "fire_bullet_4", count: 6)
+        if RotateFireballs.sFireBalls == nil {
+            RotateFireballs.sFireBalls = makeRepeatGridImage(imageName: "fire_bullet_4", count: 6)
         }
         
-        let tex = SKTexture(image: RotateFireballs.sSixFireBalls)
-        sixFireBalls = SKSpriteNode(texture: tex)
+        let tex = SKTexture(image: RotateFireballs.sFireBalls)
+        fireBalls = SKSpriteNode(texture: tex)
         super.init()
         
-        sixFireBalls.anchorPoint = CGPoint(x: 1.0 / 12.0, y: 0.5)
-        sixFireBalls.zRotation = startAngle
-        addChild(sixFireBalls)
+        fireBalls.anchorPoint = CGPoint(x: 0.5 / CGFloat(fireBallCount), y: 0.5)
+        fireBalls.zRotation = startAngle
+        addChild(fireBalls)
+        
+        makePhysicsBody()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func contactWithMario() {
+        if !GameManager.instance.mario.powerfull {
+            GameManager.instance.mario.collideWithEnemy()
+        }
+    }
+    
+    // MARK: Helper Stuff
+    
+    private func makePhysicsBody() {
+        var ballBodies: Array<SKPhysicsBody> = []
+        var x: CGFloat = 0.0
+        for _ in 1...fireBallCount {
+            let center = CGPoint(x: x, y: 0.0)
+            let body = SKPhysicsBody(circleOfRadius: 4, center: center)
+            ballBodies.append(body)
+            
+            x += 8
+        }
+
+        let body = SKPhysicsBody(bodies: ballBodies)
+        body.categoryBitMask    = PhysicsCategory.EPirhana
+        body.contactTestBitMask = PhysicsCategory.Mario
+        body.collisionBitMask   = PhysicsCategory.None
+        body.restitution = 0.0
+        body.friction = 1.0
+        body.isDynamic = false
+        
+        fireBalls.physicsBody = body
+    }
 }
 
 extension RotateFireballs: MovingSpriteNode {
     func update(deltaTime dt: CGFloat) {
-        sixFireBalls.zRotation -= (rotateSpeed * dt)
+        guard !marioShapeshift else { return }
+        
+        fireBalls.zRotation -= (rotateSpeed * dt)
+    }
+}
+
+extension RotateFireballs: MarioShapeshifting {
+    func marioWillShapeshift() {
+        self.marioShapeshift = true
+    }
+    
+    func marioDidShapeshift() {
+        self.marioShapeshift = false
     }
 }

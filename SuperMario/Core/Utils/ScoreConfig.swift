@@ -19,4 +19,5 @@ struct ScoreConfig {
     static let treadNormalKoopas: Int = 200
     static let treadStillKoopas: Int = 100
     static let treadMovingKoopas: Int = 500
+    static let shootBowser: Int = 1000
 }

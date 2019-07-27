@@ -134,12 +134,20 @@ extension GameScene {
             loadPirhanaPlant(pirhanas)
         }
         
-        if let singleladders = jsonDict["singleladders"] as? Array<Dictionary<String, Any>> {
-            loadSinglePhysicsLadders(singleladders)
+        if let singleladders = jsonDict["singlevertladders"] as? Array<Dictionary<String, Any>> {
+            loadSingleVertPhysicsLadders(singleladders)
+        }
+        
+        if let singleladders = jsonDict["singlehorzladders"] as? Array<Dictionary<String, Any>> {
+            loadSingleHorzPhysicsLadders(singleladders)
         }
         
         if let rotatefireballs = jsonDict["rotatefireballs"] as? Array<Dictionary<String, Any>> {
             loadRotateFireBalls(rotatefireballs)
+        }
+        
+        if let bridges = jsonDict["bridges"] as? Array<Dictionary<String, Any>> {
+            loadBridges(bridges)
         }
     }
     
@@ -428,6 +436,19 @@ extension GameScene {
         }
     }
     
+    fileprivate func loadBridges(_ bridges: Array<Dictionary<String, Any>>) {
+        for item in bridges {
+            let posX = (item["pos_x"] as! CGFloat) * GameConstant.TileGridLength
+            let posY = (item["pos_y"] as! CGFloat) * GameConstant.TileGridLength
+            let count = item["count"] as! Int
+            let tileType = item["tileType"] as! String
+            
+            let bridge = FragileBridgeNode(count: count, tileType: tileType)
+            bridge.position = CGPoint(x: posX, y: posY)
+            movingSpriteHolder.addChild(bridge)
+        }
+    }
+    
     fileprivate func loadRotateFireBalls(_ rotateFireBalls: Array<Dictionary<String, Any>>) {
         for item in rotateFireBalls {
             let posX = (item["pos_x"] as! CGFloat) * GameConstant.TileGridLength
@@ -436,7 +457,6 @@ extension GameScene {
             
             let fireBalls = RotateFireballs(startAngle: angle)
             fireBalls.position = CGPoint(x: posX, y: posY)
-            
             movingSpriteHolder.addChild(fireBalls)
         }
     }
@@ -452,7 +472,7 @@ extension GameScene {
         }
     }
     
-    fileprivate func loadSinglePhysicsLadders(_ ladderArray: Array<Dictionary<String, Any>>) {
+    fileprivate func loadSingleVertPhysicsLadders(_ ladderArray: Array<Dictionary<String, Any>>) {
         for item in ladderArray {
             let len = item["len"] as! Int
             let gridX = item["pos_x"] as! CGFloat
@@ -461,7 +481,7 @@ extension GameScene {
             let maxY = item["max_y"] as! CGFloat
             let downward = item["downward"] as? Bool ?? false
             
-            let ladder = OneMovingLadder(len: len)
+            let ladder = OneVertMovingLadder(len: len)
             movingSpriteHolder.addChild(ladder)
             
             let posX = gridX * GameConstant.TileGridLength
@@ -470,6 +490,25 @@ extension GameScene {
             ladder.maxY = maxY * GameConstant.TileGridLength + GameConstant.TileYOffset
             ladder.minY = minY * GameConstant.TileGridLength + GameConstant.TileYOffset
             ladder.downward = downward
+        }
+    }
+    
+    fileprivate func loadSingleHorzPhysicsLadders(_ ladderArray: Array<Dictionary<String, Any>>) {
+        for item in ladderArray {
+            let len   = item["len"] as! Int
+            let gridX = item["pos_x"] as! CGFloat
+            let gridY = item["pos_y"] as! CGFloat
+            let minX  = item["min_x"] as! CGFloat
+            let maxX  = item["max_x"] as! CGFloat
+            
+            let ladder = OneHorzMovingLadder(len: len)
+            movingSpriteHolder.addChild(ladder)
+            
+            let posX = gridX * GameConstant.TileGridLength
+            let posY = gridY * GameConstant.TileGridLength + GameConstant.TileYOffset
+            ladder.position = CGPoint(x: posX, y: posY)
+            ladder.minX = minX * GameConstant.TileGridLength
+            ladder.maxX = maxX * GameConstant.TileGridLength
         }
     }
     

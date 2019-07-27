@@ -1,49 +1,49 @@
 //
-//  OneMovingLadder.swift
+//  OneHorzMovingLadder.swift
 //  SuperMario
 //
-//  Created by haharsw on 2019/7/6.
+//  Created by haharsw on 2019/7/27.
 //  Copyright © 2019 haharsw. All rights reserved.
 //
 
 import SpriteKit
 
 fileprivate enum LadderMoveState {
-    case moveUp
-    case moveDown
-    case upWait
-    case downWait
+    case moveRight
+    case moveLeft
+    case rightWait
+    case leftWait
 }
 
-class OneMovingLadder: SKSpriteNode {
+class OneHorzMovingLadder: SKSpriteNode {
     static var sLadderLength: Int = 0
     static var sLadderImage: UIImage!
     
     let maxWaitTime: CGFloat = 1.5
-    let speedY: CGFloat = 48.0
-    var maxY: CGFloat = 0.0
-    var minY: CGFloat = 0.0
-    var downward: Bool = false {
+    let speedX: CGFloat = 64.0
+    var maxX: CGFloat = 0.0
+    var minX: CGFloat = 0.0
+    var forward: Bool = false {
         didSet {
-            if downward {
-                moveState = .moveDown
+            if forward {
+                moveState = .moveRight
             } else {
-                moveState = .moveUp
+                moveState = .moveLeft
             }
         }
     }
     
-    fileprivate var moveState: LadderMoveState = .moveUp
+    fileprivate var moveState: LadderMoveState = .moveLeft
     var waitTime: CGFloat = 0.0
     var marioShapeshift: Bool = false
     
     init(len: Int) {
-        if OneMovingLadder.sLadderLength != len {
-            OneMovingLadder.sLadderImage = makeRepeatGridImage(imageName: "ladder", count: len)
-            OneMovingLadder.sLadderLength = len
+        if OneVertMovingLadder.sLadderLength != len {
+            OneVertMovingLadder.sLadderImage = makeRepeatGridImage(imageName: "ladder", count: len)
+            OneVertMovingLadder.sLadderLength = len
         }
         
-        let tex = SKTexture(image: OneMovingLadder.sLadderImage)
+        let tex = SKTexture(image: OneVertMovingLadder.sLadderImage)
         super.init(texture: tex, color: SKColor.clear, size: tex.size())
         
         zPosition = 100.0
@@ -62,46 +62,53 @@ class OneMovingLadder: SKSpriteNode {
     }
 }
 
-extension OneMovingLadder: MovingSpriteNode {
+extension OneHorzMovingLadder: MovingSpriteNode {
     func update(deltaTime dt: CGFloat) {
         guard dt < 0.25 else { return }
         guard !marioShapeshift else { return }
         
         switch moveState {
-        case .moveUp:
-            position.y += (speedY * dt)
-            if position.y >= maxY {
-                moveState = .upWait
-                waitTime = maxWaitTime
-            }
-        case .upWait:
-            waitTime -= dt
-            if waitTime < 0.0 {
-                moveState = .moveDown
-            }
-        case .moveDown:
-            let deltaY = speedY * dt
-            position.y -= deltaY
-            if position.y <= minY {
-                moveState = .downWait
+        case .moveRight:
+            let deltaX = speedX * dt
+            position.x += deltaX
+            if position.x >= maxX {
+                moveState = .rightWait
                 waitTime = maxWaitTime
             }
             
             for body in physicsBody!.allContactedBodies() {
                 if let node = body.node {
-                    node.position.y -= deltaY
+                    node.position.x += deltaX
                 }
             }
-        case .downWait:
+        case .rightWait:
             waitTime -= dt
             if waitTime < 0.0 {
-                moveState = .moveUp
+                moveState = .moveLeft
+            }
+        case .moveLeft:
+            let deltaX = speedX * dt
+            position.x -= deltaX
+            if position.x <= minX {
+                moveState = .leftWait
+                waitTime = maxWaitTime
+            }
+            
+            for body in physicsBody!.allContactedBodies() {
+                if let node = body.node {
+                    node.position.x -= deltaX
+                }
+            }
+        case .leftWait:
+            waitTime -= dt
+            if waitTime < 0.0 {
+                moveState = .moveRight
             }
         }
     }
 }
 
-extension OneMovingLadder: MarioShapeshifting {
+extension OneHorzMovingLadder: MarioShapeshifting {
     func marioWillShapeshift() {
         self.marioShapeshift = true
     }
