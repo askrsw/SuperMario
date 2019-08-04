@@ -22,6 +22,8 @@ class ActionButton: SKNode {
     let circleFillShape = SKShapeNode(circleOfRadius: GameConstant.actionButtonCircleRadius - 1.5)
     let buttonLabel = SKLabelNode(fontNamed: GameConstant.actionButtonFontName)
     
+    let makeScreenshot = false
+    
     var actived: Bool = false {
         didSet {
             if actived == false {
@@ -38,12 +40,18 @@ class ActionButton: SKNode {
             
             case .B:
             #if DEBUG
-                if actived {
-                    GameScene.rootNode.alpha = 0.0
-                    GameScene.currentInstance?.vertIndexLabelHolder.alpha = 0.0
+                if makeScreenshot {
+                    if actived {
+                        GameManager.instance.makeCurrentScreenshot()
+                    }
                 } else {
-                    GameScene.rootNode.alpha = 1.0
-                    GameScene.currentInstance?.vertIndexLabelHolder.alpha = 1.0
+                    if actived {
+                        GameScene.rootNode.alpha = 0.0
+                        GameScene.currentInstance?.vertIndexLabelHolder.alpha = 0.0
+                    } else {
+                        GameScene.rootNode.alpha = 1.0
+                        GameScene.currentInstance?.vertIndexLabelHolder.alpha = 1.0
+                    }
                 }
             #else
                 break

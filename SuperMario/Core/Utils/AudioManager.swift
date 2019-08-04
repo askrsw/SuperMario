@@ -64,11 +64,40 @@ class AudioManager {
     var currentMusic: BackgroundMusic = .None
     var backgroundMusicPlayer: AVAudioPlayer?
     let soundCache: NSCache<NSString, SKAction> = NSCache()
+    
+    var musicOn: Bool = true {
+        didSet {
+            if musicOn {
+                let currentMusic = self.currentMusic
+                self.currentMusic = .None
+                if currentMusic != .None {
+                    play(musicName: currentMusic, false)
+                }
+            } else {
+                backgroundMusicPlayer?.stop()
+                backgroundMusicPlayer = nil
+            }
+        }
+    }
+    
+    var soundOn: Bool = true
 
     // MARK: Interface
     
+    static func setMusicOn(on: Bool) {
+        instance.musicOn = on
+    }
+    
+    static func setSoundOn(on: Bool) {
+        instance.soundOn = on
+    }
+    
     static func play(music: BackgroundMusic, _ remainRatio: Bool) {
-        instance.play(musicName: music, remainRatio)
+        if instance.musicOn {
+            instance.play(musicName: music, remainRatio)
+        } else {
+            instance.currentMusic = music
+        }
     }
     
     static func stopBackgroundMusic() {
@@ -78,7 +107,9 @@ class AudioManager {
     }
 
     static func play(sound: GameSound) {
-        instance.play(soundName: sound)
+        if instance.soundOn {
+            instance.play(soundName: sound)
+        }
     }
 }
 

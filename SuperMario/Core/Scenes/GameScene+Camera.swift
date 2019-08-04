@@ -12,6 +12,7 @@ extension GameScene {
     
     func setCamera() {
         guard let camera = camera else { return }
+        camera.addChild(cameraRootNode)
         
         camera.zPosition = 2000
         camera.xScale = 1.0 / scaleFactor
@@ -47,7 +48,7 @@ extension GameScene {
         let posY = -size.height * 0.5 + radius + marginBottom
         dirButton.position = CGPoint(x: posX, y: posY)
         
-        camera!.addChild(dirButton)
+        cameraRootNode.addChild(dirButton)
     
         dirButton.didMoveToScene()
     }
@@ -64,28 +65,28 @@ extension GameScene {
         buttonD.xScale = scaleFactor
         buttonD.yScale = scaleFactor
         buttonD.position = CGPoint(x: dX, y: dY)
-        camera!.addChild(buttonD)
+        cameraRootNode.addChild(buttonD)
         
         let cX = dX - radius - horzSpace - radius
         let cY = dY + radius + radius
         buttonC.xScale = scaleFactor
         buttonC.yScale = scaleFactor
         buttonC.position = CGPoint(x: cX, y: cY)
-        camera!.addChild(buttonC)
+        cameraRootNode.addChild(buttonC)
         
         let aX = cX
         let aY = cY + radius + vertSpace * 1.5 + radius
         buttonA.xScale = scaleFactor
         buttonA.yScale = scaleFactor
         buttonA.position = CGPoint(x: aX, y: aY)
-        camera!.addChild(buttonA)
+        cameraRootNode.addChild(buttonA)
         
         let bX = dX
         let bY = dY + radius + vertSpace * 1.5 + radius
         buttonB.xScale = scaleFactor
         buttonB.yScale = scaleFactor
         buttonB.position = CGPoint(x: bX, y: bY)
-        camera!.addChild(buttonB)
+        cameraRootNode.addChild(buttonB)
         
         buttonA.didMoveToScene()
         buttonB.didMoveToScene()

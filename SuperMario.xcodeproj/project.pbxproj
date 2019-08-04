@@ -79,6 +79,9 @@
 		AB711F2422C3C5160093C49F /* Scene1_2.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2322C3C5160093C49F /* Scene1_2.sks */; };
 		AB711F2622C3CDF00093C49F /* Physics1_2.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2522C3C89E0093C49F /* Physics1_2.geojson */; };
 		AB711F2922C3D15A0093C49F /* Scene1_2_A.sks in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */; };
+		AB88C93E22F5AD6D00BEBF40 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB88C93D22F5AD6D00BEBF40 /* MainView.swift */; };
+		AB88C94022F5B4BC00BEBF40 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB88C93F22F5B4BC00BEBF40 /* ShadowView.swift */; };
+		AB88C94222F6280200BEBF40 /* SceneSnapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB88C94122F6280200BEBF40 /* SceneSnapViewCell.swift */; };
 		AB895D6422C6F1AB007923EB /* Physics1_2_A.geojson in Resources */ = {isa = PBXBuildFile; fileRef = AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */; };
 		AB90441E22BDB55200322412 /* In_Sky.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F622BDB55000322412 /* In_Sky.wav */; };
 		AB90441F22BDB55200322412 /* Auto_Walk_to_Pipe.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB9043F722BDB55000322412 /* Auto_Walk_to_Pipe.wav */; };
@@ -211,6 +214,9 @@
 		AB711F2522C3C89E0093C49F /* Physics1_2.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2.geojson; sourceTree = "<group>"; };
 		AB711F2722C3D1280093C49F /* Physics1_2_A.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Physics1_2_A.geojson; sourceTree = "<group>"; };
 		AB711F2822C3D15A0093C49F /* Scene1_2_A.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene1_2_A.sks; sourceTree = "<group>"; };
+		AB88C93D22F5AD6D00BEBF40 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		AB88C93F22F5B4BC00BEBF40 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		AB88C94122F6280200BEBF40 /* SceneSnapViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneSnapViewCell.swift; sourceTree = "<group>"; };
 		AB9043F622BDB55000322412 /* In_Sky.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = In_Sky.wav; sourceTree = "<group>"; };
 		AB9043F722BDB55000322412 /* Auto_Walk_to_Pipe.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Auto_Walk_to_Pipe.wav; sourceTree = "<group>"; };
 		AB9043F822BDB55100322412 /* Outdoor.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Outdoor.wav; sourceTree = "<group>"; };
@@ -307,6 +313,7 @@
 		AB3E2F86227E0745003BC9B7 /* SuperMario */ = {
 			isa = PBXGroup;
 			children = (
+				AB88C93C22F5AC2E00BEBF40 /* Main */,
 				AB54E955228C0305000AE79E /* Core */,
 				AB54E93C228BFDF7000AE79E /* SKTUtils */,
 				AB54E935228BF9D7000AE79E /* Resources */,
@@ -380,7 +387,6 @@
 		AB54E934228BF3E3000AE79E /* Supports */ = {
 			isa = PBXGroup;
 			children = (
-				AB3E2F8F227E0745003BC9B7 /* GameViewController.swift */,
 				AB3E2F87227E0745003BC9B7 /* AppDelegate.swift */,
 				AB3E2F99227E0747003BC9B7 /* Info.plist */,
 			);
@@ -486,6 +492,17 @@
 				AB55758A228E9AEC00A570D5 /* TileSets.sks */,
 			);
 			path = TileSet;
+			sourceTree = "<group>";
+		};
+		AB88C93C22F5AC2E00BEBF40 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				AB3E2F8F227E0745003BC9B7 /* GameViewController.swift */,
+				AB88C93D22F5AD6D00BEBF40 /* MainView.swift */,
+				AB88C93F22F5B4BC00BEBF40 /* ShadowView.swift */,
+				AB88C94122F6280200BEBF40 /* SceneSnapViewCell.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		ABB9774C228FEE1C0011ACE5 /* Mario */ = {
@@ -707,6 +724,7 @@
 				ABB07A61229677C300D3D7FE /* GameScene+Camera.swift in Sources */,
 				AB54E952228BFDF7000AE79E /* SKTAudio.swift in Sources */,
 				AB40CDDD22B32F67003E0067 /* GameScene+Config.swift in Sources */,
+				AB88C94022F5B4BC00BEBF40 /* ShadowView.swift in Sources */,
 				AB54E94C228BFDF7000AE79E /* SKTTimingFunctions.swift in Sources */,
 				AB40CD3622B265E2003E0067 /* FlowerSprite.swift in Sources */,
 				AB4C573C22C4CD27009011B5 /* KoopasGuy.swift in Sources */,
@@ -720,6 +738,7 @@
 				AB5F465622B88DD40090F26C /* Mario+Control.swift in Sources */,
 				AB54E953228BFDF7000AE79E /* Vector3.swift in Sources */,
 				AB54E94D228BFDF7000AE79E /* SKAction+Extensions.swift in Sources */,
+				AB88C94222F6280200BEBF40 /* SceneSnapViewCell.swift in Sources */,
 				AB5D23E122BF207600255226 /* CoinSprite.swift in Sources */,
 				AB546A9122AF463800A5C01D /* GameAnimations.swift in Sources */,
 				AB40CDDB22B32BD0003E0067 /* GameScene+Audio.swift in Sources */,
@@ -739,6 +758,7 @@
 				AB3E2F88227E0745003BC9B7 /* AppDelegate.swift in Sources */,
 				ABFB7FB722CDA9BB0079658B /* CycleMovingLadder.swift in Sources */,
 				AB54E949228BFDF7000AE79E /* SKColor+Extensions.swift in Sources */,
+				AB88C93E22F5AD6D00BEBF40 /* MainView.swift in Sources */,
 				AB435B3322EC249B007D0350 /* OneHorzMovingLadder.swift in Sources */,
 				ABA14BEC22E0E6D6005D90C3 /* BowserGuy.swift in Sources */,
 			);

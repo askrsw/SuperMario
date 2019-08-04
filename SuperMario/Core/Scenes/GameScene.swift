@@ -14,6 +14,7 @@ class GameScene: SKScene {
     var scaleFactor: CGFloat = 1.0
     
     var rootNode: SKNode!
+    var cameraRootNode = SKNode()
     let brickSpriteHolder  = SKNode()
     let goldSpriteHolder   = SKNode()
     let coinSpriteHolder   = SKNode()
@@ -58,7 +59,7 @@ class GameScene: SKScene {
         GameScene.currentInstance = self
         
         mario.move(toParent: self.rootNode)
-        GameHUD.instance.move(toParent: self.camera!)
+        GameHUD.instance.move(toParent: self.cameraRootNode)
         GameHUD.instance.position = .zero
         
         buttonA.actived = false
@@ -117,7 +118,7 @@ class GameScene: SKScene {
         if let marioRef = rootNode?.childNode(withName: "mario") {
             let y = marioRef.position.y
             let x = marioRef.position.x
-            mario.position = CGPoint(x: x, y: y)
+            mario.position = CGPoint(x: x, y: y + GameConstant.TileGridLength)
             marioRef.removeFromParent()
         }
         
@@ -159,7 +160,7 @@ class GameScene: SKScene {
         
     #if DEBUG
         rootNode.addChild(horzIndexLabelHolder)
-        camera!.addChild(vertIndexLabelHolder)
+        cameraRootNode.addChild(vertIndexLabelHolder)
         
         vertIndexLabelHolder.zPosition = 20
         horzIndexLabelHolder.zPosition = 20

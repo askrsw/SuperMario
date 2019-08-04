@@ -125,6 +125,14 @@ class GameHUD: SKNode {
         timer.invalidate()
     }
     
+    func resetAll() {
+        timer.invalidate()
+        timeCount = 300
+        marioLifeCount = 3
+        coinCount = 0
+        score = 0
+    }
+    
     // MARK: Help method
     
     @objc private func timerFunction(timer: Timer) {

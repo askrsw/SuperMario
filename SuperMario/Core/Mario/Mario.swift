@@ -102,6 +102,10 @@ class Mario: SKSpriteNode {
             if let movementState = movementStateMachine.currentState as? MovementState {
                 movementState.updateTextureOrAnimation()
             }
+            
+            texture = stillTexture
+            size = stillTexture.size()
+            physicsBody = makePhysicsBody()
         }
     }
     
@@ -261,15 +265,11 @@ class Mario: SKSpriteNode {
     
     init() {
         super.init(texture: stillTexture, color: SKColor.clear, size: stillTexture.size())
-        
         zPosition = 1000
         
         moveFaster = false
-        marioPower = .A
         marioFacing = .forward
-        
         createMovementStateMachine()
-        
         physicsBody = makePhysicsBody()
     }
     
