@@ -28,8 +28,6 @@ class GameHUD: SKNode {
         
         zPosition = 1001
         
-        timer = Timer.init(timeInterval: 1.0, target: self, selector: #selector(timerFunction(timer:)), userInfo: nil, repeats: true)
-        
         marioLabel.fontName = GameConstant.hudLabelFontName
         marioLabel.fontSize = GameConstant.hudLabelFontSize
         marioLabel.horizontalAlignmentMode = .left
@@ -79,8 +77,6 @@ class GameHUD: SKNode {
         addChild(timeCountLabel)
         
         layoutChildren()
-        
-        startTimer()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -118,25 +114,42 @@ class GameHUD: SKNode {
     }
     
     func startTimer() {
-        RunLoop.current.add(timer, forMode: .default)
+        if timeCount > 0 {
+            timer = Timer.init(timeInterval: 1.0, target: self, selector: #selector(timerFunction(timer:)), userInfo: nil, repeats: true)
+            RunLoop.current.add(timer, forMode: .default)
+        }
+    }
+    
+    func resetTimer() {
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+        
+        timeCount = 300
     }
     
     func pauseTimer() {
-        timer.invalidate()
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
     }
     
     func resetAll() {
-        timer.invalidate()
-        timeCount = 300
-        marioLifeCount = 3
-        coinCount = 0
+        resetTimer()
         score = 0
+        coinCount = 0
+        marioLifeCount = 3
     }
     
     // MARK: Help method
     
     @objc private func timerFunction(timer: Timer) {
         timeCount -= 1
+        if timeCount <= 0 {
+            pauseTimer()
+        }
     }
     
     private func layoutChildren() {

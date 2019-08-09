@@ -11,6 +11,7 @@ import UIKit
 class GameConstant {
     private init() {}
     
+    public static let OriginalSceneWidth: CGFloat  = 256.0
     public static let OriginalSceneHeight: CGFloat = 224.0
     public static let sceneRowCount: Int = 15
     

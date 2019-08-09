@@ -136,6 +136,8 @@
 		ABDAFB7C22B740CD004DCE22 /* BulletSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDAFB7B22B740CD004DCE22 /* BulletSprite.swift */; };
 		ABE0845D228D02B000BD6ADB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE0845C228D02B000BD6ADB /* Extensions.swift */; };
 		ABFB7FB722CDA9BB0079658B /* CycleMovingLadder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFB7FB622CDA9BB0079658B /* CycleMovingLadder.swift */; };
+		ABFFDD5722FC794100247383 /* TransitionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFFDD5622FC794100247383 /* TransitionScene.swift */; };
+		ABFFDD5922FCAE9A00247383 /* Scene_Transition.sks in Resources */ = {isa = PBXBuildFile; fileRef = ABFFDD5822FCAE9A00247383 /* Scene_Transition.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -270,6 +272,8 @@
 		ABDAFB7B22B740CD004DCE22 /* BulletSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletSprite.swift; sourceTree = "<group>"; };
 		ABE0845C228D02B000BD6ADB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ABFB7FB622CDA9BB0079658B /* CycleMovingLadder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleMovingLadder.swift; sourceTree = "<group>"; };
+		ABFFDD5622FC794100247383 /* TransitionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionScene.swift; sourceTree = "<group>"; };
+		ABFFDD5822FCAE9A00247383 /* Scene_Transition.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene_Transition.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,6 +468,7 @@
 				AB17075222CE36C7003EEA2A /* Scene1_2_C.sks */,
 				AB384A7022CF539F00189394 /* Scene1_3.sks */,
 				ABD7F40422D3A1D500E3EF6B /* Scene1_4.sks */,
+				ABFFDD5822FCAE9A00247383 /* Scene_Transition.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 		AB54E959228C044C000AE79E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				ABFFDD5622FC794100247383 /* TransitionScene.swift */,
 				AB3E2F8D227E0745003BC9B7 /* GameScene.swift */,
 				AB40CDDC22B32F67003E0067 /* GameScene+Config.swift */,
 				ABB07A60229677C300D3D7FE /* GameScene+Camera.swift */,
@@ -645,6 +651,7 @@
 				AB90442722BDB55200322412 /* Break_Brick.wav in Resources */,
 				AB90443A22BDB55200322412 /* Time_Running_Out.wav in Resources */,
 				AB90442522BDB55200322412 /* Fire_Bullet.wav in Resources */,
+				ABFFDD5922FCAE9A00247383 /* Scene_Transition.sks in Resources */,
 				AB3E2F95227E0747003BC9B7 /* Assets.xcassets in Resources */,
 				AB54E958228C0431000AE79E /* Scene1_1.sks in Resources */,
 				AB17075322CE36C7003EEA2A /* Scene1_2_C.sks in Resources */,
@@ -718,6 +725,7 @@
 				ABB9774E228FEE3F0011ACE5 /* Mario.swift in Sources */,
 				AB546A9322AF495700A5C01D /* GameScene+Physics.swift in Sources */,
 				AB4F584322C46FD900D23EF6 /* GameScene+MarioShapeshifting.swift in Sources */,
+				ABFFDD5722FC794100247383 /* TransitionScene.swift in Sources */,
 				AB54E94E228BFDF7000AE79E /* SKAction+SpecialEffects.swift in Sources */,
 				ABA14BEE22E0EA0B005D90C3 /* EBulletSprite.swift in Sources */,
 				AB65729922B39F32004D878B /* Mario+Movement.swift in Sources */,

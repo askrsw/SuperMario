@@ -51,6 +51,12 @@ extension GameScene {
         }
     }
     
+    static var levelFinished: Bool {
+        get {
+            return currentInstance?.levelFinished ?? false
+        }
+    }
+    
     static func checkRectForShake(rect: CGRect) {
         currentInstance!.checkRectForShake(rect: rect)
     }

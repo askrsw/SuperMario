@@ -51,6 +51,8 @@ extension GameScene: SKPhysicsContactDelegate {
                     let gadget = second!.node!.userData?["param"] as! SceneGadget
                     if gadget.type == .vert {
                         mario.checkVertGadget(gadget: gadget)
+                    } else if gadget.type == .poleBase {
+                        startAutoWalkAfterFinishLevel(dstPos: gadget.destPostion)
                     }
                 case PhysicsCategory.EShell: fallthrough
                 case PhysicsCategory.Evildoer:

@@ -11,7 +11,8 @@ import SpriteKit
 extension Mario {
     
     func directionAction(_ dir: UInt32) {
-        guard pipingTime == false else { return }
+        guard !died else { return }
+        guard !pipingTime else { return }
         switch dir {
         case ButtonDirectionCategory.Left:
             speedX = true
@@ -53,19 +54,22 @@ extension Mario {
     
     // acceleration
     func turbo(_ v: Bool) {
+        guard !died else { return }
         moveFaster = v
     }
     
     func jumpHigh() {
-        guard pipingTime == false else { return }
-        guard jumping == false else { return }
+        guard !died else { return }
+        guard !pipingTime else { return }
+        guard !jumping else { return }
         guard let physicsBody = physicsBody else { return }
         let verticalForce = physicsBody.mass * 475.0
         physicsBody.applyImpulse(CGVector(dx: 0.0, dy: verticalForce))
     }
     
     func fire() {
-        guard pipingTime == false else { return }
+        guard !died else { return }
+        guard !pipingTime else { return }
         if marioPower == .C  && marioMoveState != .crouching {
             let bullet = BulletSprite(faceTo: marioFacing, marioPos: position)
             GameScene.addBullet(bullet)

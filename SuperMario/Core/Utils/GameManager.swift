@@ -20,6 +20,8 @@ class GameManager {
     let gameView = SKView(frame: UIScreen.main.bounds)
     
     var allScenes: [String: GameScene] = [:]
+    var currentLevel: Int = 0
+    weak var marioDiedInScene: GameScene?
     
     private init() {
         
@@ -38,16 +40,77 @@ class GameManager {
         _ = GameHUD.instance
     }
     
-    func start(index: Int) {
-        let sceneName = allSceneNames[index]
-        let scene = fetchScene(sceneName: sceneName)
-        gameView.presentScene(scene)
+    func start(level: Int) {
+        if level < allSceneNames.count {
+            let sceneName = allSceneNames[level]
+            let scene = fetchScene(sceneName: sceneName)
+            GameHUD.instance.resetTimer()
+            GameHUD.instance.startTimer()
+            GameHUD.instance.level = makeLevelTitle(index: level)
+            gameView.presentScene(scene)
+            currentLevel = level
+        }
+    }
+    
+    func finishLevel() {
+        var mainTitle: String!
+        if currentLevel + 1 < allSceneNames.count {
+            GameHUD.instance.level = makeLevelTitle(index: currentLevel + 1)
+            mainTitle = "Level \(GameHUD.instance.level)"
+        } else {
+            mainTitle = "Last Level"
+        }
+        
+        if let scene = SKScene(fileNamed: "Scene_Transition") as? TransitionScene {
+            scene.mainTitle = mainTitle
+            scene.nextLevel = currentLevel + 1
+            gameView.presentScene(scene)
+        } else {
+            gameView.presentScene(nil)
+        }
+        
+        allScenes.removeAll()
+        GameScene.currentInstance = nil
     }
     
     func enterScene(_ param: SceneGadget) {
         let scene = fetchScene(sceneName: param.destSceneName)
         gameView.presentScene(scene)
         mario.didEnterNextScene(param)
+    }
+    
+    func exitCurrentGame() {
+        marioDiedInScene = nil
+        allScenes.removeAll()
+        AudioManager.stopBackgroundMusic()
+        gameView.presentScene(nil)
+        GameHUD.instance.resetAll()
+    }
+    
+    func marioDied() {
+        GameHUD.instance.marioLifeCount -= 1
+        if let scene = SKScene(fileNamed: "Scene_Transition") as? TransitionScene {
+            if GameHUD.instance.marioLifeCount > 0 {
+                scene.mainTitle = "Level \(GameHUD.instance.level)"
+            } else {
+                scene.mainTitle = "Game Over"
+            }
+            scene.forMarioDied = true
+            marioDiedInScene = gameView.scene! as? GameScene
+            gameView.presentScene(scene)
+            GameHUD.instance.pauseTimer()
+        }
+    }
+    
+    func marioNewBorn() {
+        if let lastScene = marioDiedInScene {
+            if GameHUD.instance.marioLifeCount > 0 {
+                let marioInitPosition = lastScene.marioInitPostion
+                mario.newBorn(pos: marioInitPosition)
+                gameView.presentScene(lastScene)
+                GameHUD.instance.startTimer()
+            }
+        }
     }
     
     func makeCurrentScreenshot() {
@@ -64,14 +127,14 @@ class GameManager {
         }
     }
     
-    func exitCurrentGame() {
-        allScenes.removeAll()
-        AudioManager.stopBackgroundMusic()
-        gameView.presentScene(nil)
-        GameHUD.instance.resetAll()
-    }
-    
     // MARK: Help method
+    
+    private func makeLevelTitle(index: Int) -> String {
+        let major = index / 4 + 1
+        let minor = index % 4 + 1
+        
+        return "\(major) - \(minor)"
+    }
     
     private func fetchScene(sceneName name: String) -> GameScene {
         if let scene = allScenes[name] {
@@ -80,6 +143,7 @@ class GameManager {
         
         if let scene = SKScene(fileNamed: name) as? GameScene {
             allScenes[name] = scene
+            scene.name = name
             return scene
         } else {
             fatalError("Can not load game scene: \(name)")

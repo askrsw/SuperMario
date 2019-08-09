@@ -20,6 +20,7 @@ class FragileBridgeNode: SKNode {
     var rightX: CGFloat = 0.0
     var switchRect: CGRect = .zero
     var destroyed: Bool = false
+    var marioDestPostion: CGPoint = .zero
     
     override var position: CGPoint {
         didSet {
@@ -143,10 +144,14 @@ extension FragileBridgeNode: MovingSpriteNode {
         moveDown.timingMode = .easeIn
         var actrualAction = SKAction.sequence([moveDown, remove])
         let wait = SKAction.wait(forDuration: 0.05)
+        weak var weakScene = GameScene.currentInstance
         let block = SKAction.run { [weak self] in
             if let parent = self?.parent {
                 self?.boss?.move(toParent: parent)
                 self?.switchNode.move(toParent: parent)
+                if let dstPos = self?.marioDestPostion {
+                    weakScene?.startAutoWalkAfterFinishLevel(dstPos: dstPos)
+                }
             }
             self?.run(remove)
         }

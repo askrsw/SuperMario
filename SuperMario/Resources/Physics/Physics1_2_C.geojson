@@ -29,5 +29,16 @@
     
     "pirhanas": [
         { "pos": {"x": 4, "y": 4 }, "xStart": -1, "xEnd": -1 }
+    ],
+    
+    "gadgetes": [
+        {
+            "type": "poleBase",
+            "pos": {"x": 21.5, "y": 2.5},
+            "dst_pos": {"x": 28.25, "y": 2},
+            "withFlag": true,
+            "flag_pos": {"x": 21.925, "y": 11.75},
+            "castle_flag_pos": {"x": 28.5, "y": 7.5}
+        }
     ]
 }

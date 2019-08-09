@@ -58,6 +58,10 @@ extension Mario {
                 cropNode.position = gadget.destPostion
             }
             
+            if let pos = GameScene.currentInstance?.marioInitPostion, pos == .zero {
+                GameScene.currentInstance?.marioInitPostion = cropNode.position
+            }
+            
             GameScene.rootNode.addChild(cropNode)
             
             marioFacing = .forward
@@ -75,11 +79,14 @@ extension Mario {
             }
         } else {
             position = gadget.destPostion
+            if let pos = GameScene.currentInstance?.marioInitPostion, pos == .zero {
+                GameScene.currentInstance?.marioInitPostion = position
+            }
         }
     }
     
     func checkVertGadget(gadget: SceneGadget) {
-        let bottom  = position.y - size.height * 0.5
+        let bottom = position.y - size.height * 0.5
         let top = position.y + size.height * 0.5
         let start = gadget.position.y - gadget.size.height * 0.5
         let end   = start + gadget.size.height

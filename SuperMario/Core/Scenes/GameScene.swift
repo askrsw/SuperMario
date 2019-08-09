@@ -46,6 +46,14 @@ class GameScene: SKScene {
     var halfCameraViewWidth: CGFloat = 256.0
     var halfScaledSceneWdith: CGFloat = 256.0
     
+    var levelFinished: Bool = false
+    var marioAutoWalk: Bool = false
+    var marioAutoWalkFinished: Bool = false
+    var marioAutoWalkDest: CGPoint = .zero
+    var poledFlagNode: SKSpriteNode?
+    
+    var marioInitPostion: CGPoint = .zero
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializeScene()
@@ -91,6 +99,8 @@ class GameScene: SKScene {
             }
         }
         
+        marioAutoWalkingUpdate()
+        
         lastUpdateTime = currentTime
     }
     
@@ -118,7 +128,8 @@ class GameScene: SKScene {
         if let marioRef = rootNode?.childNode(withName: "mario") {
             let y = marioRef.position.y
             let x = marioRef.position.x
-            mario.position = CGPoint(x: x, y: y + GameConstant.TileGridLength)
+            marioInitPostion = CGPoint(x: x, y: y + GameConstant.TileGridLength)
+            mario.position = marioInitPostion
             marioRef.removeFromParent()
         }
         
@@ -174,7 +185,6 @@ class GameScene: SKScene {
         let scaleFactor = height / GameConstant.OriginalSceneHeight
         size = UIScreen.main.bounds.size
         self.scaleFactor = scaleFactor
-        
         self.halfScaledSceneWdith = size.width / scaleFactor * 0.5
     }
 }

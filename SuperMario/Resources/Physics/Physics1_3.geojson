@@ -39,5 +39,16 @@
         { "pos_x": 87.5, "pos_y": 2.5, "len": 3, "max_y": 10, "min_y": 1},
         { "pos_x": 92.5, "pos_y": 7.5, "len": 3, "max_y": 10, "min_y": 1, "downward": true},
         { "pos_x": 131.5, "pos_y": 6.5, "len": 3, "max_y": 9, "min_y": 4}
+    ],
+    
+    "gadgetes": [
+        {
+            "type": "poleBase",
+            "pos": {"x": 151.5, "y": 2.5},
+            "dst_pos": {"x": 157.25, "y": 2},
+            "withFlag": true,
+            "flag_pos": {"x": 151.925, "y": 11.75},
+            "castle_flag_pos": {"x": 159.5, "y": 13.5}
+        }
     ]
 }

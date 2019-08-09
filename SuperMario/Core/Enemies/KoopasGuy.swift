@@ -232,7 +232,8 @@ class KoopasGuy: EnemiesBaseNode {
         get {
             if KoopasGuy.sTexType != texType {
                 KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.1)
-                KoopasGuy.sShellToNormalAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3, startIndex: 5)
+                KoopasGuy.sShellToNormalAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3, startIndex: 5, repeatForever: false)
+                KoopasGuy.sShellToNormalAnimation = SKAction.repeat(KoopasGuy.sShellToNormalAnimation, count: 6)
                 KoopasGuy.sFlyAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3, startIndex: 3)
                 KoopasGuy.sTexType = texType
             }
@@ -259,7 +260,8 @@ class KoopasGuy: EnemiesBaseNode {
     var shellToNormalAnimation: SKAction {
         if KoopasGuy.sTexType != texType {
             KoopasGuy.sAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3)
-            KoopasGuy.sShellToNormalAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3, startIndex: 5)
+            KoopasGuy.sShellToNormalAnimation = makeAnimation(texName: "koopas", suffix: texType, count: 2, timePerFrame: 0.3, startIndex: 5, repeatForever: false)
+            KoopasGuy.sShellToNormalAnimation = SKAction.repeat(KoopasGuy.sShellToNormalAnimation, count: 6)
             KoopasGuy.sTexType = texType
         }
         

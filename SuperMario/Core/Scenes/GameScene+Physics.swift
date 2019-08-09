@@ -446,6 +446,12 @@ extension GameScene {
             let bridge = FragileBridgeNode(count: count, tileType: tileType)
             bridge.position = CGPoint(x: posX, y: posY)
             movingSpriteHolder.addChild(bridge)
+            
+            if let posDict = item["dst_pos"] as? Dictionary<String, CGFloat> {
+                let x = posDict["x"]! * GameConstant.TileGridLength + GameConstant.TileYOffset
+                let y = posDict["y"]! * GameConstant.TileGridLength + GameConstant.TileYOffset
+                bridge.marioDestPostion = CGPoint(x: x, y: y)
+            }
         }
     }
     

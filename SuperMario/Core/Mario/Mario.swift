@@ -48,12 +48,12 @@ class Mario: SKSpriteNode {
     static let crouchingTextureB = SKTexture(imageNamed: "mario_b_down1")
     static let crouchingTextureC = SKTexture(imageNamed: "mario_c_down1")
     
+    static let deadMarioTexture = SKTexture(imageNamed: "mario_a_dead")
+    
     var stillTexture = normalTextureA
     var jumpingTexture = jumpingTextureA
     var crouchingTexture: SKTexture?
     var moveAnimation = walkAnimationA
-    
-    var lifeCount: Int = 3
     
     var speedX: Bool = false
     var underWater: Bool = false
@@ -121,7 +121,9 @@ class Mario: SKSpriteNode {
             }
             
             if powerfull == false && pipingTime == false {
-                GameScene.playBackgroundMusc(moveFaster, true)
+                if !GameScene.levelFinished {
+                    GameScene.playBackgroundMusc(moveFaster, true)
+                }
             }
         }
     }
@@ -196,7 +198,9 @@ class Mario: SKSpriteNode {
             } else {
                 self.removeAction(forKey: "marioFlash")
                 self.alpha = 1.0
-                GameScene.playBackgroundMusc(moveFaster, false)
+                if !GameScene.levelFinished {
+                    GameScene.playBackgroundMusc(moveFaster, false)
+                }
                 physicsBody!.collisionBitMask = physicsBody!.collisionBitMask | PhysicsCategory.Enemy
             }
         }
@@ -263,6 +267,8 @@ class Mario: SKSpriteNode {
         }
     }
     
+    var died: Bool = false
+    
     init() {
         super.init(texture: stillTexture, color: SKColor.clear, size: stillTexture.size())
         zPosition = 1000
@@ -280,6 +286,25 @@ class Mario: SKSpriteNode {
     // MARK: interface
     
     func update(deltaTime dt: CGFloat) {
+        guard !died else {
+            if position.y < -self.size.height * 2 {
+                physicsBody = nil
+                removeFromParent()
+                GameManager.instance.marioDied()
+            }
+            return
+        }
+        
+        let sceneHeight = GameConstant.OriginalSceneHeight
+        if (position.y < -sceneHeight * 0.5) || (position.y > sceneHeight * 1.5) {
+            AudioManager.stopBackgroundMusic()
+            died = true
+            physicsBody = nil
+            removeFromParent()
+            GameManager.instance.marioDied()
+            return
+        }
+        
         updatePhysicsBodyState(deltaTime: dt)
         updateMovementStateMachine(deltaTime: dt)
     }
@@ -298,7 +323,45 @@ class Mario: SKSpriteNode {
     }
     
     func marioDied() {
+        died = true
         
+        AudioManager.stopBackgroundMusic()
+        removeAllActions()
+        texture = Mario.deadMarioTexture
+        size = Mario.deadMarioTexture.size()
+        if GameHUD.instance.marioLifeCount > 1 {
+            AudioManager.play(sound: .MarioDeathShort)
+        } else {
+            AudioManager.play(sound: .MarioDeathLong)
+        }
+        
+        if let pBody = physicsBody {
+            pBody.categoryBitMask = PhysicsCategory.None
+            pBody.collisionBitMask = PhysicsCategory.None
+            pBody.contactTestBitMask = PhysicsCategory.None
+            pBody.affectedByGravity = true
+            
+            let vector = CGVector(dx: 0.0, dy: pBody.velocity.dy)
+            pBody.velocity = vector
+            
+            let verticalForce = pBody.mass * 350.0
+            pBody.applyImpulse(CGVector(dx: 0.0, dy: verticalForce))
+        }
+    }
+    
+    func newBorn(pos: CGPoint) {
+        position = pos
+        died = false
+        pipingTime = false
+        moveFaster = false
+        marioPower = .A
+        marioFacing = .forward
+        powerfull = false
+        undead = false
+        speedX = false
+        texture = Mario.normalTextureA
+        size = Mario.normalTextureA.size()
+        physicsBody = makePhysicsBody()
     }
     
     // MARK: Help method

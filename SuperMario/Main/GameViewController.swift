@@ -37,7 +37,7 @@ class GameViewController: UIViewController {
         uiView = nil
         
         view.addSubview(gameView)
-        GameManager.instance.start(index: index)
+        GameManager.instance.start(level: index)
     }
     
     // MARK: Help method
@@ -45,6 +45,9 @@ class GameViewController: UIViewController {
     @objc private func returnButtonTapped(sender: UIButton) {
         GameManager.instance.exitCurrentGame()
         gameView.removeFromSuperview()
+        if GameManager.instance.mario.died {
+            GameManager.instance.mario.newBorn(pos: .zero)
+        }
         
         uiView = MainView()
         uiView.mainController = self

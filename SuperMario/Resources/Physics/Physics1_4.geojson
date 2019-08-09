@@ -95,7 +95,13 @@
     ],
     
     "bridges": [
-        { "pos_x": 128, "pos_y": 4, "count": 13, "tileType": "c" }
+        {
+            "pos_x": 128,
+            "pos_y": 4,
+            "count": 13,
+            "tileType": "c",
+            "dst_pos": {"x": 152.5, "y": 2}
+        }
     ],
     
     "singlehorzladders": [

@@ -122,6 +122,14 @@
           "dest": "Scene1_1_A",
           "dst_pos": {"x": 2.5, "y": 14},
           "popOut": false
+        },
+        {
+            "type": "poleBase",
+            "pos": {"x": 197.5, "y": 2.5},
+            "dst_pos": {"x": 204.25, "y": 2},
+            "withFlag": true,
+            "flag_pos": {"x": 197.925, "y": 11.75},
+            "castle_flag_pos": {"x": 204.5, "y": 7.5}
         }
     ]
 }
